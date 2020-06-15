@@ -1,0 +1,9 @@
+.register-button {
+    display: inline-block;
+    padding-top: 10px;
+
+    span:hover {
+        text-decoration: underline;
+        cursor: pointer;
+    }
+}

@@ -1,0 +1,25 @@
+.cart-button {
+    display: inline-block;
+    vertical-align: middle;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.badge {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: #ffa15f;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 12px;
+    left: -10px;
+    position: relative;
+    top: -15px;
+
+    span {
+        vertical-align: middle;
+    }
+}
