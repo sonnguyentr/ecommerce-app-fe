@@ -5,21 +5,20 @@
     &:hover {
         cursor: pointer;
     }
-}
-
-.badge {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    background-color: #ffa15f;
-    color: #fff;
-    border-radius: 50%;
-    font-size: 12px;
-    left: -12px;
-    position: relative;
-    top: -19px;
-
-    span {
-        vertical-align: middle;
+    &__badge {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        background-color: #ffa15f;
+        color: #fff;
+        border-radius: 50%;
+        font-size: 12px;
+        left: -12px;
+        position: relative;
+        top: -19px;
+    
+        span {
+            vertical-align: middle;
+        }
     }
 }
