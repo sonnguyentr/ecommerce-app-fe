@@ -9,7 +9,7 @@ import "./Header.scss";
 
 const Header = (props) => {
     return (
-        <div className="header container justify-content-around">
+        <header className="container justify-content-around">
             <SearchBox />
             <Logo />
             <div className="container-header-buttons">
@@ -17,7 +17,7 @@ const Header = (props) => {
                 <LoginButton />
                 <CartButton />
             </div>
-        </div>
+        </header>
     );
 };
 
