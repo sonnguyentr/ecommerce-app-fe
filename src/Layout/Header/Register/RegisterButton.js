@@ -4,7 +4,7 @@ import "./RegisterButton.scss";
 const RegisterButton = (props) => {
     return (
         <div className="register-button">
-            <span className="greyish-brown">Register</span>
+            <span className="text--greyish-brown">Register</span>
         </div>
     );
 };
