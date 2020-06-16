@@ -58,7 +58,7 @@ const NavBar = (props) => {
             <ul>
                 {categories.map((item, index) => {
                     return (
-                        <li key={index}>
+                        <li key={index} className="text--dark-grey">
                             {item.name}
                             <i style={{marginLeft: 5, fontSize: 13}} className="fas fa-chevron-down"></i>
                             <ul className="sub-menu">

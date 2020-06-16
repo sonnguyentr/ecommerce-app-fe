@@ -1,37 +1,63 @@
 import React from "react";
 import "./FooterSecondaryNav.scss";
 
+import { Link } from "react-router-dom";
+
 const FooterSecondaryNav = (props) => {
     const listNav1 = [
-        "Home",
-        "Products",
-        "Services",
-        "About Us",
-        "Help",
-        "Contact",
+        {
+            name: "Home",
+            path: "/",
+        },
+        {
+            name: "Products",
+            path: "/products",
+        },
+        {
+            name: "About Us",
+            path: "/about",
+        },
+        {
+            name: "Help",
+            path: "/help",
+        },
+        {
+            name: "Contact",
+            path: "/contact",
+        },
     ];
-    const listNav2 = ["Privacy Policy", "Terms & Conditions"];
+    const listNav2 = [
+        {
+            name: "Privacy Policy",
+            path: "/privacy",
+        },
+        {
+            name: "Terms & Conditions",
+            path: "/terms",
+        },
+    ];
     return (
         <nav className="footer-secondary-nav">
             <div className="container justify-content-between">
                 <ul className="footer-secondary-nav__ul">
-                    {listNav1.map((item) => (
-                        <li
-                            className="footer-secondary-nav__li"
-                            key={"nav_" + item}
-                        >
-                            {item}
+                    {listNav1.map((item, index) => (
+                        <li className="footer-secondary-nav__li" key={index}>
+                            <Link to={item.path} className="link">
+                                {item.name}
+                            </Link>
                         </li>
                     ))}
                 </ul>
                 <ul className="footer-secondary-nav__ul">
-                    {listNav2.map((item) => (
+                    {listNav2.map((item, index) => (
                         <li
                             style={{ paddingRight: 0, paddingLeft: 15 }}
                             className="footer-secondary-nav__li"
-                            key={"nav_" + item}
+                            key={index}
                         >
-                            {item}
+                            <Link to={item.path} className="link">
+                                {item.name}
+                            </Link>
                         </li>
                     ))}
                 </ul>
