@@ -8,9 +8,11 @@
     &__li {
         display: inline-block;
         padding: 0 20px 15px;
-        color: #b7b7b7;
         &:hover {
             cursor: pointer;
+        }
+        a.link {
+            color: #b7b7b7;
         }
     }
 }
