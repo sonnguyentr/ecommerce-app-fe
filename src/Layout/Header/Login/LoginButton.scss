@@ -1,0 +1,19 @@
+.login-button {
+    width: 120px;
+    height: 35px;
+    border-radius: 100px;
+    border: solid 1px #ffa15f;
+    background-color: transparent;
+    margin: 0 35px;
+    color: #ff7e24;
+    font-size: 14px;
+
+    &:hover {
+        background-color: #ff7e2424;
+        cursor: pointer;
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
