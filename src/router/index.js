@@ -1,8 +1,9 @@
 import React from "react";
+import HomePage from '../views/Homepage/Homepage'
 
 export default [
     {
         path: "/",
-        component: () => <h1>Test</h1>,
+        component: () => HomePage,
     },
 ];

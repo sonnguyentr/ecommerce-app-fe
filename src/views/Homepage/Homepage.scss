@@ -1,0 +1,48 @@
+.homepage {
+    &__container {
+        padding: 0 10%;
+    }
+    &__cover {
+        margin-top: 35px;
+        cursor: pointer;
+        position: relative;
+    }
+    &__pic {
+        cursor: pointer;
+        width: 100%;
+        margin-bottom: -140px;
+        z-index: -1;
+    }
+    &__cover-button {
+        padding: 13px 48px;
+        font-size: 16px;
+        right: 80px;
+        margin-top: -150px;
+        position: absolute;
+    }
+    &__pic-container {
+        width: 25%;
+        padding: 10px 10px;
+        position: relative;
+        &:first-of-type {
+            padding-left: 0;
+        }
+        &:last-of-type {
+            padding-right: 0;
+        }
+    }
+    &__pic-button {
+        padding: 10px 30px;
+        font-size: 14px;
+        margin-top: 10px;
+    }
+    &__overlay {
+        z-index: 99;
+    }
+    &__hr {
+        border: none;
+        width: 85%;
+        position: relative;
+        border-bottom: 1px solid white;
+    }
+}
