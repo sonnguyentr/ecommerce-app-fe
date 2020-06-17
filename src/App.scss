@@ -24,74 +24,72 @@
     vertical-align: middle;
 }
 
-.text {
-    &--center {
-        text-align: center;
-    }
-    &--bold {
-        font-weight: bold;
-    }
-    /* Text Color */
-    &--white {
-        color: #ffffff;
-    }
-    &--charcoal-grey {
-        color: #3d3d3f;
-    }
-    &--white-two {
-        color: #f6f6f6;
-    }
-    &--white-three {
-        color: #ededed;
-    }
-    &--white-four {
-        color: #d4d3d3;
-    }
-    &--pea-green {
-        color: #82bf11;
-    }
-    &--strawberry {
-        color: #f63f45;
-    }
-    &--pumpkin-orange {
-        color: #ff7413;
-    }
-    &--bright-orange {
-        color: #ff6900;
-    }
-    &--apricot {
-        color: #ffc371;
-    }
-    &--greyish-brown {
-        color: #4d4d4d;
-    }
-    &--pinkish-grey {
-        color: #cccccc;
-    }
-    &--greyish {
-        color: #acacac;
-    }
-    &--cornflower-50 {
-        color: rgba(95, 109, 255, 0.5);
-    }
-    &--greyish-two {
-        color: #b7b7b7;
-    }
-    &--white-five {
-        color: #fbfbfb;
-    }
-    &--dark-grey {
-        color: #202124;
-    }
-    &--brown-grey {
-        color: #979797;
-    }
-    &--black-8 {
-        color: rgba(0, 0, 0, 0.08);
-    }
-    &--white-six {
-        color: #eaeaea;
-    }
+.text--center {
+    text-align: center;
+}
+.text--bold {
+    font-weight: bold;
+}
+/* Text Color */
+.text--white {
+    color: #ffffff;
+}
+.text--charcoal-grey {
+    color: #3d3d3f;
+}
+.text--white-two {
+    color: #f6f6f6;
+}
+.text--white-three {
+    color: #ededed;
+}
+.text--white-four {
+    color: #d4d3d3;
+}
+.text--pea-green {
+    color: #82bf11;
+}
+.text--strawberry {
+    color: #f63f45;
+}
+.text--pumpkin-orange {
+    color: #ff7413;
+}
+.text--bright-orange {
+    color: #ff6900;
+}
+.text--apricot {
+    color: #ffc371;
+}
+.text--greyish-brown {
+    color: #4d4d4d;
+}
+.text--pinkish-grey {
+    color: #cccccc;
+}
+.text--greyish {
+    color: #acacac;
+}
+.text--cornflower-50 {
+    color: rgba(95, 109, 255, 0.5);
+}
+.text--greyish-two {
+    color: #b7b7b7;
+}
+.text--white-five {
+    color: #fbfbfb;
+}
+.text--dark-grey {
+    color: #202124;
+}
+.text--brown-grey {
+    color: #979797;
+}
+.text--black-8 {
+    color: rgba(0, 0, 0, 0.08);
+}
+.text--white-six {
+    color: #eaeaea;
 }
 
 .button {

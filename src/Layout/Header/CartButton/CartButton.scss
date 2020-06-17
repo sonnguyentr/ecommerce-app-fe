@@ -2,10 +2,10 @@
     display: inline-block;
     vertical-align: middle;
 
-    &:hover {
+    .cart-button:hover {
         cursor: pointer;
     }
-    &__badge {
+    .cart-button__badge {
         display: inline-block;
         width: 20px;
         height: 20px;
