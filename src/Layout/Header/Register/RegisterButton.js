@@ -12,7 +12,6 @@ const RegisterButton = (props) => {
         email: "",
         password: "",
     });
-    const [isValidForm, setValidForm] = useState(true);
 
     const handleChange = (value, field) => {
         setFields({ ...fields, [field]: value });
@@ -56,7 +55,6 @@ const RegisterButton = (props) => {
                 fields.hasOwnProperty(key) &&
                 !validateInput(fields[key], key)
             ) {
-                setValidForm(false);
                 return false;
             }
         }
@@ -65,7 +63,7 @@ const RegisterButton = (props) => {
     const handleFormSubmit = (event) => {
         event.preventDefault();
         if (!validateForm()) return false;
-        alert("isValidForm: " + isValidForm);
+        alert("submited");
     };
 
     return (
@@ -85,7 +83,6 @@ const RegisterButton = (props) => {
                 }}
             >
                 <h1>Register</h1>
-                <span>{isValidForm ? "true" : "false"}</span>
                 <form
                     name="register"
                     onSubmit={(e) => {
@@ -103,11 +100,13 @@ const RegisterButton = (props) => {
                             onBlur={(e) => {
                                 validateInput(e.target.value, "name");
                             }}
-                            className="form__input"
+                            className={`form__input ${
+                                errors.name ? "form__input__error" : null
+                            }`}
                             type="text"
                             placeholder="Enter your name..."
                         />
-                        <small className="form__input__error">
+                        <small className="form__input__error_message">
                             {errors.name}
                         </small>
 
@@ -120,11 +119,13 @@ const RegisterButton = (props) => {
                             onBlur={(e) => {
                                 validateInput(e.target.value, "email");
                             }}
-                            className="form__input"
+                            className={`form__input ${
+                                errors.email ? "form__input__error" : null
+                            }`}
                             type="text"
                             placeholder="Enter your email..."
                         />
-                        <small className="form__input__error">
+                        <small className="form__input__error_message">
                             {errors.email}
                         </small>
 
@@ -137,11 +138,13 @@ const RegisterButton = (props) => {
                             onBlur={(e) => {
                                 validateInput(e.target.value, "password");
                             }}
-                            className="form__input"
+                            className={`form__input ${
+                                errors.password ? "form__input__error" : null
+                            }`}
                             type="password"
                             placeholder="Enter your password…"
                         />
-                        <small className="form__input__error">
+                        <small className="form__input__error_message">
                             {errors.password}
                         </small>
                     </div>

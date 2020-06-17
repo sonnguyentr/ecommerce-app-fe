@@ -186,6 +186,10 @@ a {
         padding: 0 24px;
     }
     .form__input__error {
-        color: red
+        background-color: rgba(246, 63, 69, 0.04);
+        border-color: #f63f45;
+    }
+    .form__input__error_message {
+        color: red;
     }
 }
