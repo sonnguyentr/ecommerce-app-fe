@@ -6,6 +6,7 @@
         margin-top: 35px;
         cursor: pointer;
         position: relative;
+        z-index: -1;
     }
     &__pic {
         cursor: pointer;
