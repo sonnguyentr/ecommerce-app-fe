@@ -98,6 +98,7 @@ const LoginButton = (props) => {
                             }
                             placeholder="Enter your email..."
                             errorMessage={emailError}
+                            isFocused
                         >
                             E-mail
                         </InputWithLabel>

@@ -9,6 +9,7 @@ const InputWithLabel = ({
     className,
     placeholder,
     errorMessage,
+    isFocused,
     children,
 }) => {
     return (
@@ -23,6 +24,7 @@ const InputWithLabel = ({
                 onBlur={onBlur}
                 className={`form__input ${className}`}
                 placeholder={placeholder}
+                autoFocus={isFocused}
             />
             <small className="form__input__error_message">{errorMessage}</small>
         </>

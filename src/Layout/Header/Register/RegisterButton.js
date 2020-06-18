@@ -103,6 +103,7 @@ const RegisterButton = (props) => {
                             className={nameError && "form__input__error"}
                             placeholder="Enter your name..."
                             errorMessage={nameError}
+                            isFocused
                         >
                             Name
                         </InputWithLabel>
