@@ -103,6 +103,7 @@ const LoginButton = (props) => {
                         </InputWithLabel>
                         <InputWithLabel
                             id="password"
+                            type="password"
                             value={password}
                             onChange={handlePasswordChange}
                             className={
@@ -117,7 +118,9 @@ const LoginButton = (props) => {
                         <div className="container justify-content-between mt-3 mb-3">
                             <div>
                                 <input id="remember_password" type="checkbox" />
-                                <label htmlFor="remember_password">Remember password</label>
+                                <label htmlFor="remember_password">
+                                    Remember password
+                                </label>
                             </div>
                             <small className="text--bold text--greyish-brown">
                                 Forgot your password?

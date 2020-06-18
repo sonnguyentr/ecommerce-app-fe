@@ -1,68 +1,73 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./RegisterButton.scss";
 
-import Modal from "../../../components/Modal/Modal";
+import { Modal, InputWithLabel } from "../../../components";
 
 const RegisterButton = (props) => {
     const [show, showModal] = useState(false);
-    const [fields, setFields] = useState({ name: "", email: "", password: "" });
-    const [errors, setErrors] = useState({
-        name: "",
-        email: "",
-        password: "",
-    });
 
-    const handleChange = (value, field) => {
-        setFields({ ...fields, [field]: value });
+    const isEmpty = (value) => {
+        if (typeof value === "undefined" || value === "") {
+            return true;
+        }
+        return false;
     };
-    const validateInput = (value, field) => {
-        setErrors({ ...errors, [field]: "" });
 
-        if (typeof fields[field] == "undefined" || fields[field] === "") {
-            setErrors({ ...errors, [field]: "Field cannot be empty!" });
-            return false;
-        }
-        switch (field) {
-            case "email":
-                const regexEmail = /^[a-zA-Z0-9_.]{1,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$/;
-                if (!regexEmail.test(value)) {
-                    setErrors({
-                        ...errors,
-                        [field]: "Please enter a valid e-mail!",
-                    });
-                    return false;
-                }
-                break;
-            case "password":
-                if (value.length <= 6) {
-                    setErrors({
-                        ...errors,
-                        [field]:
-                            "Your passwords must be more than 6 characters!",
-                    });
-                    return false;
-                }
-                break;
-            default:
-                break;
-        }
-        return true;
+    // name
+    const [name, setName] = useState("");
+    const [nameError, setNameError] = useState(null);
+    const handleNameChange = (e) => {
+        const value = e.target.value;
+        setName(e.target.value);
+
+        if (isEmpty(value)) setNameError("Field cannot be empty!");
+        else setNameError("");
     };
-    const validateForm = () => {
-        for (const key in fields) {
-            if (
-                fields.hasOwnProperty(key) &&
-                !validateInput(fields[key], key)
-            ) {
-                return false;
-            }
+    // email
+    const [email, setEmail] = useState("");
+    const [emailError, setEmailError] = useState(null);
+    const handleEmailChange = (e) => {
+        const value = e.target.value;
+        setEmail(e.target.value);
+
+        if (isEmpty(value)) setEmailError("Field cannot be empty!");
+        else {
+            const regexEmail = /^[a-zA-Z0-9_.]{1,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$/;
+            if (!regexEmail.test(value)) {
+                setEmailError("Please enter a valid e-mail!");
+            } else setEmailError("");
         }
-        return true;
     };
+    // Password
+    const [password, setPassword] = useState("");
+    const [passwordError, setPasswordError] = useState(null);
+    const handlePasswordChange = (e) => {
+        const value = e.target.value;
+        setPassword(value);
+
+        if (isEmpty(value)) setPasswordError("Field cannot be empty!");
+        else if (value.length <= 6) {
+            setPasswordError("Your passwords must be more than 6 characters!");
+        } else setPasswordError("");
+    };
+    // form validation
+    const [isValidForm, setIsValidForm] = useState(false);
+    useEffect(() => {
+        if (
+            nameError == null || //initial state
+            passwordError == null ||
+            emailError == null ||
+            nameError ||
+            passwordError ||
+            emailError
+        )
+            setIsValidForm(false);
+        else setIsValidForm(true);
+    }, [nameError, passwordError, emailError]);
+
     const handleFormSubmit = (event) => {
         event.preventDefault();
-        if (!validateForm()) return false;
         alert("submited");
     };
 
@@ -91,62 +96,37 @@ const RegisterButton = (props) => {
                     className="text--left form mb-5"
                 >
                     <div className="form__container">
-                        <label className="form__label">Name</label>
-                        <input
-                            value={fields.name}
-                            onChange={(e) => {
-                                handleChange(e.target.value, "name");
-                            }}
-                            onBlur={(e) => {
-                                validateInput(e.target.value, "name");
-                            }}
-                            className={`form__input ${
-                                errors.name ? "form__input__error" : null
-                            }`}
-                            type="text"
+                        <InputWithLabel
+                            id="name"
+                            value={name}
+                            onChange={handleNameChange}
+                            className={nameError && "form__input__error"}
                             placeholder="Enter your name..."
-                        />
-                        <small className="form__input__error_message">
-                            {errors.name}
-                        </small>
-
-                        <label className="form__label">E-mail</label>
-                        <input
-                            value={fields.email}
-                            onChange={(e) => {
-                                handleChange(e.target.value, "email");
-                            }}
-                            onBlur={(e) => {
-                                validateInput(e.target.value, "email");
-                            }}
-                            className={`form__input ${
-                                errors.email ? "form__input__error" : null
-                            }`}
-                            type="text"
+                            errorMessage={nameError}
+                        >
+                            Name
+                        </InputWithLabel>
+                        <InputWithLabel
+                            id="email"
+                            value={email}
+                            onChange={handleEmailChange}
+                            className={emailError && "form__input__error"}
                             placeholder="Enter your email..."
-                        />
-                        <small className="form__input__error_message">
-                            {errors.email}
-                        </small>
-
-                        <label className="form__label">Password</label>
-                        <input
-                            value={fields.password}
-                            onChange={(e) => {
-                                handleChange(e.target.value, "password");
-                            }}
-                            onBlur={(e) => {
-                                validateInput(e.target.value, "password");
-                            }}
-                            className={`form__input ${
-                                errors.password ? "form__input__error" : null
-                            }`}
+                            errorMessage={emailError}
+                        >
+                            E-mail
+                        </InputWithLabel>
+                        <InputWithLabel
+                            id="password"
                             type="password"
-                            placeholder="Enter your password…"
-                        />
-                        <small className="form__input__error_message">
-                            {errors.password}
-                        </small>
+                            value={password}
+                            onChange={handlePasswordChange}
+                            className={passwordError && "form__input__error"}
+                            placeholder="Enter your password..."
+                            errorMessage={passwordError}
+                        >
+                            Password
+                        </InputWithLabel>
                     </div>
                     <div className="text--center text--dark-grey mt-5 mb-5">
                         By creating an account you agree to the{" "}
@@ -164,7 +144,11 @@ const RegisterButton = (props) => {
                             Privacy Policy
                         </Link>
                     </div>
-                    <button type="submit" className="button --primary --block">
+                    <button
+                        type="submit"
+                        disabled={!isValidForm}
+                        className="button --primary --block"
+                    >
                         Register
                     </button>
                 </form>
