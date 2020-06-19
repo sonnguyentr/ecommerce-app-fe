@@ -9,13 +9,15 @@ import "./Header.scss";
 
 const Header = (props) => {
     return (
-        <header className="container justify-content-around">
-            <SearchBox />
-            <Logo />
-            <div className="container-header-buttons">
-                <RegisterButton />
-                <LoginButton />
-                <CartButton />
+        <header className="container-fluid justify-content-around">
+            <div className="row">
+                <SearchBox />
+                <Logo />
+                <div className="container-header-buttons">
+                    <RegisterButton />
+                    <LoginButton />
+                    <CartButton />
+                </div>
             </div>
         </header>
     );

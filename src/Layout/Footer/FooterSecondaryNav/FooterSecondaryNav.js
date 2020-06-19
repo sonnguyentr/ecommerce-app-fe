@@ -37,8 +37,8 @@ const FooterSecondaryNav = (props) => {
         },
     ];
     return (
-        <nav className="footer-secondary-nav">
-            <div className="container justify-content-between">
+        <nav className="footer-secondary-nav container-fluid">
+            <div className="row justify-content-between">
                 <ul className="footer-secondary-nav__ul">
                     {listNav1.map((item, index) => (
                         <li className="footer-secondary-nav__li" key={index}>

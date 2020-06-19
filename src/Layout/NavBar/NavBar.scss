@@ -20,17 +20,18 @@
             }
 
             .sub-menu {
-                width: 620px;
+                width: 570px;
                 box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
                 border: solid 0.5px #eaeaea;
                 background-color: #fbfbfb;
                 margin-top: 15px;
-                padding: 0 15px;
+                padding: 0;
                 display: none;
                 position: absolute;
                 left: -310px;
 
                 li {
+                    padding: 15px;
                     font-size: 14px;
                     font-weight: normal;
                     text-align: center;

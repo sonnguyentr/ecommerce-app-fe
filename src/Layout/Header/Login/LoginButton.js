@@ -78,7 +78,9 @@ const LoginButton = (props) => {
             >
                 <h1>Log In</h1>
                 <small className="text--strawberry">
-                    {!isLoginSuccess ? "Your e-mail/password is invalid!" : null}
+                    {!isLoginSuccess
+                        ? "Your e-mail/password is invalid!"
+                        : null}
                 </small>
                 <form
                     name="login"
@@ -116,16 +118,23 @@ const LoginButton = (props) => {
                         >
                             Password
                         </InputWithLabel>
-                        <div className="container justify-content-between mt-3 mb-3">
-                            <div>
-                                <input id="remember_password" type="checkbox" />
-                                <label htmlFor="remember_password">
-                                    Remember password
-                                </label>
+                        <div className="container-fluid mt-3 mb-3">
+                            <div className="row">
+                                <div className="col-md-6 px-0">
+                                    <input
+                                        id="remember_password"
+                                        type="checkbox"
+                                    />{" "}
+                                    <label htmlFor="remember_password">
+                                        Remember password
+                                    </label>
+                                </div>
+                                <div className="col-md-6 px-0 text-right">
+                                    <small className="text--bold text--greyish-brown">
+                                        Forgot your password?
+                                    </small>
+                                </div>
                             </div>
-                            <small className="text--bold text--greyish-brown">
-                                Forgot your password?
-                            </small>
                         </div>
                     </div>
                     <Button
