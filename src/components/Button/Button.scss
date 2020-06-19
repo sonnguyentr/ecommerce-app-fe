@@ -15,6 +15,17 @@
             background-color: #ff7e24;
         }
     }
+    &.--blue {
+        background-color: #5f6dff;
+        border: solid 1px #394afd;
+        color: white;
+        &:hover {
+            background-color: #394afd;
+        }
+    }
+    &.--shadow {
+        box-shadow: 0 6px 18px 0 rgba(0, 0, 0, 0.12);
+    }
     &.--block {
         display: block;
         width: 100%;
@@ -27,7 +38,7 @@
             background-color: #ff7e2424;
             cursor: pointer;
         }
-    
+
         &:focus {
             outline: none;
         }
