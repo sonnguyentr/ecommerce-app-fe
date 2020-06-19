@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./RegisterButton.scss";
 
-import { Modal, InputWithLabel } from "../../../components";
+import { Modal, InputWithLabel, Button } from "../../../components";
 
 const RegisterButton = (props) => {
     const [show, showModal] = useState(false);
@@ -145,13 +145,13 @@ const RegisterButton = (props) => {
                             Privacy Policy
                         </Link>
                     </div>
-                    <button
+                    <Button
                         type="submit"
                         disabled={!isValidForm}
-                        className="button --primary --block"
+                        className="--primary --block"
                     >
                         Register
-                    </button>
+                    </Button>
                 </form>
                 <hr />
                 <div className="mt-3 mb-2">

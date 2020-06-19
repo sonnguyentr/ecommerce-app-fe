@@ -3,7 +3,6 @@
     .homepage__cover {
         margin-top: 35px;
         cursor: pointer;
-        position: relative;
         z-index: -1;
         img {
             width: 100%;
@@ -18,9 +17,9 @@
     .homepage__cover-button {
         padding: 13px 48px;
         font-size: 16px;
-        right: 80px;
-        margin-top: -150px;
+        right: 250px;
         position: absolute;
+        bottom: 200px;
     }
     .homepage__pic-container {
         width: 25%;

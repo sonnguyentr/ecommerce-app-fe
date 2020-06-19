@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./LoginButton.scss";
 
-import { Modal, InputWithLabel } from "../../../components";
+import { Modal, InputWithLabel, Button } from "../../../components";
 
 const LoginButton = (props) => {
     const [show, showModal] = useState(false);
-    const [isLoginFailed, setIsLoginSuccess] = useState(null);
+    const [isLoginSuccess, setIsLoginSuccess] = useState(true);
 
     const isEmpty = (value) => {
         if (typeof value === "undefined" || value === "") {
@@ -56,20 +56,20 @@ const LoginButton = (props) => {
 
     const handleFormSubmit = (event) => {
         event.preventDefault();
-        alert("submited");
+        alert("submited" + isLoginSuccess);
         setIsLoginSuccess(false);
     };
     return (
         <>
-            <button
-                className="login-button text--bold"
-                type="button"
+            <Button
+                style={{ borderRadius: "100px", padding: "10px 30px" }}
+                className="--outline --primary"
                 onClick={() => {
                     showModal(!show);
                 }}
             >
-                Log in
-            </button>
+                Log In
+            </Button>
             <Modal
                 show={show}
                 handleClose={() => {
@@ -78,7 +78,7 @@ const LoginButton = (props) => {
             >
                 <h1>Log In</h1>
                 <small className="text--strawberry">
-                    {isLoginFailed ? "Your e-mail/password is invalid!" : null}
+                    {!isLoginSuccess ? "Your e-mail/password is invalid!" : null}
                 </small>
                 <form
                     name="login"
@@ -93,7 +93,7 @@ const LoginButton = (props) => {
                             value={email}
                             onChange={handleEmailChange}
                             className={
-                                (isLoginFailed || emailError) &&
+                                (!isLoginSuccess || emailError) &&
                                 "form__input__error"
                             }
                             placeholder="Enter your email..."
@@ -108,7 +108,7 @@ const LoginButton = (props) => {
                             value={password}
                             onChange={handlePasswordChange}
                             className={
-                                (isLoginFailed || passwordError) &&
+                                (!isLoginSuccess || passwordError) &&
                                 "form__input__error"
                             }
                             placeholder="Enter your password..."
@@ -128,13 +128,13 @@ const LoginButton = (props) => {
                             </small>
                         </div>
                     </div>
-                    <button
-                        disabled={!isValidForm}
+                    <Button
                         type="submit"
-                        className="button --primary --block"
+                        disabled={!isValidForm}
+                        className="--primary --block"
                     >
                         Log In
-                    </button>
+                    </Button>
                 </form>
                 <hr />
                 <div className="mt-3 mb-2">

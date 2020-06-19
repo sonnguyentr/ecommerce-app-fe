@@ -1,6 +1,8 @@
 import React from "react";
 import "./Homepage.scss";
 
+import {Button} from '../../components'
+
 const HomePage = () => {
     const homepageCategories = [
         {
@@ -24,9 +26,9 @@ const HomePage = () => {
         <div className="homepage__container">
             <div className="homepage__cover">
                 <img src="/img/cover.jpg" height="666px" alt="cover"></img>
-                <button className="button --primary homepage__cover-button">
+                <Button className="--primary homepage__cover-button">
                     <span className="text--bold">Shop now</span>
-                </button>
+                </Button>
             </div>
 
             <div className="container">
@@ -42,12 +44,9 @@ const HomePage = () => {
                                 <div className="homepage__overlay">
                                     <h2 style={{marginBottom: 10}} className="text--white">{cat.name}</h2>
                                     <hr className="homepage__hr" />
-                                    <button
-                                        style={{}}
-                                        className="button --primary homepage__pic-button"
-                                    >
-                                        <span>Shop now</span>
-                                    </button>
+                                    <Button className="--primary homepage__pic-button">
+                                        <span className="text--bold">Shop now</span>
+                                    </Button>
                                 </div>
                             </div>
                         )
