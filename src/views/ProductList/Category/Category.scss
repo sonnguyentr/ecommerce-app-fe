@@ -1,0 +1,22 @@
+.category {
+    .category__item {
+        font-size: 14px;
+        color: #4d4d4d;
+        margin-bottom: 16px;
+        cursor: pointer;
+
+        &:hover{
+            text-decoration: underline;
+        }
+        
+        &.chosen {
+            color: #ff6900;
+            font-weight: 500;
+        }
+    }
+    hr {
+        margin: 10px;
+        margin-left: 0;
+        width: 20px;
+    }
+}

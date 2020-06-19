@@ -7,19 +7,17 @@ import NavBar from "./NavBar/NavBar";
 import routes from "../router";
 
 import Footer from "./Footer/Footer";
-const layout = (props) => {
+const Layout = (props) => {
     return (
         <div>
             <Header />
             <NavBar />
             <section style={{ padding: "30px 0", maxWidth: "1465px", margin: "auto" }}>
-                <div className="text-center">// Breadcrumb</div>
                 <Switch>
                     {routes.map((route, i) => (
                         <Route
                             key={i}
                             path={route.path}
-                            // exact={route.exact}
                             children={<route.component />}
                         />
                     ))}
@@ -29,4 +27,4 @@ const layout = (props) => {
         </div>
     );
 };
-export default layout;
+export default Layout;

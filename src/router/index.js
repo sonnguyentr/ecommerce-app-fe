@@ -4,7 +4,7 @@ import ProductList from "../views/ProductList/ProductList";
 
 export default [
     {
-        path: "/:param",
+        path: "/:routeName",
         component: () => <ProductList />,
     },
     {
