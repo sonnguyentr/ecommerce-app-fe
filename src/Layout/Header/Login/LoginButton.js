@@ -1,71 +1,66 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./LoginButton.scss";
 
-import Modal from "../../../components/Modal/Modal";
+import { Modal, InputWithLabel } from "../../../components";
 
 const LoginButton = (props) => {
     const [show, showModal] = useState(false);
-    const [fields, setFields] = useState({ email: "", password: "" });
-    const [errors, setErrors] = useState(false);
-    const [isLoginFailed, setIsLoginFailed] = useState(false);
+    const [isLoginFailed, setIsLoginSuccess] = useState(null);
 
-    const handleChange = (value, field) => {
-        setFields({ ...fields, [field]: value });
+    const isEmpty = (value) => {
+        if (typeof value === "undefined" || value === "") {
+            return true;
+        }
+        return false;
     };
-    const validateInput = (value, field) => {
-        setErrors({ ...errors, [field]: "" });
+    // email
+    const [email, setEmail] = useState("");
+    const [emailError, setEmailError] = useState(null);
+    const handleEmailChange = (e) => {
+        const value = e.target.value;
+        setEmail(e.target.value);
 
-        if (typeof fields[field] == "undefined" || fields[field] === "") {
-            setErrors({ ...errors, [field]: "Field cannot be empty!" });
-            return false;
+        if (isEmpty(value)) setEmailError("Field cannot be empty!");
+        else {
+            const regexEmail = /^[a-zA-Z0-9_.]{1,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$/;
+            if (!regexEmail.test(value)) {
+                setEmailError("Please enter a valid e-mail!");
+            } else setEmailError("");
         }
-        switch (field) {
-            case "email":
-                const regexEmail = /^[a-zA-Z0-9_.]{1,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$/;
-                if (!regexEmail.test(value)) {
-                    setErrors({
-                        ...errors,
-                        [field]: "Please enter a valid e-mail!",
-                    });
-                    return false;
-                }
-                break;
-            case "password":
-                if (value.length <= 6) {
-                    setErrors({
-                        ...errors,
-                        [field]:
-                            "Your passwords must be more than 6 characters!",
-                    });
-                    return false;
-                }
-                break;
-            default:
-                break;
-        }
-        return true;
     };
+    // Password
+    const [password, setPassword] = useState("");
+    const [passwordError, setPasswordError] = useState(null);
+    const handlePasswordChange = (e) => {
+        const value = e.target.value;
+        setPassword(value);
 
-    const validateForm = () => {
-        for (const key in fields) {
-            if (
-                fields.hasOwnProperty(key) &&
-                !validateInput(fields[key], key)
-            ) {
-                return false;
-            }
-        }
-        return true;
+        if (isEmpty(value)) setPasswordError("Field cannot be empty!");
+        else if (value.length <= 6) {
+            setPasswordError("Your passwords must be more than 6 characters!");
+        } else setPasswordError("");
     };
+    // form validation
+    const [isValidForm, setIsValidForm] = useState(false);
+    useEffect(() => {
+        if (
+            passwordError == null || //initial state
+            emailError == null ||
+            passwordError ||
+            emailError
+        )
+            setIsValidForm(false);
+        else setIsValidForm(true);
+    }, [passwordError, emailError]);
+
     const handleFormSubmit = (event) => {
         event.preventDefault();
-        if (!validateForm()) return false;
         alert("submited");
-        setIsLoginFailed(true)
+        setIsLoginSuccess(false);
     };
     return (
-        <div style={{ display: "inline" }}>
+        <>
             <button
                 className="login-button text--bold"
                 type="button"
@@ -82,7 +77,9 @@ const LoginButton = (props) => {
                 }}
             >
                 <h1>Log In</h1>
-                <small className="text--strawberry">{isLoginFailed ? "Your e-mail/password is invalid!" : null}</small>
+                <small className="text--strawberry">
+                    {isLoginFailed ? "Your e-mail/password is invalid!" : null}
+                </small>
                 <form
                     name="login"
                     onSubmit={(e) => {
@@ -91,59 +88,51 @@ const LoginButton = (props) => {
                     className="text--left form mb-5"
                 >
                     <div className="form__container">
-                        <label className="form__label">E-mail</label>
-                        <input
-                            value={fields.email}
-                            onChange={(e) => {
-                                handleChange(e.target.value, "email");
-                            }}
-                            onBlur={(e) => {
-                                validateInput(e.target.value, "email");
-                            }}
-                            className={`form__input ${
-                                isLoginFailed || errors.email
-                                    ? "form__input__error"
-                                    : null
-                            }`}
-                            type="text"
+                        <InputWithLabel
+                            id="email"
+                            value={email}
+                            onChange={handleEmailChange}
+                            className={
+                                (isLoginFailed || emailError) &&
+                                "form__input__error"
+                            }
                             placeholder="Enter your email..."
-                        />
-                        <small className="form__input__error_message">
-                            {errors.email}
-                        </small>
-
-                        <label className="form__label">Password</label>
-                        <input
-                            value={fields.password}
-                            onChange={(e) => {
-                                handleChange(e.target.value, "password");
-                            }}
-                            onBlur={(e) => {
-                                validateInput(e.target.value, "password");
-                            }}
-                            className={`form__input ${
-                                isLoginFailed || errors.password
-                                    ? "form__input__error"
-                                    : null
-                            }`}
+                            errorMessage={emailError}
+                            isFocused
+                        >
+                            E-mail
+                        </InputWithLabel>
+                        <InputWithLabel
+                            id="password"
                             type="password"
-                            placeholder="Enter your password…"
-                        />
-                        <small className="form__input__error_message">
-                            {errors.password}
-                        </small>
-
+                            value={password}
+                            onChange={handlePasswordChange}
+                            className={
+                                (isLoginFailed || passwordError) &&
+                                "form__input__error"
+                            }
+                            placeholder="Enter your password..."
+                            errorMessage={passwordError}
+                        >
+                            Password
+                        </InputWithLabel>
                         <div className="container justify-content-between mt-3 mb-3">
                             <div>
-                                <input type="checkbox" />
-                                <label>Remember password</label>
+                                <input id="remember_password" type="checkbox" />
+                                <label htmlFor="remember_password">
+                                    Remember password
+                                </label>
                             </div>
                             <small className="text--bold text--greyish-brown">
                                 Forgot your password?
                             </small>
                         </div>
                     </div>
-                    <button type="submit" className="button --primary --block">
+                    <button
+                        disabled={!isValidForm}
+                        type="submit"
+                        className="button --primary --block"
+                    >
                         Log In
                     </button>
                 </form>
@@ -158,7 +147,7 @@ const LoginButton = (props) => {
                     </Link>
                 </div>
             </Modal>
-        </div>
+        </>
     );
 };
 
