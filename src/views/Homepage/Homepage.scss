@@ -4,6 +4,10 @@
         margin-top: 35px;
         cursor: pointer;
         position: relative;
+        z-index: -1;
+        img {
+            width: 100%;
+        }
     }
     .homepage__pic {
         cursor: pointer;
@@ -22,10 +26,10 @@
         width: 25%;
         padding: 10px 10px;
         position: relative;
-        .homepage:first-of-type {
+        &:first-of-type {
             padding-left: 0;
         }
-        .homepage:last-of-type {
+        &:last-of-type {
             padding-right: 0;
         }
     }
