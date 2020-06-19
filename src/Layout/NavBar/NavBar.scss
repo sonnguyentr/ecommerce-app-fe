@@ -29,7 +29,7 @@
                 display: none;
                 position: absolute;
                 left: -310px;
-
+                z-index: 3;
                 li {
                     padding: 15px;
                     font-size: 14px;
@@ -39,5 +39,8 @@
                 }
             }
         }
+    }
+    a.link {
+        color: #202124;
     }
 }
