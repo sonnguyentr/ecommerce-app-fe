@@ -1,10 +1,8 @@
 .cart-button {
     display: inline-block;
     vertical-align: middle;
+    cursor: pointer;
 
-    .cart-button:hover {
-        cursor: pointer;
-    }
     .cart-button__badge {
         display: inline-block;
         width: 20px;
@@ -16,7 +14,7 @@
         left: -12px;
         position: relative;
         top: -19px;
-    
+
         span {
             vertical-align: middle;
         }

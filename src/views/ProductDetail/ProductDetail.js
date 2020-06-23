@@ -1,17 +1,23 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import ProductPicture from "./ProductPicture/ProductPicture";
 import "./ProducDetail.scss";
 
 import Size from "./Size/Size";
 import Quantity from "./Quantity/Quantity";
 import Color from "./Color/Color";
+import AddToCart from "./AddToCart/AddToCart";
 
-import { Button } from "../../components";
-
-const ProductDetail = (props) => {
-    const stars = 5;
+const ProductDetail = ({ dispatchAddToCart }) => {
+    const product = {
+        id: "X-1",
+        stars: 5,
+        title: "Collete Stretch Linen Minidress",
+        price: 69,
+        reviewCount: 0,
+    };
     const starsArray = [];
-    for (let i = 0; i < stars; i++) {
+    for (let i = 0; i < product.stars; i++) {
         starsArray.push(
             <i key={i} className="fas fa-star text--white-six"></i>
         );
@@ -31,6 +37,10 @@ const ProductDetail = (props) => {
     const handleColor = (value) => {
         setColor(value);
     };
+
+    const handleAddToCart = () => {
+        dispatchAddToCart({ ...product, size, quantity, color });
+    };
     return (
         <div
             style={{ maxWidth: "1220px" }}
@@ -41,12 +51,12 @@ const ProductDetail = (props) => {
                     <ProductPicture />
                 </div>
                 <div className="col-md-5 ml-3">
-                    <h2 className="product-detail__title">
-                        Collete Stretch Linen Minidress
-                    </h2>
-                    <p className="product-detail__price">$69.00</p>
+                    <h2 className="product-detail__title">{product.title}</h2>
+                    <p className="product-detail__price">
+                        ${product.price.toFixed(2)}
+                    </p>
                     <small className="mb-3 d-block">
-                        {starsArray} | 0 Review
+                        {starsArray} | {product.reviewCount} Review
                     </small>
                     <Size size={size} handleSize={handleSize} />
                     <Color color={color} handleColor={handleColor} />
@@ -54,9 +64,7 @@ const ProductDetail = (props) => {
                         handleQuantity={handleQuantity}
                         quantity={quantity}
                     />
-                    <Button className="--block --blue --shadow mb-3">
-                        Add to cart
-                    </Button>
+                    <AddToCart handleAddToCart={handleAddToCart} />
                     <hr />
                     <small className="text--bold d-block">
                         Model wearing size S
@@ -69,4 +77,11 @@ const ProductDetail = (props) => {
     );
 };
 
-export default ProductDetail;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        dispatchAddToCart: (product) =>
+            dispatch({ type: "ADD_TO_CART", payload: product }),
+    };
+};
+
+export default connect(null, mapDispatchToProps)(ProductDetail);
