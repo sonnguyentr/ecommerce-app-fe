@@ -1,7 +1,19 @@
 const initialState = {
     username: null,
     userId: null,
-    shoppingCart: [],
+    shoppingCart: [
+        {
+            id: "X-1",
+            stars: 5,
+            title: "Collete Stretch Linen Minidress",
+            price: 69,
+            reviewCount: 0,
+            picture: "/img/product-pic-1.png",
+            size: "S",
+            color: "red",
+            quantity: 2,
+        },
+    ],
 };
 
 const reducer = (state = initialState, action) => {

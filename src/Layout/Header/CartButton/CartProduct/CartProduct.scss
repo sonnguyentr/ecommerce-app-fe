@@ -1,0 +1,22 @@
+.cart-product {
+    &:hover {
+        background-color: rgba(255, 161, 95, 0.3);
+    }
+    .cart-product__title {
+        font-size: 12px;
+        font-weight: 600;
+        color: #4d4d4d;
+    }
+    .cart-product__price {
+        color: #4d4d4d;
+        font-size: 12px;
+    }
+    .cart-product__description {
+        color: rgba(32, 33, 36, 0.4);
+        font-size: 12px;
+        width: 110px;
+        // text-overflow: ellipsis;
+        // overflow: hidden;
+        // white-space: nowrap;
+    }
+}

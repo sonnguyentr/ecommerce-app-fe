@@ -2,8 +2,12 @@ import React from "react";
 import { connect } from "react-redux";
 
 import "./CartButton.scss";
+import CartProduct from "./CartProduct/CartProduct";
+import { Button } from "../../../components";
 
-const CartButton = ({ count }) => {
+import {Link} from 'react-router-dom'
+
+const CartButton = ({ count, shoppingCart }) => {
     return (
         <div className="cart-button">
             <i
@@ -12,6 +16,20 @@ const CartButton = ({ count }) => {
             ></i>
             <div className="cart-button__badge">
                 <span>{count}</span>
+            </div>
+            <div className="cart-button__list-item">
+                {shoppingCart.map((item) => (
+                    <CartProduct key={item.id} {...item} />
+                ))}
+                {shoppingCart.map((item) => (
+                    <CartProduct key={item.id} {...item} />
+                ))}
+                {shoppingCart.map((item) => (
+                    <CartProduct key={item.id} {...item} />
+                ))}
+                <Button className="--block mt-0 cart-button__view-cart">
+                    <Link to="/check-out">View cart</Link>
+                </Button>
             </div>
         </div>
     );
@@ -24,7 +42,8 @@ const mapStateToProps = (state) => {
     );
     console.log(state.shoppingCart);
     return {
-        count: count,
+        count,
+        shoppingCart: state.shoppingCart,
     };
 };
 

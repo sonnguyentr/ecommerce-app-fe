@@ -15,6 +15,7 @@ const ProductDetail = ({ dispatchAddToCart }) => {
         title: "Collete Stretch Linen Minidress",
         price: 69,
         reviewCount: 0,
+        picture: "/img/product-pic-1.png"
     };
     const starsArray = [];
     for (let i = 0; i < product.stars; i++) {
