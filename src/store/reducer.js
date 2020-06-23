@@ -10,7 +10,10 @@ const initialState = {
             reviewCount: 0,
             picture: "/img/product-pic-1.png",
             size: "S",
-            color: "red",
+            color: {
+                name: "red",
+                value: "#ff5f6d",
+            },
             quantity: 2,
         },
     ],

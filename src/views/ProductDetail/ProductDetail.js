@@ -15,7 +15,7 @@ const ProductDetail = ({ dispatchAddToCart }) => {
         title: "Collete Stretch Linen Minidress",
         price: 69,
         reviewCount: 0,
-        picture: "/img/product-pic-1.png"
+        picture: "/img/product-pic-1.png",
     };
     const starsArray = [];
     for (let i = 0; i < product.stars; i++) {
@@ -31,10 +31,13 @@ const ProductDetail = ({ dispatchAddToCart }) => {
 
     const [quantity, setQuantity] = useState(1);
     const handleQuantity = (value) => {
-        if (quantity + value > 0) setQuantity(quantity + value);
+        setQuantity(quantity + value);
     };
 
-    const [color, setColor] = useState("red");
+    const [color, setColor] = useState({
+        name: "red",
+        value: "#ff5f6d",
+    });
     const handleColor = (value) => {
         setColor(value);
     };

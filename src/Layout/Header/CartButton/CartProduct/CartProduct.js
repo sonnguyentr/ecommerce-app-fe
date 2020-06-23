@@ -24,13 +24,13 @@ const CartProduct = (props) => {
                         </div>
                         <div className="col-8 text-right">
                             <span className="cart-product__description">
-                                {`${props.size} • ${props.color} • ${props.quantity} pcs`}
+                                {`${props.size} • ${props.color.name} • ${props.quantity} pcs`}
                             </span>
                         </div>
                     </div>
                 </div>
             </div>
-            <hr className="mb-0"/>
+            <hr className="my-1"/>
         </div>
     );
 };
