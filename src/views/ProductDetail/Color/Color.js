@@ -35,7 +35,7 @@ const Color = ({ color, handleColor }) => {
             <p className="product-color__label mb-2">Color: ({color.name})</p>
             {listColors.map((item) => (
                 <Button
-                    key={item.color.name}
+                    key={item.name}
                     onClick={() => handleColor(item)}
                     style={{
                         padding: 0,
