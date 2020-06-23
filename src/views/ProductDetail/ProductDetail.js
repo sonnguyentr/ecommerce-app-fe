@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import ProductPicture from "./ProductPicture/ProductPicture";
 import "./ProducDetail.scss";
 
 import Size from "./Size/Size";
+import Quantity from "./Quantity/Quantity";
+import Color from "./Color/Color";
 
 import { Button } from "../../components";
 
@@ -15,6 +17,20 @@ const ProductDetail = (props) => {
         );
     }
 
+    const [size, setSize] = useState("S");
+    const handleSize = (value) => {
+        setSize(value);
+    };
+
+    const [quantity, setQuantity] = useState(1);
+    const handleQuantity = (value) => {
+        if (quantity + value > 0) setQuantity(quantity + value);
+    };
+
+    const [color, setColor] = useState("red");
+    const handleColor = (value) => {
+        setColor(value);
+    };
     return (
         <div
             style={{ maxWidth: "1220px" }}
@@ -32,7 +48,12 @@ const ProductDetail = (props) => {
                     <small className="mb-3 d-block">
                         {starsArray} | 0 Review
                     </small>
-                    <Size />
+                    <Size size={size} handleSize={handleSize} />
+                    <Color color={color} handleColor={handleColor} />
+                    <Quantity
+                        handleQuantity={handleQuantity}
+                        quantity={quantity}
+                    />
                     <Button className="--block --blue --shadow mb-3">
                         Add to cart
                     </Button>

@@ -5,6 +5,9 @@
     box-sizing: content-box;
     position: relative;
     cursor: pointer;
+    &.disabled {
+        cursor: default;
+    }
     .title {
         font-size: 14px;
         max-height: 40px;

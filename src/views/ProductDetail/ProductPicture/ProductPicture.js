@@ -38,7 +38,7 @@ const ProductPicture = (props) => {
                     {listPics.map((pic) => {
                         return (
                             <img
-                                onClick={handleClickPic.bind(null, pic)}
+                                onClick={() => handleClickPic(pic)}
                                 key={pic.id}
                                 src={pic.src}
                                 className="img-fluid product-picture--small "

@@ -8,7 +8,7 @@ const Category = ({ list, onClick }) => {
                 return (
                     <div key={index}>
                         <p
-                            onClick={onClick.bind(null, item)}
+                            onClick={() => onClick(item)}
                             className={`category__item ${
                                 item.isChosen ? "chosen" : ""
                             }`}
