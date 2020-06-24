@@ -1,0 +1,43 @@
+.button {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0 35px;
+    padding: 15px 30px;
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    cursor: pointer;
+    &.--primary {
+        background-color: #ffa15f;
+        border: solid 1px #ffa15f;
+        color: white;
+        &:hover {
+            background-color: #ff7e24;
+        }
+    }
+    &.--block {
+        display: block;
+        width: 100%;
+        margin: 0;
+    }
+    &.--outline {
+        color: #ff7e24;
+        background-color: transparent;
+        &:hover {
+            background-color: #ff7e2424;
+            cursor: pointer;
+        }
+    
+        &:focus {
+            outline: none;
+        }
+    }
+    &:disabled {
+        background-color: #b1b1b1;
+        border: solid 1px #b1b1b1;
+
+        &:hover {
+            background-color: #9e9d9d;
+        }
+    }
+}
