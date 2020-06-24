@@ -8,6 +8,14 @@ import Quantity from "./Quantity/Quantity";
 import Color from "./Color/Color";
 import AddToCart from "./AddToCart/AddToCart";
 
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        dispatchAddToCart: (product) =>
+            dispatch({ type: "ADD_TO_CART", payload: product }),
+    };
+};
+
 const ProductDetail = ({ dispatchAddToCart }) => {
     const product = {
         id: "X-1",
@@ -76,13 +84,6 @@ const ProductDetail = ({ dispatchAddToCart }) => {
             </div>
         </div>
     );
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        dispatchAddToCart: (product) =>
-            dispatch({ type: "ADD_TO_CART", payload: product }),
-    };
 };
 
 export default connect(null, mapDispatchToProps)(ProductDetail);

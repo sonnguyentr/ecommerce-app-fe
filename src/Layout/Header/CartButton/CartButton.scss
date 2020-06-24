@@ -47,11 +47,12 @@
 
         .cart-button__view-cart {
             padding: 10px;
-            font-size: 14px;
-            font-weight: bold;
             background-color: transparent;
-            color: #ffa15f;
-
+            a {
+                color: #ffa15f;
+                font-size: 14px;
+                font-weight: bold;
+            }
             &:hover {
                 background-color: rgba(255, 161, 95, 0.3);
             }

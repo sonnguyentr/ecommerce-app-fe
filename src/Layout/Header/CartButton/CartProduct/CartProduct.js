@@ -30,7 +30,7 @@ const CartProduct = (props) => {
                     </div>
                 </div>
             </div>
-            <hr className="my-1"/>
+            <hr className="mt-1 mb-0"/>
         </div>
     );
 };

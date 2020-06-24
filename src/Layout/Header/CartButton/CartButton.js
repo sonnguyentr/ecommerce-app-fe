@@ -7,6 +7,17 @@ import { Button } from "../../../components";
 
 import { Link } from "react-router-dom";
 
+const mapStateToProps = ({ shoppingCart }) => {
+    const count = shoppingCart.reduce(
+        (accu, item) => (accu += item.quantity || 0),
+        0
+    );
+    return {
+        count,
+        shoppingCart,
+    };
+};
+
 const CartButton = ({ count, shoppingCart }) => {
     return (
         <div className="cart-button">
@@ -24,24 +35,12 @@ const CartButton = ({ count, shoppingCart }) => {
                 {shoppingCart.map((item) => (
                     <CartProduct key={item.id} {...item} />
                 ))}
-                <Button className="--block mt-0 cart-button__view-cart">
+                <Button className="button--block mt-0 cart-button__view-cart">
                     <Link to="/check-out">View cart</Link>
                 </Button>
             </div>
         </div>
     );
-};
-
-const mapStateToProps = (state) => {
-    const count = state.shoppingCart.reduce(
-        (accu, item) => (accu += item.quantity || 0),
-        0
-    );
-    console.log(state.shoppingCart);
-    return {
-        count,
-        shoppingCart: state.shoppingCart,
-    };
 };
 
 export default connect(mapStateToProps)(CartButton);
