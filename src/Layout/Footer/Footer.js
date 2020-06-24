@@ -9,9 +9,13 @@ const Footer = (props) => {
         <footer>
             <div className="container-fluid">
                 <div className="row justify-content-between">
-                    <FooterLogo />
-                    <PrimaryNav />
-                    <div>
+                    <div className="col-auto">
+                        <FooterLogo />
+                    </div>
+                    <div className="col-auto">
+                        <PrimaryNav />
+                    </div>
+                    <div className="col-auto text-right">
                         <i className="fab fa-twitter text--greyish-two"></i>
                         <i style={{ fontSize: 18, margin: "0px 20px"}} className="fab fa-instagram text--greyish-two"></i>
                         <i className="fab fa-facebook-f text--greyish-two"></i>

@@ -1,10 +1,9 @@
 .cart-button {
     display: inline-block;
     vertical-align: middle;
+    position: relative;
+    cursor: pointer;
 
-    .cart-button:hover {
-        cursor: pointer;
-    }
     .cart-button__badge {
         display: inline-block;
         width: 20px;
@@ -16,9 +15,42 @@
         left: -12px;
         position: relative;
         top: -19px;
-    
+
         span {
             vertical-align: middle;
+        }
+    }
+
+    &:hover > .cart-button__list-item {
+        visibility: visible;
+    }
+
+    .cart-button__list-item {
+        z-index: 3;
+        visibility: hidden;
+        transition: visibility 0.2s, opacity 0.5s linear;
+        position: absolute;
+        right: 0;
+        top: 40px;
+        width: 270px;
+        box-shadow: 0 14px 30px 0 rgba(0, 0, 0, 0.14);
+        border: solid 0.5px #eaeaea;
+        background-color: #fbfbfb;
+
+        &:hover {
+            display: block;
+        }
+
+        .cart-button__view-cart {
+            padding: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            background-color: transparent;
+            color: #ffa15f;
+
+            &:hover {
+                background-color: rgba(255, 161, 95, 0.3);
+            }
         }
     }
 }

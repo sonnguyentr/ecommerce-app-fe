@@ -1,0 +1,26 @@
+.check-out__total {
+    .total__title {
+        font-size: 14px;
+        font-weight: bold;
+    }
+    .total__subtotal {
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .total__box {
+        background-color: #f9f9f9;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 32px 30px 24px;
+
+        p {
+            padding: 5px;
+            margin-bottom: 0;
+        }
+    }
+    .total__button {
+        color: white;
+        box-shadow: 0 6px 18px 0 rgba(0, 0, 0, 0.12);
+        background-color: #ff5f6d;
+    }
+}
