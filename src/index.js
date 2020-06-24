@@ -5,7 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from "react-router-dom";
 
-import reducer from './store/reducer'
+import reducer from './reducer'
 import { createStore } from "redux"
 import { Provider } from "react-redux"
 

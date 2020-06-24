@@ -1,10 +1,25 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import "./RegisterButton.scss";
 
 import { Modal, InputWithLabel, Button } from "../../../components";
 
-const RegisterButton = (props) => {
+import api from "../../../api";
+import { user as userConstant } from "../../../constant";
+
+const mapStateToProps = ({ user }) => {
+    return { user };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        dispatchRegisterSuccess: (payload) =>
+            dispatch({ type: userConstant.REGISTER_SUCCESS, payload }),
+    };
+};
+
+const RegisterButton = ({ dispatchRegisterSuccess }) => {
     const [show, showModal] = useState(false);
 
     const isEmpty = (value) => {
@@ -66,9 +81,16 @@ const RegisterButton = (props) => {
         else setIsValidForm(true);
     }, [nameError, passwordError, emailError]);
 
-    const handleFormSubmit = (event) => {
+    const handleFormSubmit = async (event) => {
         event.preventDefault();
-        alert("submited");
+        const data = await api.register({ name, email, password });
+        console.log(data);
+        if (data.status === 200) {
+            dispatchRegisterSuccess({ ...data.data });
+            alert("Đăng kí thành công");
+        } else {
+            alert(data.error.message);
+        }
     };
 
     return (
@@ -168,4 +190,10 @@ const RegisterButton = (props) => {
     );
 };
 
-export default RegisterButton;
+const WraperComponent = ({ user, dispatchRegisterSuccess }) => {
+    console.log(user);
+    if (user) return null;
+    return <RegisterButton dispatchRegisterSuccess={dispatchRegisterSuccess} />;
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(WraperComponent);

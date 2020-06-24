@@ -8,10 +8,9 @@ import { Button } from "../../../components";
 import { Link } from "react-router-dom";
 
 const mapStateToProps = ({ shoppingCart }) => {
-    const count = shoppingCart.reduce(
-        (accu, item) => (accu += item.quantity || 0),
-        0
-    );
+    const count = shoppingCart
+        ? shoppingCart.reduce((accu, item) => (accu += item.quantity || 0), 0)
+        : 0;
     return {
         count,
         shoppingCart,
@@ -25,20 +24,16 @@ const CartButton = ({ count, shoppingCart }) => {
             <div className="cart-button__badge">
                 <span>{count}</span>
             </div>
-            <div className="cart-button__list-item">
-                {shoppingCart.map((item) => (
-                    <CartProduct key={item.id} {...item} />
-                ))}
-                {shoppingCart.map((item) => (
-                    <CartProduct key={item.id} {...item} />
-                ))}
-                {shoppingCart.map((item) => (
-                    <CartProduct key={item.id} {...item} />
-                ))}
-                <Button className="button--block mt-0 cart-button__view-cart">
-                    <Link to="/check-out">View cart</Link>
-                </Button>
-            </div>
+            {!!count && (
+                <div className="cart-button__list-item">
+                    {shoppingCart.map((item) => (
+                        <CartProduct key={item.id} {...item} />
+                    ))}
+                    <Button className="button--block mt-0 cart-button__view-cart">
+                        <Link to="/check-out">View cart</Link>
+                    </Button>
+                </div>
+            )}
         </div>
     );
 };
