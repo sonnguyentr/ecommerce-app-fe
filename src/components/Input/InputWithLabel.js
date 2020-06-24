@@ -13,7 +13,7 @@ const InputWithLabel = ({
     children,
 }) => {
     return (
-        <>
+        <div className="input-group">
             <label htmlFor={id} className="form__label">
                 {children}
             </label>
@@ -27,7 +27,7 @@ const InputWithLabel = ({
                 autoFocus={isFocused}
             />
             <small className="form__input__error_message">{errorMessage}</small>
-        </>
+        </div>
     );
 };
 
