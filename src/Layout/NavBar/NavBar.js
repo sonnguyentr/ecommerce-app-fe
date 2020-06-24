@@ -1,5 +1,6 @@
 import React from "react";
 import "./NavBar.scss";
+import { Link } from 'react-router-dom'
 
 const categories = [
     {
@@ -59,11 +60,13 @@ const NavBar = (props) => {
                 {categories.map((item, index) => {
                     return (
                         <li key={index} className="text--dark-grey">
-                            {item.name}
+                            <Link className="link" to={item.name}>{item.name}</Link>
                             <i style={{marginLeft: 5, fontSize: 13}} className="fas fa-chevron-down"></i>
                             <ul className="sub-menu">
                                 {item.subCat.map((subcat, i) => {
-                                    return <li key={i}>{subcat}</li>;
+                                    return <li key={i}>
+                                        <Link className="link" to={subcat}>{subcat}</Link>
+                                    </li>;
                                 })}
                             </ul>
                         </li>
