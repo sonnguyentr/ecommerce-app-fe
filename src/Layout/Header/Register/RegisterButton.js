@@ -15,7 +15,7 @@ const mapStateToProps = ({ user }) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         dispatchRegisterSuccess: (payload) =>
-            dispatch({ type: userConstant.REGISTER_SUCCESS, payload }),
+            dispatch({ type: userConstant.UPDATE_USER, payload }),
     };
 };
 
@@ -89,7 +89,7 @@ const RegisterButton = ({ dispatchRegisterSuccess }) => {
             dispatchRegisterSuccess({ ...data.data });
             alert("Đăng kí thành công");
         } else {
-            alert(data.error.message);
+            alert(data.message);
         }
     };
 
