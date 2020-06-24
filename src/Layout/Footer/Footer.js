@@ -17,12 +17,12 @@ const Footer = (props) => {
                     </div>
                     <div className="col-auto text-right">
                         <i className="fab fa-twitter text--greyish-two"></i>
-                        <i style={{ fontSize: 18, margin: "0px 20px"}} className="fab fa-instagram text--greyish-two"></i>
+                        <i className="fab fa-instagram text--greyish-two"></i>
                         <i className="fab fa-facebook-f text--greyish-two"></i>
                     </div>
                 </div>
             </div>
-            <hr style={{border: "1px solid #eaeaea"}}/>
+            <hr />
             <SecondaryNav />
         </footer>
     );

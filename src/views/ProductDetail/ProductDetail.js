@@ -46,10 +46,7 @@ const ProductDetail = ({ dispatchAddToCart }) => {
         dispatchAddToCart({ ...product, size, quantity, color });
     };
     return (
-        <div
-            style={{ maxWidth: "1220px" }}
-            className="container-fluid product-detail"
-        >
+        <div className="container-fluid product-detail">
             <div className="row">
                 <div className="col-md-5">
                     <ProductPicture />

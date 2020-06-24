@@ -18,7 +18,7 @@ const Item = ({ title, price, available, img }) => {
 
             {available ? (
                 <div className="quick-shop">
-                    <Button className="--primary --block">+ Quick shop</Button>
+                    <Button className="button--primary button--block">+ Quick shop</Button>
                 </div>
             ) : (
                 <div className="sold-out">Sold out</div>

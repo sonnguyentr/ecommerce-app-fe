@@ -61,7 +61,7 @@ const NavBar = (props) => {
                     return (
                         <li key={index} className="text--dark-grey">
                             <Link className="link" to={item.name}>{item.name}</Link>
-                            <i style={{marginLeft: 5, fontSize: 13}} className="fas fa-chevron-down"></i>
+                            <i className="fas fa-chevron-down ml-2"></i>
                             <ul className="sub-menu">
                                 {item.subCat.map((subcat, i) => {
                                     return <li key={i}>

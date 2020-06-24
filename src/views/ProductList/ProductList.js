@@ -117,10 +117,7 @@ const ProductList = () => {
                     />
                 </div>
                 <div className="col-xs-12 col-md-auto">
-                    <div
-                        className="container-fluid"
-                        style={{ width: "1000px" }}
-                    >
+                    <div className="container-fluid product-list__list-item">
                         <div className="row">
                             <div className="col-6 offset-md-6">
                                 <Paging />

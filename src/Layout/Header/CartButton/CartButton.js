@@ -5,15 +5,12 @@ import "./CartButton.scss";
 import CartProduct from "./CartProduct/CartProduct";
 import { Button } from "../../../components";
 
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 const CartButton = ({ count, shoppingCart }) => {
     return (
         <div className="cart-button">
-            <i
-                style={{ fontSize: "20px" }}
-                className="fas fa-shopping-cart text--charcoal-grey"
-            ></i>
+            <i className="fas fa-shopping-cart text--charcoal-grey"></i>
             <div className="cart-button__badge">
                 <span>{count}</span>
             </div>

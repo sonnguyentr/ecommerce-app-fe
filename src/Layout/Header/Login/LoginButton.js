@@ -62,8 +62,7 @@ const LoginButton = (props) => {
     return (
         <>
             <Button
-                style={{ borderRadius: "100px", padding: "10px 30px" }}
-                className="--outline --primary"
+                className="login-button button--outline button--primary"
                 onClick={() => {
                     showModal(!show);
                 }}
@@ -140,7 +139,7 @@ const LoginButton = (props) => {
                     <Button
                         type="submit"
                         disabled={!isValidForm}
-                        className="--primary --block"
+                        className="button--primary button--block"
                     >
                         Log In
                     </Button>

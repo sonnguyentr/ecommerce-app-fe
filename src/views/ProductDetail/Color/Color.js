@@ -38,12 +38,9 @@ const Color = ({ color, handleColor }) => {
                     key={item.name}
                     onClick={() => handleColor(item)}
                     style={{
-                        padding: 0,
                         backgroundColor: item.value,
-                        width: "30px",
-                        height: "30px",
                     }}
-                    className="d-inline-block mx-1 rounded-circle"
+                    className="d-inline-block mx-1 product-color__button"
                 ></Button>
             ))}
         </div>
