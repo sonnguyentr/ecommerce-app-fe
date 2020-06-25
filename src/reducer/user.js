@@ -1,11 +1,16 @@
 import { user as userConstant } from "../constant";
 
-const userState = (state = null, action) => {
+const initUser = JSON.parse(localStorage.getItem("user")) || null;
+
+const userState = (state = initUser, action) => {
     switch (action.type) {
         case userConstant.UPDATE_USER:
-            console.log(action.payload);
             const { user, token } = action.payload;
+            localStorage.setItem("user", JSON.stringify({ ...user, token }));
             return { ...user, token };
+        case userConstant.LOGOUT_USER:
+            localStorage.setItem("user", null);
+            return null;
         default:
             return state;
     }
