@@ -1,0 +1,19 @@
+.add-product {
+    .add-product__label {
+        font-size: 12px;
+        font-weight: bold;
+        color: #202124;
+        width: 100px;
+    }
+    .add-product__input-container {
+        width: 800px;
+    }
+    .add-product__row {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 900px;
+        margin: auto;
+        align-items: center;
+        // text-align: center;
+    }
+}
