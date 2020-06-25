@@ -40,7 +40,7 @@ const Color = ({ color, handleColor }) => {
                     style={{
                         backgroundColor: item.value,
                         boxShadow: `${
-                            color.value == item.value
+                            color.value === item.value
                                 ? "0 0 5px 2px " + item.value
                                 : ""
                         }`,
