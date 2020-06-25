@@ -1,0 +1,31 @@
+.left-bar {
+    padding-top: 20px;
+    box-shadow: 1px 0 0 0 #ededed;
+    .left-bar__item {
+        box-sizing: content-box;
+        text-align: left;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 18px;
+        i {
+            color: #979797;
+            display: inline-block;
+            margin-right: 10px;
+            font-size: 20px;
+            width: 25px;
+        }
+        a {
+            display: inline-block;
+            text-decoration: none;
+            color: #3d3d3f;
+        }
+    }
+    .left-bar__chosen {
+        margin-left: -4px;
+        border-left: 4px solid #ffa15f;
+        i,
+        a {
+            color: #ffa15f;
+        }
+    }
+}

@@ -15,13 +15,16 @@ const Layout = (props) => {
             <NavBar />
             <section className="layout__section">
                 <Switch>
-                    {routes.map((route, i) => (
-                        <Route
+                    {routes.map((route, i) => {
+                        const Component = route.component 
+                        return(
+                            <Route
                             key={i}
                             path={route.path}
-                            children={<route.component />}
+                            children={<Component/>}
                         />
-                    ))}
+                    )})
+                }
                 </Switch>
             </section>
             <Footer />

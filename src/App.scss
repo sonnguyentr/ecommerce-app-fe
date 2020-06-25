@@ -11,7 +11,9 @@ body {
 a {
     text-decoration: none;
 }
-
+.App, #root, body, html {
+    height: 100%;
+}
 .justify-content-around {
     justify-content: space-around !important;
 }
