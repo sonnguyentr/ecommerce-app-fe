@@ -1,7 +1,7 @@
 import React from "react";
 import "./UserAvatar.scss";
 import { Link } from "react-router-dom";
-const UserAvatar = ({ dispatchUserLogOut }) => {
+const UserAvatar = ({ dispatchUserLogOut, user }) => {
     const menuItems = [
         {
             text: "Account Setting",
@@ -27,7 +27,14 @@ const UserAvatar = ({ dispatchUserLogOut }) => {
                         </div>
                     );
                 })}
-                <div onClick={dispatchUserLogOut} className="avatar__menu-item">Logout</div>
+                {user && user.role === "seller" && (
+                    <div className="avatar__menu-item border-bottom">
+                        <Link to="seller-dashboard">Seller dashboard</Link>
+                    </div>
+                )}
+                <div onClick={dispatchUserLogOut} className="avatar__menu-item">
+                    Logout
+                </div>
             </div>
         </div>
     );

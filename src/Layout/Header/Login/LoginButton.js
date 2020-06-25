@@ -97,6 +97,7 @@ const LoginButton = ({dispatchUserUpdate, api}) => {
                     <div className="form__container">
                         <InputWithLabel
                             id="email"
+                            name="email"
                             value={email}
                             onChange={handleEmailChange}
                             className={
@@ -112,6 +113,7 @@ const LoginButton = ({dispatchUserUpdate, api}) => {
                         <InputWithLabel
                             id="password"
                             type="password"
+                            name="password"
                             value={password}
                             onChange={handlePasswordChange}
                             className={
