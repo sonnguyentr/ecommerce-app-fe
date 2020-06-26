@@ -1,6 +1,9 @@
 import axios from "axios";
 import { config } from "../constant";
 import auth from "./auth";
+import seller from "./seller";
+import product from "./product";
+
 const token = "";
 const api = {
     base: config.host + "/api",
@@ -45,6 +48,9 @@ const api = {
                 }
             });
     },
+    axios,
     ...auth,
+    ...seller,
+    ...product,
 };
 export default api;

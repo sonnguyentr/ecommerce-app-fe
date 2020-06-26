@@ -1,12 +1,16 @@
-import React from "react"
+import React from "react";
+import { useHistory } from "react-router-dom";
 
 const FooterLogo = (props) => {
+    const history = useHistory();
     return (
         <svg
+            onClick={() => {history.push("/")}}
             xmlns="http://www.w3.org/2000/svg"
             width="96"
             height="20"
             viewBox="0 0 96 20"
+            className="cursor-pointer"
         >
             <g fill="none" fillRule="evenodd">
                 <path

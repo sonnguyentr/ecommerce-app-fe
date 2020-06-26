@@ -1,13 +1,18 @@
 import React from "react";
-import './Logo.scss'
+import "./Logo.scss";
+import { useHistory } from "react-router-dom";
+
 const Logo = (props) => {
+    const history = useHistory();
     return (
         <div className="container-logo">
             <svg
+                onClick={() => {history.push("/")}}
                 xmlns="http://www.w3.org/2000/svg"
                 width="96"
                 height="20"
                 viewBox="0 0 96 20"
+                className="cursor-pointer"
             >
                 <g fill="none" fillRule="evenodd">
                     <path

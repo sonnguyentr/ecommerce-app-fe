@@ -1,0 +1,15 @@
+.photo-upload {
+    display: inline-block;
+    margin-right: 20px;
+    &:last-child {
+        margin-right: 0;
+    }
+    .photo-upload__input {
+        display: none;
+    }
+    .photo-upload__img {
+        width: 180px;
+        height: 270px;
+        cursor: pointer;
+    }
+}
