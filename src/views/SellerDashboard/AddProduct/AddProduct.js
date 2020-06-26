@@ -29,9 +29,9 @@ const AddProduct = (props) => {
         setPhotoArray([...newArr]);
     };
     // Name
-    const [name, setName] = useState("");
-    const handleNameChange = (e) => {
-        setName(e.target.value);
+    const [title, setTitle] = useState("");
+    const handleTitleChange = (e) => {
+        setTitle(e.target.value);
     };
     // Price
     const [price, setPrice] = useState("");
@@ -60,7 +60,7 @@ const AddProduct = (props) => {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         const postData = {
-            name,
+            title,
             price,
             description,
             photos: photoArray,
@@ -86,7 +86,7 @@ const AddProduct = (props) => {
             >
                 <div className="container-fluid form">
                     <Photos photoUpload={photoUpload} photoArray={photoArray} />
-                    <Name name={name} handleNameChange={handleNameChange} />
+                    <Name title={title} handleTitleChange={handleTitleChange} />
                     <Price
                         price={price}
                         handlePriceChange={handlePriceChange}

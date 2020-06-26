@@ -4,10 +4,10 @@ import { useHistory } from "react-router-dom";
 
 import { Button } from "../../../components";
 
-const Item = ({ title, price, available, img }) => {
+const Item = ({ title, price, available, img, _id }) => {
     const history = useHistory();
     const handleClick = () => {
-        history.push("/product-detail");
+        history.push(`/product-detail/${title}-${_id}`);
     };
     return (
         <div

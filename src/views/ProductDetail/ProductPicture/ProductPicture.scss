@@ -1,4 +1,5 @@
 .product-picture {
+    cursor: pointer;
     .product-picture--main {
         width: auto;
         height: 537px;
@@ -7,5 +8,8 @@
         width: 80px;
         height: 116px;
         margin-bottom: 25px;
+    }
+    .disabled {
+        cursor: default;
     }
 }

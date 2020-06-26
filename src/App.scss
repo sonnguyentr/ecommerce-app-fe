@@ -11,6 +11,9 @@ body {
 a {
     text-decoration: none;
 }
+.cursor-pointer {
+    cursor: pointer;
+}
 .App, #root, body, html {
     height: 100%;
 }

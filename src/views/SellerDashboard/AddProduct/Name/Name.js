@@ -1,6 +1,6 @@
 import React from "react";
 
-const Name = ({ name, handleNameChange }) => {
+const Name = ({ title, handleTitleChange }) => {
     return (
         <div className="add-product__row">
             <div className="add-product__label">
@@ -11,8 +11,8 @@ const Name = ({ name, handleNameChange }) => {
             <div className="add-product__input-container">
                 <input
                     className="form__input add-product__input"
-                    onChange={handleNameChange}
-                    value={name}
+                    onChange={handleTitleChange}
+                    value={title}
                     type="text"
                     name="product-name"
                     id="product-name"

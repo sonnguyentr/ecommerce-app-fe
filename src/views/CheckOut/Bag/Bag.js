@@ -19,12 +19,6 @@ const Bag = ({ shoppingCart, handleQuantity }) => {
                     {shoppingCart.map((item) => (
                         <BagItem handleQuantity={handleQuantity} key={item.id} {...item} />
                     ))}
-                    {shoppingCart.map((item) => (
-                        <BagItem handleQuantity={handleQuantity} key={item.id} {...item} />
-                    ))}
-                    {shoppingCart.map((item) => (
-                        <BagItem handleQuantity={handleQuantity} key={item.id} {...item} />
-                    ))}
                 </tbody>
             </table>
         </div>

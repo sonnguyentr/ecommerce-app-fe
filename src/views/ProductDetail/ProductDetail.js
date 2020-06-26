@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import ProductPicture from "./ProductPicture/ProductPicture";
 import "./ProducDetail.scss";
@@ -9,6 +10,7 @@ import Quantity from "./Quantity/Quantity";
 import Color from "./Color/Color";
 import AddToCart from "./AddToCart/AddToCart";
 
+import api from "../../api";
 const mapDispatchToProps = (dispatch) => {
     return {
         dispatchAddToCart: (product) =>
@@ -17,16 +19,36 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const ProductDetail = ({ dispatchAddToCart }) => {
-    const product = {
-        id: "X-1",
-        stars: 5,
-        title: "Collete Stretch Linen Minidress",
-        price: 69,
-        reviewCount: 0,
-        picture: "/img/product-pic-1.png",
-    };
+    const { title } = useParams();
+    const productId = title.split("-")[1];
+
+    const [product, setProduct] = useState({});
+    useEffect(() => {
+        const getProductDetail = async () => {
+            const data = await api.getProductDetail(productId);
+            if (data.status === 200) {
+                const product = {
+                    ...data.data.data,
+                };
+                product.id = product._id;
+                product.picture =
+                    product.photos[0] || "/img/product-placeholder.png";
+                setProduct(product);
+                console.log(product);
+            }
+        };
+        getProductDetail();
+    }, [productId]);
+    // const product = {
+    //     id: "X-1",
+    //     stars: 5,
+    //     title: "Collete Stretch Linen Minidress",
+    //     price: 69,
+    //     reviewCount: 0,
+    //     picture: "/img/product-pic-1.png",
+    // };
     const starsArray = [];
-    for (let i = 0; i < product.stars; i++) {
+    for (let i = 0; i < 5; i++) {
         starsArray.push(
             <i key={i} className="fas fa-star text--white-six"></i>
         );
@@ -57,17 +79,21 @@ const ProductDetail = ({ dispatchAddToCart }) => {
         <div className="container-fluid product-detail">
             <div className="row">
                 <div className="col-md-5">
-                    <ProductPicture />
+                    <ProductPicture photos={product.photos} />
                 </div>
                 <div className="col-md-5 ml-3">
                     <h2 className="product-detail__title">{product.title}</h2>
                     <p className="product-detail__price">
-                        ${product.price.toFixed(2)}
+                        ${product.price && product.price.toFixed(2)}
                     </p>
                     <small className="mb-3 d-block">
                         {starsArray} | {product.reviewCount} Review
                     </small>
-                    <Size size={size} handleSize={handleSize} />
+                    <Size
+                        properties={product.properties}
+                        size={size}
+                        handleSize={handleSize}
+                    />
                     <Color color={color} handleColor={handleColor} />
                     <Quantity
                         handleQuantity={handleQuantity}
@@ -75,11 +101,12 @@ const ProductDetail = ({ dispatchAddToCart }) => {
                     />
                     <AddToCart handleAddToCart={handleAddToCart} />
                     <hr />
-                    <small className="text--bold d-block">
+                    {product.description}
+                    {/* <small className="text--bold d-block">
                         Model wearing size S
                     </small>
                     <small className="d-block">- Chest: 36”</small>
-                    <small className="d-block">- Length: 25.75”</small>
+                    <small className="d-block">- Length: 25.75”</small> */}
                 </div>
             </div>
         </div>

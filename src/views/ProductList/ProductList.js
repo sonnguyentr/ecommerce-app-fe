@@ -5,6 +5,9 @@ import Paging from "./Paging/Paging";
 import Categories from "./Category/Category";
 import { useParams } from "react-router-dom";
 
+import api from "../../api";
+import { useEffect } from "react";
+import { useState } from "react";
 const ProductList = () => {
     /*
         Breadcrumb
@@ -14,45 +17,33 @@ const ProductList = () => {
         items
     */
     const { routeName } = useParams();
-    const ListItem = [
-        {
-            title: "Amber Button-Down Linen Midi Dress",
-            price: "$69.00",
-            available: true,
-            img: "/img/product-pic-1.png",
-        },
-        {
-            title: "Hattie High-Neck Linen Jumpsuit",
-            price: "$69.00",
-            available: false,
-            img: "/img/product-pic-2.png",
-        },
-        {
-            title: "Moonstruck Surplice Romper",
-            price: "$69.00",
-            available: true,
-            img: "/img/product-pic-3.png",
-        },
-        {
-            title: "Collete Stretch Linen Minidress",
-            price: "$69.00",
-            available: false,
-            img: "/img/product-pic-4.png",
-        },
-        {
-            title: "Collete Stretch Linen Minidress",
-            price: "$69.00",
-            available: true,
-            img: "/img/product-pic-5.png",
-        },
-        {
-            title: "Collete Stretch Linen Minidress",
-            price: "$69.00",
-            available: false,
-            img: "/img/product-pic-6.png",
-        },
-    ];
+    const [listItem, setListItem] = useState([]);
+    useEffect(() => {
+        const getListItem = async () => {
+            const data = await api.getListProduct();
+            console.log(data);
 
+            //         title: "Collete Stretch Linen Minidress",
+            //         price: "$69.00",
+            //         available: false,
+            //         img: "/img/product-pic-6.png",
+            //     },
+            if (data.status === 200) {
+                const list = data.data.data.map((item) => {
+                    item.price = `$${item.price.toFixed(2)}`;
+                    item.img = item.photos[0];
+                    let quantity = item.properties.reduce(
+                        (accu, current) => (accu += current.quantity || 0),
+                        0
+                    );
+                    item.available = !!quantity;
+                    return item;
+                });
+                setListItem(list);
+            }
+        };
+        getListItem();
+    }, []);
     const categoriesDummy = [
         {
             name: "All dresses",
@@ -124,10 +115,10 @@ const ProductList = () => {
                             </div>
                         </div>
                         <div className="row">
-                            {ListItem.map((item, index) => {
+                            {listItem.map((item, index) => {
                                 return <Item key={index} {...item} />;
                             })}
-                            {ListItem.map((item, index) => {
+                            {listItem.map((item, index) => {
                                 return <Item key={index} {...item} />;
                             })}
                         </div>

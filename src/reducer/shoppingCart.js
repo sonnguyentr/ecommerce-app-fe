@@ -28,7 +28,7 @@ const cart = (state = initialState, action) => {
                     ...shoppingCart[productIndex],
                     ...action.payload,
                 };
-            } else shoppingCart.push(action.payload);
+            } else shoppingCart.unshift(action.payload);
             return [...shoppingCart];
         default:
             return state;
