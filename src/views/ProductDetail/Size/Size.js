@@ -12,7 +12,7 @@ const Size = ({ size, handleSize }) => {
                     key={button.size}
                     onClick={() => handleSize(button.size)}
                     className={`${
-                        size === button.size ? "--primary" : ""
+                        size === button.size ? "button--primary" : ""
                     } product-size__button mr-2`}
                 >
                     {button.size}

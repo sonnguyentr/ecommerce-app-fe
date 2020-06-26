@@ -4,10 +4,11 @@
     margin: 0 35px;
     padding: 15px 30px;
     border: none;
-    outline: none;
+    &:focus {
+        outline: none;
+    }
     border-radius: 2px;
-    cursor: pointer;
-    &.--primary {
+    &.button--primary {
         background-color: #ffa15f;
         border: solid 1px #ffa15f;
         color: white;
@@ -15,7 +16,7 @@
             background-color: #ff7e24;
         }
     }
-    &.--blue {
+    &.button--blue {
         background-color: #5f6dff;
         border: solid 1px #394afd;
         color: white;
@@ -23,15 +24,15 @@
             background-color: #394afd;
         }
     }
-    &.--shadow {
+    &.button--shadow {
         box-shadow: 0 6px 18px 0 rgba(0, 0, 0, 0.12);
     }
-    &.--block {
+    &.button--block {
         display: block;
         width: 100%;
         margin: 0;
     }
-    &.--outline {
+    &.button--outline {
         color: #ff7e24;
         background-color: transparent;
         &:hover {

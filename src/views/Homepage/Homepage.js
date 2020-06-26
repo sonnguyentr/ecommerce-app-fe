@@ -26,7 +26,7 @@ const HomePage = () => {
         <div className="homepage__container">
             <div className="homepage__cover">
                 <img src="/img/cover.jpg" height="666px" alt="cover" className="img-fluid"></img>
-                <Button className="--primary homepage__cover-button">
+                <Button className="button--primary homepage__cover-button">
                     <span className="text--bold">Shop now</span>
                 </Button>
             </div>
@@ -34,18 +34,18 @@ const HomePage = () => {
             <div className="container-fluid">
                 <div className="row">
                     {
-                        homepageCategories.map(cat => {
+                        homepageCategories.map(({name, img}) => {
                             return (
-                                <div key={cat.name} className="homepage__pic-container text--center">
+                                <div key={name} className="homepage__pic-container text--center">
                                     <img
-                                        src={cat.img}
+                                        src={img}
                                         className="homepage__pic img-fluid"
                                         alt="home-pic"
                                     ></img>
                                     <div className="homepage__overlay">
-                                        <h2 style={{marginBottom: 10}} className="text--white">{cat.name}</h2>
+                                        <h2 className="text--white">{name}</h2>
                                         <hr className="homepage__hr" />
-                                        <Button className="--primary homepage__pic-button">
+                                        <Button className="button--primary homepage__pic-button">
                                             <span className="text--bold">Shop now</span>
                                         </Button>
                                     </div>
@@ -54,23 +54,6 @@ const HomePage = () => {
                         })
                     }
                 </div>
-                {/* <div className="homepage__pic-container text--center">
-                    <img
-                        src="/img/home-pic2.webp"
-                        className="homepage__pic"
-                        alt="home-pic"
-                    ></img>
-                    <div className="homepage__overlay">
-                        <h2 style={{marginBottom: 10}} className="text--white">Women</h2>
-                        <hr className="homepage__hr" />
-                        <button
-                            style={{}}
-                            className="button --primary homepage__pic-button"
-                        >
-                            <span>Shop now</span>
-                        </button>
-                    </div>
-                </div> */}
             </div>
         </div>
     );

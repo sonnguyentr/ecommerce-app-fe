@@ -23,7 +23,7 @@ const Total = ({ totalBill }) => {
                     </div>
                 </div>
             </div>
-            <Button className="--block total__button">Check Out</Button>
+            <Button className="button--block total__button">Check Out</Button>
         </div>
     );
 };

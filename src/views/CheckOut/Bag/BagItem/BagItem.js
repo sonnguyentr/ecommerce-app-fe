@@ -8,9 +8,9 @@ const BagItem = (props) => {
         props.handleQuantity(props.id, value);
     };
     return (
-        <tr className="border-top">
+        <tr className="bag-item border-top">
             <td>
-                <div className="bag-item container-fluid py-2">
+                <div className="container-fluid py-2">
                     <div className="row">
                         <div className="col-auto p-0">
                             <img
@@ -19,8 +19,8 @@ const BagItem = (props) => {
                                 alt={props.title}
                             />
                         </div>
-                        <div className="col pr-0" style={{ maxWidth: "120px" }}>
-                            <span className="bad-item__title">
+                        <div className="col pr-0 bag-item__title">
+                            <span>
                                 {props.title}
                             </span>
                         </div>
@@ -30,22 +30,19 @@ const BagItem = (props) => {
             <td className="text-center">
                 <div
                     style={{
-                        padding: 0,
                         backgroundColor: props.color.value,
-                        width: "30px",
-                        height: "30px",
                     }}
-                    className="d-inline-block mx-1 rounded-circle"
+                    className="d-inline-block mx-1 rounded-circle bag-item__color"
                 ></div>
             </td>
-            <td className="text-center">{props.size}</td>
+            <td className="text-center bag-item__size">{props.size}</td>
             <td className="text-center">
                 <QuantityButton
                     handleQuantity={handleQuantity}
                     quantity={props.quantity}
                 />
             </td>
-            <td style={{width: "140px"}} className="text-center">
+            <td className="text-center bag-item__amount">
                 ${(props.price * props.quantity).toFixed(2)}
             </td>
         </tr>

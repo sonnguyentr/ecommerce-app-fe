@@ -51,7 +51,6 @@ const FooterSecondaryNav = (props) => {
                 <ul className="footer-secondary-nav__ul">
                     {listNav2.map((item, index) => (
                         <li
-                            style={{ paddingRight: 0, paddingLeft: 15 }}
                             className="footer-secondary-nav__li"
                             key={index}
                         >

@@ -14,7 +14,6 @@ const Modal = ({ handleClose, show, children }) => {
                     className="close"
                     type="button"
                     onClick={handleClose}
-                    style={{cursor: "pointer"}}
                 >
                     X
                 </button>

@@ -1,4 +1,5 @@
 import React from "react";
+import "./Layout.scss";
 
 import { Switch, Route } from "react-router-dom";
 
@@ -12,7 +13,7 @@ const Layout = (props) => {
         <div>
             <Header />
             <NavBar />
-            <section style={{ padding: "30px 0", maxWidth: "1465px", margin: "auto" }}>
+            <section className="layout__section">
                 <Switch>
                     {routes.map((route, i) => (
                         <Route

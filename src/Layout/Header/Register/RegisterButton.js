@@ -148,7 +148,7 @@ const RegisterButton = (props) => {
                     <Button
                         type="submit"
                         disabled={!isValidForm}
-                        className="--primary --block"
+                        className="button--primary button--block"
                     >
                         Register
                     </Button>

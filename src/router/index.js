@@ -1,4 +1,3 @@
-import React from "react";
 import HomePage from "../views/Homepage/Homepage";
 import ProductList from "../views/ProductList/ProductList";
 import ProductDetail from "../views/ProductDetail/ProductDetail";
@@ -7,18 +6,18 @@ import CheckOut from "../views/CheckOut/CheckOut";
 export default [
     {
         path: "/product-detail",
-        component: () => <ProductDetail />,
+        component: ProductDetail,
     },
     {
         path: "/check-out",
-        component: () => <CheckOut />,
+        component: CheckOut,
     },
     {
         path: "/:routeName",
-        component: () => <ProductList />,
+        component: ProductList,
     },
     {
         path: "/",
-        component: () => <HomePage />,
+        component: HomePage,
     },
 ];
