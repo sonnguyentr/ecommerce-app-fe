@@ -1,6 +1,6 @@
 import React from "react";
 import "./CheckOut.scss";
-
+import { shoppingCart } from '../../constant'
 import { connect } from "react-redux";
 
 import Total from "./Total/Total";
@@ -20,7 +20,7 @@ const mapStateToProps = ({shoppingCart}) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         dispatchAddToCart: (product) =>
-            dispatch({ type: "ADD_TO_CART", payload: product }),
+            dispatch({ type: shoppingCart.ADD_TO_CART, payload: product }),
     };
 };
 

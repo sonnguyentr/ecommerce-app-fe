@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import ProductPicture from "./ProductPicture/ProductPicture";
 import "./ProducDetail.scss";
+import { shoppingCart } from "../../constant";
 
 import Size from "./Size/Size";
 import Quantity from "./Quantity/Quantity";
 import Color from "./Color/Color";
 import AddToCart from "./AddToCart/AddToCart";
 
-
 const mapDispatchToProps = (dispatch) => {
     return {
         dispatchAddToCart: (product) =>
-            dispatch({ type: "ADD_TO_CART", payload: product }),
+            dispatch({ type: shoppingCart.ADD_TO_CART, payload: product }),
     };
 };
 
