@@ -4,7 +4,7 @@ import "./LoginButton.scss";
 
 import { Modal, InputWithLabel, Button } from "../../../components";
 
-const LoginButton = (props) => {
+const LoginButton = ({dispatchUserUpdate, api}) => {
     const [show, showModal] = useState(false);
     const [isLoginSuccess, setIsLoginSuccess] = useState(true);
 
@@ -54,15 +54,21 @@ const LoginButton = (props) => {
         else setIsValidForm(true);
     }, [passwordError, emailError]);
 
-    const handleFormSubmit = (event) => {
+    const handleFormSubmit = async (event) => {
         event.preventDefault();
-        alert("submited" + isLoginSuccess);
-        setIsLoginSuccess(false);
+        const data = await api.login({ email, password });
+        if (data.status === 200) {
+            setIsLoginSuccess(true);
+            dispatchUserUpdate({ ...data.data })
+            alert("Login successs!");
+        } else {
+            setIsLoginSuccess(false);
+        }
     };
     return (
         <>
             <Button
-                className="login-button button--outline button--primary"
+                className="login login__button button--outline button--primary"
                 onClick={() => {
                     showModal(!show);
                 }}
@@ -91,6 +97,7 @@ const LoginButton = (props) => {
                     <div className="form__container">
                         <InputWithLabel
                             id="email"
+                            name="email"
                             value={email}
                             onChange={handleEmailChange}
                             className={
@@ -106,6 +113,7 @@ const LoginButton = (props) => {
                         <InputWithLabel
                             id="password"
                             type="password"
+                            name="password"
                             value={password}
                             onChange={handlePasswordChange}
                             className={

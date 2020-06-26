@@ -11,6 +11,7 @@ const InputWithLabel = ({
     errorMessage,
     isFocused,
     children,
+    name
 }) => {
     return (
         <div className="input-group">
@@ -25,6 +26,8 @@ const InputWithLabel = ({
                 className={`form__input ${className}`}
                 placeholder={placeholder}
                 autoFocus={isFocused}
+                name={name}
+                id={id}
             />
             <small className="form__input__error_message">{errorMessage}</small>
         </div>
