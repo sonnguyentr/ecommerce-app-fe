@@ -4,9 +4,24 @@
         font-weight: bold;
         color: #202124;
         width: 100px;
+        text-align: right;
+        padding-right: 20px;
     }
     .add-product__input-container {
         width: 800px;
+    }
+    .add-product__input {
+        border-radius: 2px;
+        border: solid 1px #ededed;
+        background-color: #ffffff;
+        padding: 5px 12px;
+    }
+    .add-product__text-area {
+        height: 112px;
+        border: solid 1px #ededed;
+        background-color: #ffffff;
+        border-radius: 2px;
+        padding: 5px 12px;
     }
     .add-product__row {
         display: flex;
@@ -14,6 +29,6 @@
         max-width: 900px;
         margin: auto;
         align-items: center;
-        // text-align: center;
+        margin-bottom: 20px;
     }
 }

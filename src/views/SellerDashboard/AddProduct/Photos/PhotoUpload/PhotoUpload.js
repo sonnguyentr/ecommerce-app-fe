@@ -18,6 +18,7 @@ const PhotoUpload = ({ index, photoUpload, src }) => {
                 onChange={(e) => photoUpload(e, index)}
                 className="photo-upload__input"
                 type="file"
+                accept="image/*"
                 id={"photoUpload-" + index}
             />
         </div>
