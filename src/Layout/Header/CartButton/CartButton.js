@@ -5,7 +5,7 @@ import "./CartButton.scss";
 import CartProduct from "./CartProduct/CartProduct";
 import { Button } from "../../../components";
 
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const mapStateToProps = ({ shoppingCart }) => {
     const count = shoppingCart
@@ -18,6 +18,7 @@ const mapStateToProps = ({ shoppingCart }) => {
 };
 
 const CartButton = ({ count, shoppingCart }) => {
+    const history = useHistory();
     return (
         <div className="cart-button">
             <i className="fas fa-shopping-cart text--charcoal-grey"></i>
@@ -25,12 +26,17 @@ const CartButton = ({ count, shoppingCart }) => {
                 <span>{count}</span>
             </div>
             {!!count && (
-                <div className="cart-button__list-item">
+                <div
+                    onClick={() => {
+                        history.push("/check-out");
+                    }}
+                    className="cart-button__list-item"
+                >
                     {shoppingCart.map((item) => (
                         <CartProduct key={item.id} {...item} />
                     ))}
                     <Button className="button--block mt-0 cart-button__view-cart">
-                        <Link to="/check-out">View cart</Link>
+                        View cart
                     </Button>
                 </div>
             )}

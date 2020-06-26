@@ -65,7 +65,7 @@ const NavBar = (props) => {
                             <ul className="sub-menu">
                                 {item.subCat.map((subcat, i) => {
                                     return <li key={i}>
-                                        <Link className="link" to={subcat}>{subcat}</Link>
+                                        <Link className="link" to={"/"+subcat}>{subcat}</Link>
                                     </li>;
                                 })}
                             </ul>
