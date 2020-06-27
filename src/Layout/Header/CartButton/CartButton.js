@@ -5,7 +5,7 @@ import "./CartButton.scss";
 import CartProduct from "./CartProduct/CartProduct";
 import { Button } from "../../../components";
 
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const mapStateToProps = ({ shoppingCart }) => {
     const count = shoppingCart

@@ -1,21 +1,5 @@
 import { shoppingCart as cartConstant } from "../constant";
-
-const initialState = [
-    //     {
-    //         id: "X-1",
-    //         stars: 5,
-    //         title: "Collete Stretch Linen Minidress",
-    //         price: 69,
-    //         reviewCount: 0,
-    //         picture: "/img/product-pic-1.png",
-    //         size: "S",
-    //         color: {
-    //             name: "red",
-    //             value: "#ff5f6d",
-    //         },
-    //         quantity: 2,
-    //     },
-];
+const initialState = JSON.parse(localStorage.getItem("shoppingCart")) || [];
 
 const cart = (state = initialState, action) => {
     switch (action.type) {
@@ -29,7 +13,14 @@ const cart = (state = initialState, action) => {
                     ...action.payload,
                 };
             } else shoppingCart.unshift(action.payload);
+            localStorage.setItem(
+                "shoppingCart",
+                JSON.stringify([...shoppingCart])
+            );
             return [...shoppingCart];
+        case cartConstant.CLEAR_CART:
+            localStorage.setItem("shoppingCart", "[]");
+            return [];
         default:
             return state;
     }
