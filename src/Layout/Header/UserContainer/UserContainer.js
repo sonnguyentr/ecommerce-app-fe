@@ -5,7 +5,6 @@ import LoginButton from "../Login/LoginButton";
 import RegisterButton from "../Register/RegisterButton";
 import UserAvatar from "../UserAvatar/UserAvatar";
 
-import api from "../../../api";
 import { user as userConstant } from "../../../constant";
 
 const mapStateToProps = ({ user }) => {
@@ -24,8 +23,8 @@ const mapDispatchToProps = (dispatch) => {
 const UserContainer = ({ dispatchUserUpdate, user, dispatchUserLogOut }) => {
     return !user ? (
         <>
-            <RegisterButton dispatchUserUpdate={dispatchUserUpdate} api={api} />
-            <LoginButton dispatchUserUpdate={dispatchUserUpdate} api={api} />
+            <RegisterButton dispatchUserUpdate={dispatchUserUpdate} />
+            <LoginButton dispatchUserUpdate={dispatchUserUpdate} />
         </>
     ) : (
         <UserAvatar dispatchUserLogOut={dispatchUserLogOut} user={user} />

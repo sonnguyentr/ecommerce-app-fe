@@ -1,56 +1,31 @@
 import axios from "axios";
 import { config } from "../constant";
-import auth from "./auth";
-import seller from "./seller";
-import product from "./product";
+import store from "../store/store";
 
-const token = "";
-const api = {
-    base: config.host + "/api",
-    request_api: async function (path_api, postData = {}) {
-        return axios({
-            url: this.base + path_api,
-            method: Object["keys"](postData)["length"] ? "POST" : "GET",
-            data: postData,
-            headers: {
-                Authorization: token && "Bearer " + token,
-            },
-        })
-            .then((result) => {
-                return { data: result.data, status: result.status };
-            })
-            .catch((error) => {
-                console.log("request error", error);
-                if (error.response) {
-                    return {
-                        ...error.response.data,
-                        status: error.response.status,
-                    };
-                }
-            });
+const state = store.getState();
+const token = state.user && state.user.token;
+// export default api;
+const instance = axios.create({
+    baseURL: config.host + "/api",
+    headers: {
+        Authorization: token && "Bearer " + token,
     },
-    request_api_no_token: async function (path_api, postData = {}) {
-        return axios({
-            url: this.base + path_api,
-            method: Object["keys"](postData)["length"] ? "POST" : "GET",
-            data: postData,
-        })
-            .then((result) => {
-                return { data: result.data, status: result.status };
-            })
-            .catch((error) => {
-                console.log("request error", error);
-                if (error.response) {
-                    return {
-                        ...error.response.data,
-                        status: error.response.status,
-                    };
-                }
-            });
+});
+
+export default {
+    register: ({ name, email, password }) => {
+        return instance.post("auth/register", { name, email, password });
     },
-    axios,
-    ...auth,
-    ...seller,
-    ...product,
+    login: ({ email, password }) => {
+        return instance.post("/auth/login", { email, password });
+    },
+    getListProduct: () => {
+        return instance.get("/product");
+    },
+    getProductDetail: function (_id) {
+        return instance.get("/product/" + _id);
+    },
+    addProduct: function (postData) {
+        return instance.post("/product/add-product", postData);
+    },
 };
-export default api;
