@@ -6,15 +6,16 @@ const Size = ({ size, handleSize, properties = [] }) => {
     return (
         <div className="product-size mb-4">
             <p className="product-size__label mb-2">Size</p>
-            {properties.map((button) => (
+            {properties.map((property) => (
                 <Button
-                    key={button.size}
-                    onClick={() => handleSize(button.size)}
+                    key={property.size}
+                    onClick={() => handleSize(property.size)}
+                    disabled={!property.quantity}
                     className={`${
-                        size === button.size ? "button--primary" : ""
+                        size === property.size ? "button--primary" : ""
                     } product-size__button mr-2`}
                 >
-                    {button.size}
+                    {property.size}
                 </Button>
             ))}
         </div>
