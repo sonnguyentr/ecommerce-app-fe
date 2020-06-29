@@ -1,7 +1,9 @@
 import React from "react";
 import "./ProductItem.scss";
+import { useHistory} from "react-router-dom"
 
 const ProductItem = (props) => {
+    const history = useHistory();
     return (
         <tr className="product-item">
             <td>
@@ -23,7 +25,7 @@ const ProductItem = (props) => {
             <td className="product-item__action">
                 <span>Action <i className="fas fa-chevron-down"></i></span>
                 <ul className="list-actions">
-                    <li>
+                    <li onClick={() => {history.push(`/seller-dashboard/products/${props._id}`)}}>
                         <i className="fas fa-pen text--greyish-two mr-3"></i>
                         Edit
                     </li>

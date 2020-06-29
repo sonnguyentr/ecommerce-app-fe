@@ -6,6 +6,10 @@ export default [
         component: AddProduct,
     },
     {
+        path: "/products/:_id",
+        component: AddProduct,
+    },
+    {
         path: "/products/",
         component: Products,
     },

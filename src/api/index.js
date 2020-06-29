@@ -31,4 +31,7 @@ export default {
     removeProduct: function (_id) {
         return instance.delete("/products/" + _id);
     },
+    editProduct: function (_id, postData) {
+        return instance.put("/products/" + _id, postData);
+    },
 };

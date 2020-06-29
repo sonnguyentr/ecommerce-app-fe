@@ -15,7 +15,7 @@ const LeftBar = (props) => {
                     <div
                         key={i}
                         className={`left-bar__item ${
-                            path + item.to === pathname
+                            pathname.includes(path + item.to)
                                 ? "left-bar__chosen"
                                 : ""
                         }`}
