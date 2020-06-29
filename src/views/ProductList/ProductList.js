@@ -21,13 +21,6 @@ const ProductList = () => {
     useEffect(() => {
         const getListItem = async () => {
             const data = await api.getListProduct();
-            console.log(data);
-
-            //         title: "Collete Stretch Linen Minidress",
-            //         price: "$69.00",
-            //         available: false,
-            //         img: "/img/product-pic-6.png",
-            //     },
             if (data.status === 200) {
                 const list = data.data.data.map((item) => {
                     item.price = `$${item.price.toFixed(2)}`;

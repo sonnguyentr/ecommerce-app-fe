@@ -20,12 +20,15 @@ export default {
         return instance.post("/auth/login", { email, password });
     },
     getListProduct: () => {
-        return instance.get("/product");
+        return instance.get("/products");
     },
     getProductDetail: function (_id) {
-        return instance.get("/product/" + _id);
+        return instance.get("/products/" + _id);
     },
     addProduct: function (postData) {
-        return instance.post("/product/add-product", postData);
+        return instance.post("/products/add-product", postData);
+    },
+    removeProduct: function (_id) {
+        return instance.delete("/products/" + _id);
     },
 };

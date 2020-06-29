@@ -1,0 +1,19 @@
+.product-list__container {
+    border-radius: 2px;
+    box-shadow: 0 10px 24px 0 var(--black-8);
+    background-color: white;
+    padding: 22px;
+    table {
+        padding: 10px;
+        width: 100%;
+        thead {
+            font-size: 12px;
+            font-weight: 600;
+            color: #acacac;
+            border-bottom: 2px solid #ededed;
+        }
+        th {
+            height: 55px;
+        }
+    }
+}
