@@ -1,12 +1,9 @@
 import React from "react";
 import "./BagItem.scss";
 
-import { QuantityButton } from "../../../../components";
+import { QuantityButton, Button } from "../../../../components";
 
 const BagItem = (props) => {
-    const handleQuantity = (value) => {
-        props.handleQuantity(props.id, value);
-    };
     return (
         <tr className="bag-item border-top">
             <td>
@@ -20,9 +17,7 @@ const BagItem = (props) => {
                             />
                         </div>
                         <div className="col pr-0 bag-item__title">
-                            <span>
-                                {props.title}
-                            </span>
+                            <span>{props.title}</span>
                         </div>
                     </div>
                 </div>
@@ -38,12 +33,24 @@ const BagItem = (props) => {
             <td className="text-center bag-item__size">{props.size}</td>
             <td className="text-center">
                 <QuantityButton
-                    handleQuantity={handleQuantity}
+                    handleQuantity={(value) => {
+                        props.handleQuantity(props.id, value);
+                    }}
                     quantity={props.quantity}
                 />
             </td>
             <td className="text-center bag-item__amount">
                 ${(props.price * props.quantity).toFixed(2)}
+            </td>
+            <td className="text-center bag-item__remove">
+                <Button
+                    onClick={() => {
+                        props.handleRemoveBagItem(props.id);
+                    }}
+                    className="button--outline"
+                >
+                    <i className="fas fa-trash"></i>
+                </Button>
             </td>
         </tr>
     );

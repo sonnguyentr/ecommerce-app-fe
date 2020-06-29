@@ -3,7 +3,7 @@ const initialState = JSON.parse(localStorage.getItem("shoppingCart")) || [];
 
 const cart = (state = initialState, action) => {
     switch (action.type) {
-        case cartConstant.ADD_TO_CART:
+        case cartConstant.ADD_TO_CART: {
             const id = action.payload.id;
             const shoppingCart = [...state];
             let productIndex = shoppingCart.findIndex((item) => item.id === id);
@@ -18,9 +18,18 @@ const cart = (state = initialState, action) => {
                 JSON.stringify([...shoppingCart])
             );
             return [...shoppingCart];
-        case cartConstant.CLEAR_CART:
+        }
+        case cartConstant.REMOVE_FROM_CART: {
+            const id = action.payload;
+            const shoppingCart = [...state];
+            let productIndex = shoppingCart.findIndex((item) => item.id === id);
+            shoppingCart.splice(productIndex, 1);
+            return [...shoppingCart];
+        }
+        case cartConstant.CLEAR_CART: {
             localStorage.setItem("shoppingCart", "[]");
             return [];
+        }
         default:
             return state;
     }
