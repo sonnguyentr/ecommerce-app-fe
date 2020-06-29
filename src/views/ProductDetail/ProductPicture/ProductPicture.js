@@ -2,28 +2,29 @@ import React, { useState, useEffect } from "react";
 import "./ProductPicture.scss";
 
 const ProductPicture = ({ photos = [] }) => {
-    // const listPicsDummy = [
-    //     {
-    //         id: 1,
-    //         src: "/img/product-pic-1.png",
-    //         main: true,
-    //     },
-    //     {
-    //         id: 2,
-    //         src: "/img/product-pic-4.png",
-    //     },
-    //     {
-    //         id: 3,
-    //         src: "/img/product-pic-3.png",
-    //     },
-    //     {
-    //         id: 4,
-    //         src: "/img/product-pic-2.png",
-    //     },
-    // ];
-    const [listPics, setListPics] = useState([]);
-    const [mainPic, setMainPic] = useState({});
+    const listPicsDummy = [
+        {
+            id: 1,
+            src: "/img/product-placeholder.png",
+            main: true,
+        },
+        {
+            id: 2,
+            src: "/img/product-placeholder.png",
+        },
+        {
+            id: 3,
+            src: "/img/product-placeholder.png",
+        },
+        {
+            id: 4,
+            src: "/img/product-placeholder.png",
+        },
+    ];
+    const [listPics, setListPics] = useState(listPicsDummy);
+    const [mainPic, setMainPic] = useState(listPicsDummy[0]);
     useEffect(() => {
+        // const arr = photos.slice(0);
         const list = photos.map((item, index) => {
             return {
                 id: index,
@@ -32,9 +33,10 @@ const ProductPicture = ({ photos = [] }) => {
                 disabled: !item,
             };
         });
-        setListPics(list);
-        setMainPic(list[0] || {});
-        console.log(photos);
+        if (list && list.length) {
+            setListPics(list);
+            setMainPic(list[0] || {});
+        }
     }, [photos]);
     const handleClickPic = (pic) => {
         setMainPic({ ...pic, main: true });

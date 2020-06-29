@@ -118,9 +118,6 @@ const ProductList = () => {
                             {listItem.map((item, index) => {
                                 return <Item key={index} {...item} />;
                             })}
-                            {listItem.map((item, index) => {
-                                return <Item key={index} {...item} />;
-                            })}
                         </div>
                         <div className="row">
                             <div className="col-6 offset-md-6">

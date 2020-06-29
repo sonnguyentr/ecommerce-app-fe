@@ -5,7 +5,7 @@ import CheckOut from "../views/CheckOut/CheckOut";
 
 export default [
     {
-        path: "/product-detail/:title",
+        path: "/product-detail/:productId",
         component: ProductDetail,
     },
     {

@@ -19,9 +19,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const ProductDetail = ({ dispatchAddToCart }) => {
-    const { title } = useParams();
-    const productId = title.split("-")[1];
-
+    const { productId } = useParams();
     const [product, setProduct] = useState({});
     useEffect(() => {
         const getProductDetail = async () => {
@@ -34,19 +32,10 @@ const ProductDetail = ({ dispatchAddToCart }) => {
                 product.picture =
                     product.photos[0] || "/img/product-placeholder.png";
                 setProduct(product);
-                console.log(product);
             }
         };
         getProductDetail();
     }, [productId]);
-    // const product = {
-    //     id: "X-1",
-    //     stars: 5,
-    //     title: "Collete Stretch Linen Minidress",
-    //     price: 69,
-    //     reviewCount: 0,
-    //     picture: "/img/product-pic-1.png",
-    // };
     const starsArray = [];
     for (let i = 0; i < 5; i++) {
         starsArray.push(
