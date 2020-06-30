@@ -5,8 +5,9 @@ import { connect } from "react-redux";
 
 import Total from "./Total/Total";
 import Bag from "./Bag/Bag";
+import api from "../../api";
 
-const mapStateToProps = ({ shoppingCart }) => {
+const mapStateToProps = ({ shoppingCart, user }) => {
     const totalBill = shoppingCart.reduce(
         (accu, item) => (accu += item.price * item.quantity || 0),
         0
@@ -14,6 +15,7 @@ const mapStateToProps = ({ shoppingCart }) => {
     return {
         shoppingCart,
         totalBill,
+        user,
     };
 };
 
@@ -27,6 +29,9 @@ const mapDispatchToProps = (dispatch) => {
                 payload: productId,
             });
         },
+        dispatchClearCart: () => {
+            dispatch({ type: shoppingCart.CLEAR_CART });
+        },
     };
 };
 
@@ -35,10 +40,45 @@ const CheckOut = ({
     totalBill,
     dispatchAddToCart,
     dispatchRemoveFromCart,
+    dispatchClearCart,
+    user,
 }) => {
     const handleQuantity = (id, value) => {
         const item = shoppingCart.find((el) => el.id === id);
         dispatchAddToCart({ ...item, quantity: item.quantity + value });
+    };
+    const createOrder = () => {
+        return shoppingCart.map((product) => {
+            const { _id, size, quantity } = product;
+            return {
+                _id,
+                size,
+                quantity,
+            };
+        });
+    };
+    const handleCheckOut = async () => {
+        if (!user) return alert("Please login before checking out.");
+        if (!shoppingCart || !shoppingCart.length)
+            return alert("Cart is empty.");
+        console.log(shoppingCart);
+        const products = createOrder();
+        try {
+            const data = await api.createOrder({
+                customerId: user._id,
+                products,
+            });
+            console.log(data);
+            if (data.status == 200) {
+                alert("Order created!");
+                dispatchClearCart();
+            }
+        } catch (error) {
+            console.log(error.response.data);
+            alert(
+                (error.response.data && error.response.data.message) || "Error!"
+            );
+        }
     };
     return (
         <div className="container-fluid check-out">
@@ -54,7 +94,10 @@ const CheckOut = ({
                     />
                 </div>
                 <div className="col-3">
-                    <Total totalBill={totalBill} />
+                    <Total
+                        totalBill={totalBill}
+                        handleCheckOut={handleCheckOut}
+                    />
                 </div>
             </div>
         </div>

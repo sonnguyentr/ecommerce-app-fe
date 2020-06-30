@@ -34,4 +34,7 @@ export default {
     editProduct: function (_id, postData) {
         return instance.put("/products/" + _id, postData);
     },
+    createOrder: function ({ customerId, products }) {
+        return instance.post("/orders", { customerId, products });
+    },
 };
