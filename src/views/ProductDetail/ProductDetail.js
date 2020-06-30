@@ -32,6 +32,8 @@ const ProductDetail = ({ dispatchAddToCart }) => {
                 product.picture =
                     product.photos[0] || "/img/product-placeholder.png";
                 setProduct(product);
+                const availableProperty = product.properties.find((i) => i.quantity);
+                setSize(availableProperty.size);
             }
         };
         getProductDetail();

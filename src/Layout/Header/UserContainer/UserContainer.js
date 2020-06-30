@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import LoginButton from "../Login/LoginButton";
 import RegisterButton from "../Register/RegisterButton";
@@ -25,13 +26,18 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 const UserContainer = ({ dispatchUserUpdate, user, dispatchUserLogOut }) => {
+    const history = useHistory();
+    const handleLogout = () => {
+        history.push("/");
+        dispatchUserLogOut();
+    };
     return !user ? (
         <>
             <RegisterButton dispatchUserUpdate={dispatchUserUpdate} />
             <LoginButton dispatchUserUpdate={dispatchUserUpdate} />
         </>
     ) : (
-        <UserAvatar dispatchUserLogOut={dispatchUserLogOut} user={user} />
+        <UserAvatar dispatchUserLogOut={handleLogout} user={user} />
     );
 };
 

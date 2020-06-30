@@ -2,6 +2,7 @@ import React from "react";
 import "./CheckOut.scss";
 import { shoppingCart } from "../../constant";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import Total from "./Total/Total";
 import Bag from "./Bag/Bag";
@@ -49,14 +50,16 @@ const CheckOut = ({
     };
     const createOrder = () => {
         return shoppingCart.map((product) => {
-            const { _id, size, quantity } = product;
+            const { _id, size, quantity, price } = product;
             return {
                 _id,
                 size,
                 quantity,
+                price,
             };
         });
     };
+    const history = useHistory();
     const handleCheckOut = async () => {
         if (!user) return alert("Please login before checking out.");
         if (!shoppingCart || !shoppingCart.length)
@@ -69,9 +72,10 @@ const CheckOut = ({
                 products,
             });
             console.log(data);
-            if (data.status == 200) {
+            if (data.status === 200) {
                 alert("Order created!");
                 dispatchClearCart();
+                history.push("/orders");
             }
         } catch (error) {
             console.log(error.response.data);

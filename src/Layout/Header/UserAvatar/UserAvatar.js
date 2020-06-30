@@ -7,6 +7,10 @@ const UserAvatar = ({ dispatchUserLogOut, user }) => {
             text: "Account Setting",
             to: "/account-setting",
         },
+        {
+            text: "Orders",
+            to: "/orders",
+        },
     ];
     return (
         <div className="avatar">

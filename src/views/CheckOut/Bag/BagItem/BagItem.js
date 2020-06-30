@@ -2,33 +2,18 @@ import React from "react";
 import "./BagItem.scss";
 
 import { QuantityButton, Button } from "../../../../components";
+import ProductInfo from "./ProductInfo/ProductInfo";
+import ProductAmount from "./ProductAmount/ProductAmount";
+import ProductColor from "./ProductColor/ProductColor";
 
 const BagItem = (props) => {
     return (
         <tr className="bag-item border-top">
             <td>
-                <div className="container-fluid py-2">
-                    <div className="row">
-                        <div className="col-auto p-0">
-                            <img
-                                className="bag-item__img"
-                                src={props.picture}
-                                alt={props.title}
-                            />
-                        </div>
-                        <div className="col pr-0 bag-item__title">
-                            <span>{props.title}</span>
-                        </div>
-                    </div>
-                </div>
+                <ProductInfo title={props.title} picture={props.picture} />
             </td>
             <td className="text-center">
-                <div
-                    style={{
-                        backgroundColor: props.color.value,
-                    }}
-                    className="d-inline-block mx-1 rounded-circle bag-item__color"
-                ></div>
+                <ProductColor value={props.color.value} />
             </td>
             <td className="text-center bag-item__size">{props.size}</td>
             <td className="text-center">
@@ -39,8 +24,8 @@ const BagItem = (props) => {
                     quantity={props.quantity}
                 />
             </td>
-            <td className="text-center bag-item__amount">
-                ${(props.price * props.quantity).toFixed(2)}
+            <td className="text-center">
+                <ProductAmount value={props.price * props.quantity} />
             </td>
             <td className="text-center bag-item__remove">
                 <Button

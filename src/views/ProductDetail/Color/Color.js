@@ -31,8 +31,8 @@ const Color = ({ color, handleColor }) => {
         },
     ];
     return (
-        <div className="product-color mb-4">
-            <p className="product-color__label mb-2">Color: ({color.name})</p>
+        <div className="product-detail-color mb-4">
+            <p className="product-detail-color__label mb-2">Color: ({color.name})</p>
             {listColors.map((item) => (
                 <Button
                     key={item.name}
@@ -45,7 +45,7 @@ const Color = ({ color, handleColor }) => {
                                 : ""
                         }`,
                     }}
-                    className="d-inline-block mx-1 product-color__button"
+                    className="d-inline-block mx-1 product-detail-color__button"
                 ></Button>
             ))}
         </div>
