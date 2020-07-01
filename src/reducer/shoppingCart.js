@@ -11,8 +11,9 @@ const cart = (state = initialState, action) => {
                 shoppingCart[productIndex] = {
                     ...shoppingCart[productIndex],
                     ...action.payload,
+                    photos: null,
                 };
-            } else shoppingCart.unshift(action.payload);
+            } else shoppingCart.unshift({ ...action.payload, photos: null });
             localStorage.setItem(
                 "shoppingCart",
                 JSON.stringify([...shoppingCart])

@@ -52,7 +52,8 @@ const ProductDetail = ({ dispatchAddToCart }) => {
 
     const [quantity, setQuantity] = useState(1);
     const handleQuantity = (value) => {
-        setQuantity(quantity + value);
+        const property = product.properties.find((prop) => prop.size === size);
+        setQuantity(Math.min(quantity + value, property.quantity));
     };
 
     const [color, setColor] = useState({
