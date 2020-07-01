@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 const UserAvatar = ({ dispatchUserLogOut, user }) => {
     const menuItems = [
         {
-            text: "Account Setting",
-            to: "/account-setting",
-        },
-        {
             text: "Orders",
             to: "/orders",
+        },
+        {
+            text: "Account Setting",
+            to: "/account-setting",
         },
     ];
     return (

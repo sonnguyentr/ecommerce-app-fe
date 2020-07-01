@@ -48,4 +48,7 @@ export default {
     cancelOrder: ({ order_id }) => {
         return instance.post("/orders/cancel", { order_id });
     },
+    updateOrder: ({ order_id, status }) => {
+        return instance.put("/orders/" + order_id, { status });
+    },
 };

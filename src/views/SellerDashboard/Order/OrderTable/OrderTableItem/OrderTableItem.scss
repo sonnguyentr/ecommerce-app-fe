@@ -1,0 +1,79 @@
+.order-table__item {
+    font-size: 14px;
+    font-weight: 500;
+    &:nth-child(even) {
+        background-color: #f6f6f6;
+    }
+    td {
+        line-height: 42px;
+        vertical-align: baseline;
+    }
+    .order-item__status {
+        width: 70px;
+        height: 20px;
+        border-radius: 12px;
+        font-size: 10px;
+        font-weight: 500;
+        display: inline-block;
+        line-height: 1;
+        padding-top: 5px;
+        color: white;
+        &.completed {
+            background-color: #82bf11;
+        }
+        &.canceled {
+            background-color: #f05d62;
+        }
+        &.pending {
+            background-color: #fbba4e;
+        }
+    }
+    .order-item__product-detail {
+        line-height: 30px;
+        margin: 0;
+    }
+    .order-item__action {
+        font-size: 14px;
+        font-weight: 600;
+        position: relative;
+        &:hover {
+            cursor: pointer;
+        }
+        &:hover > ul {
+            display: block;
+        }
+        .list-actions {
+            width: 200px;
+            border-radius: 2px;
+            box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.08);
+            background-color: white;
+            right: 0;
+            display: none;
+            position: absolute;
+            list-style: none;
+            z-index: 3;
+            padding: 0;
+            margin: 0;
+            li {
+                height: 40px;
+                text-align: left;
+                padding: 0px 14px;
+                font-size: 14px;
+                font-weight: 500;
+                color: #3d3d3f;
+                &:hover {
+                    background-color: #f6f6f6;
+                }
+            }
+            .completed {
+                color: #82bf11;
+            }
+            .canceled {
+                color: #f05d62;
+            }
+            .pending {
+                color: #fbba4e;
+            }
+        }
+    }
+}
