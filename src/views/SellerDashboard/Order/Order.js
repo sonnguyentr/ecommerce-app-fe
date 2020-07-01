@@ -37,9 +37,7 @@ const Order = (props) => {
         // send request to serve
         try {
             const data = await API.updateOrder({ order_id, status });
-            if (data.status === 200) {
-                updateOrderStatus(order_id, data.data.order);
-            }
+            updateOrderStatus(order_id, data.data.order);
         } catch (err) {
             alert(
                 (err.response && err.response.data.message) ||

@@ -1,7 +1,6 @@
 import React from "react";
 import "./OrderItem.scss";
 
-import ProductAmount from "../../CheckOut/Bag/BagItem/ProductAmount/ProductAmount";
 import ListProduct from "./ListProduct/ListProduct";
 import { Button } from "../../../components";
 

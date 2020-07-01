@@ -56,10 +56,8 @@ const Order = ({ user }) => {
         if (!confirm) return;
         try {
             const data = await API.cancelOrder({ order_id });
-            if (data.status === 200) {
-                alert((data.data && data.data.message) || "Cancel success!");
-                setReload(reload + 1);
-            }
+            alert((data.data && data.data.message) || "Cancel success!");
+            setReload(reload + 1);
         } catch (error) {
             console.log(error.response);
             alert(

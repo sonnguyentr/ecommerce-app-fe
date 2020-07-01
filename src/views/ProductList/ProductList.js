@@ -20,8 +20,8 @@ const ProductList = () => {
     const [listItem, setListItem] = useState([]);
     useEffect(() => {
         const getListItem = async () => {
-            const data = await api.getListProduct();
-            if (data.status === 200) {
+            try {
+                const data = await api.getListProduct();
                 const list = data.data.data.map((item) => {
                     item.price = `$${item.price.toFixed(2)}`;
                     item.img = item.photos[0];
@@ -33,6 +33,8 @@ const ProductList = () => {
                     return item;
                 });
                 setListItem(list);
+            } catch (err) {
+                console.log(err);
             }
         };
         getListItem();

@@ -71,11 +71,8 @@ const RegisterButton = ({ dispatchUserUpdate }) => {
         event.preventDefault();
         try {
             const data = await API.register({ name, email, password });
-            if (data.status === 200) {
-                dispatchUserUpdate({ ...data.data });
-                alert("Register success!");
-            } else {
-            }
+            dispatchUserUpdate({ ...data.data });
+            alert("Register success!");
         } catch (error) {
             console.log(error.response.data);
             alert(

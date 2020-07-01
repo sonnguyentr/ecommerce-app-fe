@@ -12,29 +12,28 @@ import Buttons from "./Buttons/Buttons";
 import api from "../../../api";
 const AddProduct = (props) => {
     const { _id } = useParams();
-    const updateProductData = useCallback(
-        (product) => {
-            let photos = [{}, {}, {}, {}];
-            photos = photos.map((photo, i) => {
-                return {
-                    src: product.photos[i],
-                };
-            });
-            setPhotoArray([...photos]);
-            setTitle(product.title);
-            setPrice(product.price);
-            setDescription(product.description);
-            setSizeArray(product.properties);
-        },
-        []
-    );
+    const updateProductData = useCallback((product) => {
+        let photos = [{}, {}, {}, {}];
+        photos = photos.map((photo, i) => {
+            return {
+                src: product.photos[i],
+            };
+        });
+        setPhotoArray([...photos]);
+        setTitle(product.title);
+        setPrice(product.price);
+        setDescription(product.description);
+        setSizeArray(product.properties);
+    }, []);
     useEffect(() => {
         if (!_id) return;
 
         const getProductDetail = async () => {
-            const data = await api.getProductDetail(_id);
-            if (data.status === 200) {
+            try {
+                const data = await api.getProductDetail(_id);
                 updateProductData(data.data.data);
+            } catch (err) {
+                console.log(err);
             }
         };
         getProductDetail();
@@ -94,11 +93,14 @@ const AddProduct = (props) => {
             photos: photoArray,
             properties: sizeArray,
         };
-        const data = await api.addProduct(postData);
-        if (data.status === 200) {
+        try {
+            await api.addProduct(postData);
             alert("Product created!");
-        } else {
-            alert(data.message);
+        } catch (err) {
+            alert(
+                (err.response && err.response.data.message) ||
+                    "Something went wrong!"
+            );
         }
     };
 
@@ -110,12 +112,18 @@ const AddProduct = (props) => {
             photos: photoArray,
             properties: sizeArray,
         };
-        const data = await api.editProduct(_id, postData);
-        if (data.status === 200) {
+        try {
+            const data = await api.editProduct(_id, postData);
+
             alert("Product updated!");
             updateProductData(data.data.product);
-        } else {
-            alert(data.message);
+        } catch (err) {
+            alert(
+                (err.response &&
+                    err.response.data &&
+                    err.response.data.message) ||
+                    "Something went wrong!"
+            );
         }
     };
 
