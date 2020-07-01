@@ -1,3 +1,24 @@
 .order-item {
     text-align: center;
+    .order-item__title {
+        text-align: left;
+        width: 400px;
+    }
+    .order-item__show-detail {
+        font-size: 20px;
+        padding: 15px;
+        margin: 0;
+        background-color: transparent;
+    }
+    .order-item__cancel {
+        font-size: 20px;
+        padding: 15px;
+        margin: 0;
+        color: #f63f45;
+        background-color: transparent;
+        &:disabled {
+            border: none;
+            color: #b7b7b7;
+        }
+    }
 }

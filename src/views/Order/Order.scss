@@ -3,16 +3,17 @@
         font-size: 24px;
         font-weight: 500;
     }
-    .order__container {
-        table {
-            width: 100%;
-            thead {
-                font-size: 14px;
-                font-weight: bold;
-            }
-            th {
-                height: 35px;
-            }
+    .order__table {
+        width: 100%;
+    }
+    .order__thead {
+        font-size: 14px;
+        font-weight: bold;
+        th {
+            height: 35px;
         }
+    }
+    td {
+        width: 200px;
     }
 }

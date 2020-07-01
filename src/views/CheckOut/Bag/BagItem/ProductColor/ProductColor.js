@@ -1,7 +1,7 @@
 import React from "react";
 import "./ProductColor.scss";
 
-const ProductColor = ({ value = "rgba(255, 195, 113, 0.5)" }) => {
+const ProductColor = ({ value = "#ff5f6d" }) => {
     return (
         <div
             style={{

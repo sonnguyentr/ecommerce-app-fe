@@ -14,9 +14,7 @@ const instance = axios.create({
 
 export default {
     setToken: (token) => {
-        console.log(token);
         instance.defaults.headers["Authorization"] = "Bearer " + token;
-        console.log(instance.defaults.headers);
     },
     register: ({ name, email, password }) => {
         return instance.post("auth/register", { name, email, password });
@@ -46,5 +44,8 @@ export default {
     },
     getListOrder: () => {
         return instance.get("/orders");
+    },
+    cancelOrder: ({ order_id }) => {
+        return instance.post("/orders/cancel", { order_id });
     },
 };
