@@ -21,13 +21,6 @@ const ProductList = () => {
     useEffect(() => {
         const getListItem = async () => {
             const data = await api.getListProduct();
-            console.log(data);
-
-            //         title: "Collete Stretch Linen Minidress",
-            //         price: "$69.00",
-            //         available: false,
-            //         img: "/img/product-pic-6.png",
-            //     },
             if (data.status === 200) {
                 const list = data.data.data.map((item) => {
                     item.price = `$${item.price.toFixed(2)}`;
@@ -108,24 +101,29 @@ const ProductList = () => {
                     />
                 </div>
                 <div className="col-xs-12 col-md-auto">
-                    <div className="container-fluid product-list__list-item">
-                        <div className="row">
-                            <div className="col-6 offset-md-6">
-                                <Paging />
-                            </div>
-                        </div>
-                        <div className="row">
-                            {listItem.map((item, index) => {
-                                return <Item key={index} {...item} />;
-                            })}
-                            {listItem.map((item, index) => {
-                                return <Item key={index} {...item} />;
-                            })}
-                        </div>
-                        <div className="row">
-                            <div className="col-6 offset-md-6">
-                                <Paging />
-                            </div>
+                    <div className="container-fluid">
+                        <div className="product-list__container">
+                            {listItem && listItem.length ? (
+                                <>
+                                    <div className="text-right">
+                                        <Paging />
+                                    </div>
+                                    <div className="row">
+                                        {listItem.map((item, index) => {
+                                            return (
+                                                <Item key={index} {...item} />
+                                            );
+                                        })}
+                                    </div>
+                                    <div className="text-right">
+                                        <Paging />
+                                    </div>
+                                </>
+                            ) : (
+                                <div className="text--greyish-two">
+                                    No result found
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

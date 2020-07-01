@@ -12,7 +12,7 @@ export default [
     {
         name: "Products",
         icon: "fas fa-list",
-        to: "/products/add-product",
+        to: "/products",
     },
     {
         name: "Payments",

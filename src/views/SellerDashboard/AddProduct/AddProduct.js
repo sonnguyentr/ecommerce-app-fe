@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./AddProduct.scss";
+import { useParams } from "react-router-dom";
 
 import Photos from "./Photos/Photos";
 import Name from "./Name/Name";
@@ -10,6 +11,34 @@ import Buttons from "./Buttons/Buttons";
 
 import api from "../../../api";
 const AddProduct = (props) => {
+    const { _id } = useParams();
+    const updateProductData = useCallback(
+        (product) => {
+            let photos = [{}, {}, {}, {}];
+            photos = photos.map((photo, i) => {
+                return {
+                    src: product.photos[i],
+                };
+            });
+            setPhotoArray([...photos]);
+            setTitle(product.title);
+            setPrice(product.price);
+            setDescription(product.description);
+            setSizeArray(product.properties);
+        },
+        []
+    );
+    useEffect(() => {
+        if (!_id) return;
+
+        const getProductDetail = async () => {
+            const data = await api.getProductDetail(_id);
+            if (data.status === 200) {
+                updateProductData(data.data.data);
+            }
+        };
+        getProductDetail();
+    }, [_id, updateProductData]);
     // Photo
     const initPhotoArray = [{}, {}, {}, {}];
     const [photoArray, setPhotoArray] = useState(initPhotoArray);
@@ -57,8 +86,7 @@ const AddProduct = (props) => {
         setDescription(e.target.value);
     };
 
-    const handleFormSubmit = async (e) => {
-        e.preventDefault();
+    const submitAddProduct = async () => {
         const postData = {
             title,
             price,
@@ -67,7 +95,6 @@ const AddProduct = (props) => {
             properties: sizeArray,
         };
         const data = await api.addProduct(postData);
-        console.log(data);
         if (data.status === 200) {
             alert("Product created!");
         } else {
@@ -75,9 +102,34 @@ const AddProduct = (props) => {
         }
     };
 
+    const submitEditProduct = async () => {
+        const postData = {
+            title,
+            price,
+            description,
+            photos: photoArray,
+            properties: sizeArray,
+        };
+        const data = await api.editProduct(_id, postData);
+        if (data.status === 200) {
+            alert("Product updated!");
+            updateProductData(data.data.product);
+        } else {
+            alert(data.message);
+        }
+    };
+
+    const handleFormSubmit = async (e) => {
+        e.preventDefault();
+        if (_id) {
+            submitEditProduct();
+        } else {
+            submitAddProduct();
+        }
+    };
+
     return (
         <div className="add-product">
-            <h1>Add Product</h1>
             <form
                 name="add-product"
                 onSubmit={(e) => {

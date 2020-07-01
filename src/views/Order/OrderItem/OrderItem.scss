@@ -1,0 +1,46 @@
+.order-item {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    .order-item__title {
+        text-align: left;
+        width: 400px;
+    }
+    .order-item__show-detail {
+        font-size: 17px;
+        padding: 10px;
+        margin: 0;
+        background-color: transparent;
+    }
+    .order-item__cancel {
+        font-size: 17px;
+        padding: 10px;
+        margin: 0;
+        color: #f63f45;
+        background-color: transparent;
+        &:disabled {
+            border: none;
+            color: #b7b7b7;
+        }
+    }
+    .order-item__status {
+        width: 70px;
+        height: 20px;
+        border-radius: 12px;
+        font-size: 10px;
+        font-weight: 500;
+        display: inline-block;
+        line-height: 1;
+        padding-top: 5px;
+        color: white;
+        &.completed {
+            background-color: #82bf11;
+        }
+        &.canceled {
+            background-color: #f05d62;
+        }
+        &.pending {
+            background-color: #fbba4e;
+        }
+    }
+}

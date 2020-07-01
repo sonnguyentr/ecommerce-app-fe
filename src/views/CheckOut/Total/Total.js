@@ -3,7 +3,7 @@ import "./Total.scss";
 
 import { Button } from "../../../components";
 
-const Total = ({ totalBill }) => {
+const Total = ({ totalBill, handleCheckOut }) => {
     return (
         <div className="check-out__total">
             <p className="total__title mb-2">Total</p>
@@ -23,7 +23,12 @@ const Total = ({ totalBill }) => {
                     </div>
                 </div>
             </div>
-            <Button className="button--block total__button">Check Out</Button>
+            <Button
+                onClick={handleCheckOut}
+                className="button--block total__button"
+            >
+                Check Out
+            </Button>
         </div>
     );
 };

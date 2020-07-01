@@ -1,0 +1,14 @@
+.order-table {
+    &.order-table__container {
+        background-color: white;
+        padding: 24px;
+    }
+    table {
+        width: 100%;
+    }
+    th {
+        font-size: 12px;
+        font-weight: 600;
+        color: #acacac;
+    }
+}

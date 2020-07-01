@@ -5,7 +5,7 @@ const Price = ({ price, handlePriceChange }) => {
         <div className="add-product__row">
             <div className="add-product__label">
                 <label htmlFor="product-price" className="add-product__title">
-                    Price($)
+                    Price ($)
                 </label>
             </div>
             <div className="add-product__input-container">

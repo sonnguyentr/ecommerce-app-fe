@@ -7,7 +7,7 @@ import { Button } from "../../../components";
 const Item = ({ title, price, available, img, _id }) => {
     const history = useHistory();
     const handleClick = () => {
-        history.push(`/product-detail/${title}-${_id}`);
+        history.push(`/product-detail/${_id}`);
     };
     return (
         <div

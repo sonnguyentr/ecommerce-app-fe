@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import "./RegisterButton.scss";
 
 import { Modal, InputWithLabel, Button } from "../../../components";
+import API from "../../../api";
 
-const RegisterButton = ({ dispatchUserUpdate, api }) => {
+const RegisterButton = ({ dispatchUserUpdate }) => {
     const [show, showModal] = useState(false);
 
     const isEmpty = (value) => {
@@ -68,13 +69,18 @@ const RegisterButton = ({ dispatchUserUpdate, api }) => {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        const data = await api.register({ name, email, password });
-        console.log(data);
-        if (data.status === 200) {
-            dispatchUserUpdate({ ...data.data });
-            alert("Register success!");
-        } else {
-            alert(data.message);
+        try {
+            const data = await API.register({ name, email, password });
+            if (data.status === 200) {
+                dispatchUserUpdate({ ...data.data });
+                alert("Register success!");
+            } else {
+            }
+        } catch (error) {
+            console.log(error.response.data);
+            alert(
+                (error.response.data && error.response.data.message) || "Error!"
+            );
         }
     };
 

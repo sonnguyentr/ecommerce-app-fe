@@ -1,12 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import LoginButton from "../Login/LoginButton";
 import RegisterButton from "../Register/RegisterButton";
 import UserAvatar from "../UserAvatar/UserAvatar";
 
-import api from "../../../api";
-import { user as userConstant } from "../../../constant";
+import {
+    user as userConstant,
+    shoppingCart as cartConstant,
+} from "../../../constant";
 
 const mapStateToProps = ({ user }) => {
     return { user };
@@ -16,19 +19,25 @@ const mapDispatchToProps = (dispatch) => {
         dispatchUserUpdate: (payload) =>
             dispatch({ type: userConstant.UPDATE_USER, payload }),
         dispatchUserLogOut: () => {
-            alert("Logout");
             dispatch({ type: userConstant.LOGOUT_USER });
+            dispatch({ type: cartConstant.CLEAR_CART });
+            alert("Logged out!");
         },
     };
 };
 const UserContainer = ({ dispatchUserUpdate, user, dispatchUserLogOut }) => {
+    const history = useHistory();
+    const handleLogout = () => {
+        history.push("/");
+        dispatchUserLogOut();
+    };
     return !user ? (
         <>
-            <RegisterButton dispatchUserUpdate={dispatchUserUpdate} api={api} />
-            <LoginButton dispatchUserUpdate={dispatchUserUpdate} api={api} />
+            <RegisterButton dispatchUserUpdate={dispatchUserUpdate} />
+            <LoginButton dispatchUserUpdate={dispatchUserUpdate} />
         </>
     ) : (
-        <UserAvatar dispatchUserLogOut={dispatchUserLogOut} user={user} />
+        <UserAvatar dispatchUserLogOut={handleLogout} user={user} />
     );
 };
 

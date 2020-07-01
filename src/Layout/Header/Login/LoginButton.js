@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import "./LoginButton.scss";
 
 import { Modal, InputWithLabel, Button } from "../../../components";
+import API from "../../../api";
 
-const LoginButton = ({dispatchUserUpdate, api}) => {
+const LoginButton = ({ dispatchUserUpdate }) => {
     const [show, showModal] = useState(false);
     const [isLoginSuccess, setIsLoginSuccess] = useState(true);
 
@@ -56,12 +57,14 @@ const LoginButton = ({dispatchUserUpdate, api}) => {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        const data = await api.login({ email, password });
-        if (data.status === 200) {
-            setIsLoginSuccess(true);
-            dispatchUserUpdate({ ...data.data })
-            alert("Login successs!");
-        } else {
+        try {
+            const data = await API.login({ email, password });
+            if (data.status === 200) {
+                setIsLoginSuccess(true);
+                dispatchUserUpdate({ ...data.data });
+            } else {
+            }
+        } catch (error) {
             setIsLoginSuccess(false);
         }
     };

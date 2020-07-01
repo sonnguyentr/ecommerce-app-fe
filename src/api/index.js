@@ -1,56 +1,52 @@
 import axios from "axios";
 import { config } from "../constant";
-import auth from "./auth";
-import seller from "./seller";
-import product from "./product";
+import store from "../store/store";
 
-const token = "";
-const api = {
-    base: config.host + "/api",
-    request_api: async function (path_api, postData = {}) {
-        return axios({
-            url: this.base + path_api,
-            method: Object["keys"](postData)["length"] ? "POST" : "GET",
-            data: postData,
-            headers: {
-                Authorization: token && "Bearer " + token,
-            },
-        })
-            .then((result) => {
-                return { data: result.data, status: result.status };
-            })
-            .catch((error) => {
-                console.log("request error", error);
-                if (error.response) {
-                    return {
-                        ...error.response.data,
-                        status: error.response.status,
-                    };
-                }
-            });
+const state = store.getState();
+const token = state.user && state.user.token;
+// export default api;
+const instance = axios.create({
+    baseURL: config.host + "/api",
+    headers: {
+        Authorization: token && "Bearer " + token,
     },
-    request_api_no_token: async function (path_api, postData = {}) {
-        return axios({
-            url: this.base + path_api,
-            method: Object["keys"](postData)["length"] ? "POST" : "GET",
-            data: postData,
-        })
-            .then((result) => {
-                return { data: result.data, status: result.status };
-            })
-            .catch((error) => {
-                console.log("request error", error);
-                if (error.response) {
-                    return {
-                        ...error.response.data,
-                        status: error.response.status,
-                    };
-                }
-            });
+});
+
+export default {
+    setToken: (token) => {
+        instance.defaults.headers["Authorization"] = "Bearer " + token;
     },
-    axios,
-    ...auth,
-    ...seller,
-    ...product,
+    register: ({ name, email, password }) => {
+        return instance.post("auth/register", { name, email, password });
+    },
+    login: ({ email, password }) => {
+        return instance.post("/auth/login", { email, password });
+    },
+    getListProduct: () => {
+        return instance.get("/products");
+    },
+    getProductDetail: (_id) => {
+        return instance.get("/products/" + _id);
+    },
+    addProduct: (postData) => {
+        return instance.post("/products/add-product", postData);
+    },
+    removeProduct: (_id) => {
+        return instance.delete("/products/" + _id);
+    },
+    editProduct: (_id, postData) => {
+        return instance.put("/products/" + _id, postData);
+    },
+    createOrder: ({ customerId, products }) => {
+        return instance.post("/orders", { customerId, products });
+    },
+    getListOrder: () => {
+        return instance.get("/orders");
+    },
+    cancelOrder: ({ order_id }) => {
+        return instance.post("/orders/cancel", { order_id });
+    },
+    updateOrder: ({ order_id, status }) => {
+        return instance.put("/orders/" + order_id, { status });
+    },
 };
-export default api;
