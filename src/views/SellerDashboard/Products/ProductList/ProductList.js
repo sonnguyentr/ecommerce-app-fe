@@ -50,7 +50,7 @@ const ProductList = (props) => {
     };
 
     return (
-        <div className="product-list__container">
+        <div className="sell-product-list__container">
             <table>
                 <thead>
                     <tr>

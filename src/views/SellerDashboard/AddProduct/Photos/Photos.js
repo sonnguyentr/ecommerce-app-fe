@@ -20,7 +20,7 @@ const Photos = ({ photoUpload, photoArray }) => {
                     ))}
                 </div>
                 <span className="photos__note">
-                    You can add up to 8 photos. The 1st photo will be set as
+                    You can add up to 4 photos. The 1st photo will be set as
                     cover (main photo).
                 </span>
             </div>

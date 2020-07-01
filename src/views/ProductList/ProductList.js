@@ -101,21 +101,29 @@ const ProductList = () => {
                     />
                 </div>
                 <div className="col-xs-12 col-md-auto">
-                    <div className="container-fluid product-list__list-item">
-                        <div className="row">
-                            <div className="col-6 offset-md-6">
-                                <Paging />
-                            </div>
-                        </div>
-                        <div className="row">
-                            {listItem.map((item, index) => {
-                                return <Item key={index} {...item} />;
-                            })}
-                        </div>
-                        <div className="row">
-                            <div className="col-6 offset-md-6">
-                                <Paging />
-                            </div>
+                    <div className="container-fluid">
+                        <div className="product-list__container">
+                            {listItem && listItem.length ? (
+                                <>
+                                    <div className="text-right">
+                                        <Paging />
+                                    </div>
+                                    <div className="row">
+                                        {listItem.map((item, index) => {
+                                            return (
+                                                <Item key={index} {...item} />
+                                            );
+                                        })}
+                                    </div>
+                                    <div className="text-right">
+                                        <Paging />
+                                    </div>
+                                </>
+                            ) : (
+                                <div className="text--greyish-two">
+                                    No result found
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

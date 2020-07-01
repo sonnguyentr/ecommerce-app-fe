@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./AddProduct.scss";
 import { useParams } from "react-router-dom";
 
@@ -12,19 +12,22 @@ import Buttons from "./Buttons/Buttons";
 import api from "../../../api";
 const AddProduct = (props) => {
     const { _id } = useParams();
-    const updateProductData = (product) => {
-        let photos = [...photoArray];
-        photos = photos.map((photo, i) => {
-            return {
-                src: product.photos[i],
-            };
-        });
-        setPhotoArray([...photos]);
-        setTitle(product.title);
-        setPrice(product.price);
-        setDescription(product.description);
-        setSizeArray(product.properties);
-    };
+    const updateProductData = useCallback(
+        (product) => {
+            let photos = [{}, {}, {}, {}];
+            photos = photos.map((photo, i) => {
+                return {
+                    src: product.photos[i],
+                };
+            });
+            setPhotoArray([...photos]);
+            setTitle(product.title);
+            setPrice(product.price);
+            setDescription(product.description);
+            setSizeArray(product.properties);
+        },
+        []
+    );
     useEffect(() => {
         if (!_id) return;
 
@@ -35,7 +38,7 @@ const AddProduct = (props) => {
             }
         };
         getProductDetail();
-    }, [_id]);
+    }, [_id, updateProductData]);
     // Photo
     const initPhotoArray = [{}, {}, {}, {}];
     const [photoArray, setPhotoArray] = useState(initPhotoArray);

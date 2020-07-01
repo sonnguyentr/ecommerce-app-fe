@@ -13,7 +13,7 @@ const Buttons = (props) => {
                     onClick={() => history.goBack()}
                     className="add-product__cancel-buton button--outline"
                 >
-                    Cancel
+                    Back
                 </Button>
                 <Button
                     className="add-product__submit-buton button--primary"

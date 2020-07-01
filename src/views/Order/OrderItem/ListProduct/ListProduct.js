@@ -19,7 +19,7 @@ const ListProduct = ({ products }) => {
             </thead>
             <tbody>
                 {products.map((product) => {
-                    return <OrderProduct {...product} />;
+                    return <OrderProduct key={product.product_id} {...product} />;
                 })}
             </tbody>
         </table>

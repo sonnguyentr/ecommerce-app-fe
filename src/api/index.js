@@ -23,8 +23,6 @@ export default {
         return instance.post("/auth/login", { email, password });
     },
     getListProduct: () => {
-        console.log(instance.defaults.headers);
-
         return instance.get("/products");
     },
     getProductDetail: (_id) => {
