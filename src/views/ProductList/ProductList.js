@@ -17,11 +17,16 @@ const ProductList = () => {
         items
     */
     const { routeName } = useParams();
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(10);
+    const handlePageChange = (value) => {
+        setPage(value);
+    };
     const [listItem, setListItem] = useState([]);
     useEffect(() => {
         const getListItem = async () => {
             try {
-                const data = await api.getListProduct();
+                const data = await api.getListProduct(page);
                 const list = data.data.data.map((item) => {
                     item.price = `$${item.price.toFixed(2)}`;
                     item.img = item.photos[0];
@@ -33,12 +38,13 @@ const ProductList = () => {
                     return item;
                 });
                 setListItem(list);
+                setTotalPages(data.data.totalPages);
             } catch (err) {
-                console.log(err);
+                console.error(err);
             }
         };
         getListItem();
-    }, []);
+    }, [page]);
     const categoriesDummy = [
         {
             name: "All dresses",
@@ -108,7 +114,11 @@ const ProductList = () => {
                             {listItem && listItem.length ? (
                                 <>
                                     <div className="text-right">
-                                        <Paging />
+                                        <Paging
+                                            page={page}
+                                            handlePageChange={handlePageChange}
+                                            totalPages={totalPages}
+                                        />
                                     </div>
                                     <div className="row">
                                         {listItem.map((item, index) => {
@@ -118,7 +128,11 @@ const ProductList = () => {
                                         })}
                                     </div>
                                     <div className="text-right">
-                                        <Paging />
+                                        <Paging
+                                            page={page}
+                                            handlePageChange={handlePageChange}
+                                            totalPages={totalPages}
+                                        />
                                     </div>
                                 </>
                             ) : (

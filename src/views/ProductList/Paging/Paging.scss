@@ -1,3 +1,14 @@
 .paging {
-    font-size: 13px;
+    font-size: 14px;
+    font-weight: 500;
+    .paging__text {
+        display: inline-block;
+        text-align: center;
+        width: 35px;
+    }
+    .paging__button {
+        border-radius: 15px;
+        padding: 5px 10px;
+        margin: 0;
+    }
 }

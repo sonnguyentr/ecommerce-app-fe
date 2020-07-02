@@ -1,12 +1,32 @@
 import React from "react";
 import "./Paging.scss";
 
-const Paging = (props) => {
+import { Button } from "../../../components";
+
+const Paging = ({ page, totalPages, handlePageChange }) => {
+    const handleArrowClick = (value) => {
+        const newPage = page + value;
+        if (newPage >= 1 && newPage <= totalPages) {
+            handlePageChange(newPage);
+        }
+    };
     return (
         <div className="text-right text--greyish-brown paging">
-            <i className="fas fa-chevron-left"></i>
-            <span className="text--dark-grey mx-2">1 / 100</span>
-            <i className="fas fa-chevron-right"></i>
+            <Button
+                onClick={() => handleArrowClick(-1)}
+                className="paging__button button--transparent"
+            >
+                <i className="fas fa-chevron-left"></i>
+            </Button>
+            <span className="text--dark-grey paging__text">
+                {page} / {totalPages}
+            </span>
+            <Button
+                onClick={() => handleArrowClick(1)}
+                className="paging__button button--transparent"
+            >
+                <i className="fas fa-chevron-right"></i>
+            </Button>
         </div>
     );
 };
