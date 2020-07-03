@@ -11,7 +11,6 @@ const Item = ({ title, price, available, img, _id }) => {
     };
     const [isLoaded, setIsLoaded] = useState(false);
     const onImgLoaded = () => {
-        console.log("object");
         setIsLoaded(true);
     };
     return (
