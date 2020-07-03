@@ -30,12 +30,23 @@ const ProductList = () => {
             setSize(value);
         }
     };
+    const initAvailability = {
+        inStore: true,
+        outOfStock: false,
+    };
+    const [availability, setAvailability] = useState(initAvailability);
+
+    const handleAvailabilityChange = (value) => {
+        const newObj = { ...availability };
+        newObj[value] = !newObj[value];
+        setAvailability(newObj);
+    };
 
     const [listItem, setListItem] = useState([]);
     useEffect(() => {
         const getListItem = async () => {
             try {
-                const data = await api.getListProduct({ page, size });
+                const data = await api.getListProduct({ page, size, ...availability });
                 const list = data.data.data.map((item) => {
                     item.price = `$${item.price.toFixed(2)}`;
                     item.img = item.photos[0];
@@ -53,7 +64,7 @@ const ProductList = () => {
             }
         };
         getListItem();
-    }, [page, size]);
+    }, [page, size, availability]);
     const categoriesDummy = [
         {
             name: "All dresses",
@@ -116,7 +127,12 @@ const ProductList = () => {
                             });
                         }}
                     />
-                    <Filter handleSizeChange={handleSizeChange} size={size} />
+                    <Filter
+                        handleAvailabilityChange={handleAvailabilityChange}
+                        handleSizeChange={handleSizeChange}
+                        size={size}
+                        availability={availability}
+                    />
                 </div>
                 <div className="col-xs-12 col-md-auto">
                     <div className="container-fluid">

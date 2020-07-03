@@ -1,24 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import "./FilterSize";
 
 import { SizeButton } from "../../../../components";
-const FilterSize = ({ size, handleSizeChange }) => {
+const FilterSize = ({
+    size,
+    handleSizeChange,
+    handleFilterChange,
+    isChosenFilter,
+}) => {
     const properties = [{ size: "S" }, { size: "M" }, { size: "L" }];
-    const [isChosenFilter, setChosenFilter] = useState(false);
-    const handleFilterClick = () => {
-        setChosenFilter(!isChosenFilter);
-    };
     return (
         <div className="filter___item-container">
             <div
-                onClick={handleFilterClick}
+                onClick={() => handleFilterChange("size")}
                 className={`filter___item ${
                     isChosenFilter ? "filter___item--chosen" : ""
                 }`}
             >
                 Size
                 <i
-                    className={`fas fa-chevron-${
+                    className={`align-self-center fas fa-chevron-${
                         isChosenFilter ? "up" : "down"
                     }`}
                 ></i>
