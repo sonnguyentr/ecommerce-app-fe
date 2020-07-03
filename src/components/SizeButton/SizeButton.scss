@@ -1,14 +1,22 @@
 .size-button {
-    padding: 10px 18px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
     margin: 0;
-    border: none;
+    border: solid 1px #d4d3d3;
+    background-color: transparent;
+    font-size: 14px;
+    font-weight: normal;
+    color: #202124;
+    border-radius: 0;
     &:disabled {
-        background-color: #f5f5f5;
         opacity: 0.5;
+        border: solid 1px #d4d3d3;
     }
     &.size-button--chosen {
         background-color: #ffa15f;
         border: solid 1px #ffa15f;
+        font-weight: bold;
         color: white;
         &:hover {
             background-color: #ff7e24;

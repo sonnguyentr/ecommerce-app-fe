@@ -23,8 +23,8 @@ export default {
     login: ({ email, password }) => {
         return instance.post("/auth/login", { email, password });
     },
-    getListProduct: (page = 1, limit = 20) => {
-        const query = buildParamQuery({ page, limit });
+    getListProduct: ({ page = 1, limit = 20, size }) => {
+        const query = buildParamQuery({ page, limit, size });
         return instance.get("/products" + (query ? `?${query}` : ""));
     },
     getProductDetail: (_id) => {

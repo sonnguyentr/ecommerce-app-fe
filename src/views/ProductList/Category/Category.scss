@@ -1,15 +1,20 @@
-.category {
+.product-list__category {
+    .category__title {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 27px;
+    }
     .category__item {
         font-size: 14px;
         color: #4d4d4d;
         margin-bottom: 16px;
         cursor: pointer;
 
-        &:hover{
+        &:hover {
             text-decoration: underline;
         }
-        
-        &.chosen {
+
+        &.category__item--chosen {
             color: #ff6900;
             font-weight: 500;
         }

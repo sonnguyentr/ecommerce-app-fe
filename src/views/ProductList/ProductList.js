@@ -1,13 +1,12 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import "./ProductList.scss";
 import Item from "./Item/Item";
 import Paging from "./Paging/Paging";
 import Categories from "./Category/Category";
-import { useParams } from "react-router-dom";
+import Filter from "./Filter/Filter";
 
 import api from "../../api";
-import { useEffect } from "react";
-import { useState } from "react";
 const ProductList = () => {
     /*
         Breadcrumb
@@ -22,11 +21,21 @@ const ProductList = () => {
     const handlePageChange = (value) => {
         setPage(value);
     };
+
+    const [size, setSize] = useState(null);
+    const handleSizeChange = (value) => {
+        if (size === value) {
+            setSize(null);
+        } else {
+            setSize(value);
+        }
+    };
+
     const [listItem, setListItem] = useState([]);
     useEffect(() => {
         const getListItem = async () => {
             try {
-                const data = await api.getListProduct(page);
+                const data = await api.getListProduct({ page, size });
                 const list = data.data.data.map((item) => {
                     item.price = `$${item.price.toFixed(2)}`;
                     item.img = item.photos[0];
@@ -44,7 +53,7 @@ const ProductList = () => {
             }
         };
         getListItem();
-    }, [page]);
+    }, [page, size]);
     const categoriesDummy = [
         {
             name: "All dresses",
@@ -107,6 +116,7 @@ const ProductList = () => {
                             });
                         }}
                     />
+                    <Filter handleSizeChange={handleSizeChange} size={size} />
                 </div>
                 <div className="col-xs-12 col-md-auto">
                     <div className="container-fluid">
