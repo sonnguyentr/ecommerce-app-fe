@@ -33,7 +33,7 @@ const UserAvatar = ({ dispatchUserLogOut, user }) => {
                 })}
                 {user && user.role === "seller" && (
                     <div className="avatar__menu-item border-bottom">
-                        <Link to="/seller-dashboard">Seller dashboard</Link>
+                        <Link to="/seller-dashboard/orders">Seller dashboard</Link>
                     </div>
                 )}
                 <div onClick={dispatchUserLogOut} className="avatar__menu-item">

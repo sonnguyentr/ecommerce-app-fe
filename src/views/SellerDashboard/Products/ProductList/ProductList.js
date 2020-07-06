@@ -2,14 +2,21 @@ import React, { useState, useEffect } from "react";
 import "./ProductList.scss";
 
 import ProductItem from "./ProductItem/ProductItem";
+import { Paging } from "../../../../components";
 
 import api from "../../../../api";
 const ProductList = (props) => {
+    const [page, setPage] = useState(1);
+    const handlePageChange = (value) => {
+        setPage(value);
+    };
+    const [totalPages, setTotalPages] = useState(1);
+
     const [listProducts, setListProducts] = useState([]);
     useEffect(() => {
         const getListItem = async () => {
             try {
-                const data = await api.getListProduct();
+                const data = await api.getListProduct({ page, limit: 10  });
                 const list = data.data.data.map((item) => {
                     item.price = `$${item.price.toFixed(2)}`;
                     item.img = item.photos[0];
@@ -22,12 +29,13 @@ const ProductList = (props) => {
                     return item;
                 });
                 setListProducts(list);
+                setTotalPages(data.data.totalPages);
             } catch (err) {
                 console.log(err);
             }
         };
         getListItem();
-    }, []);
+    }, [page]);
 
     const handleRemoveProduct = async (product) => {
         const result = window.confirm(
@@ -71,6 +79,13 @@ const ProductList = (props) => {
                     ))}
                 </tbody>
             </table>
+            <div className="text-right mt-3">
+                <Paging
+                    page={page}
+                    totalPages={totalPages}
+                    handlePageChange={handlePageChange}
+                />
+            </div>
         </div>
     );
 };

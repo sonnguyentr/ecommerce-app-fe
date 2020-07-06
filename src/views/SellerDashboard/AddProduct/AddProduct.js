@@ -138,6 +138,7 @@ const AddProduct = (props) => {
 
     return (
         <div className="add-product">
+            <h1 className="seller-dashboard__title">{!_id ? "Add product" : "Edit product"}</h1>
             <form
                 name="add-product"
                 onSubmit={(e) => {

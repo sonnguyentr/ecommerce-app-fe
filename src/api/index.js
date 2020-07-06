@@ -48,8 +48,12 @@ export default {
     createOrder: ({ customerId, products }) => {
         return instance.post("/orders", { customerId, products });
     },
-    getListOrder: () => {
-        return instance.get("/orders");
+    getListOrder: ({ page = 1, limit = 20 }) => {
+        const query = buildParamQuery({
+            page,
+            limit,
+        });
+        return instance.get("/orders" + (query ? `?${query}` : ""));
     },
     cancelOrder: ({ order_id }) => {
         return instance.post("/orders/cancel", { order_id });

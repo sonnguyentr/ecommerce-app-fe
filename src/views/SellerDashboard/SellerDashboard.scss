@@ -1,5 +1,13 @@
 .seller-dashboard {
-    height: 100%;
+    height: fit-content;
+    min-height: 100%;
     box-shadow: 1px 0 0 0 #ededed;
     background-color: #f6f6f6;
+    padding: 35px 20px;
+    .seller-dashboard__title {
+        font-size: 28px;
+        font-weight: bold;
+        color: #202124;
+        margin-bottom: 25px;
+    }
 }

@@ -1,9 +1,9 @@
 import React from "react";
 import "./Paging.scss";
 
-import { Button } from "../../../components";
+import { Button } from "../index";
 
-const Paging = ({ page, totalPages, handlePageChange }) => {
+const Paging = ({ page = 1, totalPages = 1, handlePageChange }) => {
     const handleArrowClick = (value) => {
         const newPage = page + value;
         if (newPage >= 1 && newPage <= totalPages) {
@@ -11,7 +11,7 @@ const Paging = ({ page, totalPages, handlePageChange }) => {
         }
     };
     return (
-        <div className="text-right text--greyish-brown paging">
+        <div className="text--greyish-brown paging">
             <Button
                 onClick={() => handleArrowClick(-1)}
                 className="paging__button button--transparent"

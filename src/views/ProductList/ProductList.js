@@ -2,7 +2,7 @@ import React, { useReducer, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./ProductList.scss";
 import Item from "./Item/Item";
-import Paging from "./Paging/Paging";
+import { Paging } from "../../components";
 import Categories from "./Category/Category";
 import Filter from "./Filter/Filter";
 
@@ -46,7 +46,11 @@ const ProductList = () => {
     useEffect(() => {
         const getListItem = async () => {
             try {
-                const data = await api.getListProduct({ page, size, ...availability });
+                const data = await api.getListProduct({
+                    page,
+                    size,
+                    ...availability,
+                });
                 const list = data.data.data.map((item) => {
                     item.price = `$${item.price.toFixed(2)}`;
                     item.img = item.photos[0];

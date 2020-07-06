@@ -2,7 +2,15 @@ import React from "react";
 import "./OrderTable.scss";
 
 import OrderTableItem from "./OrderTableItem/OrderTableItem";
-const OrderTable = ({ listOrders, handleUpdateOrderStatus }) => {
+import { Paging } from "../../../../components";
+
+const OrderTable = ({
+    listOrders,
+    handleUpdateOrderStatus,
+    page,
+    handlePageChange,
+    totalPages,
+}) => {
     return (
         <div className="order-table order-table__container">
             <table>
@@ -30,6 +38,14 @@ const OrderTable = ({ listOrders, handleUpdateOrderStatus }) => {
                     })}
                 </tbody>
             </table>
+
+            <div className="text-right mt-3">
+                <Paging
+                    page={page}
+                    totalPages={totalPages}
+                    handlePageChange={handlePageChange}
+                />
+            </div>
         </div>
     );
 };
