@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import "./AddProduct.scss";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 import Photos from "./Photos/Photos";
 import Name from "./Name/Name";
@@ -13,6 +13,7 @@ import toastr from "toastr";
 import api from "../../../api";
 const AddProduct = (props) => {
     const { _id } = useParams();
+    const history = useHistory();
     const updateProductData = useCallback((product) => {
         let photos = [{}, {}, {}, {}];
         photos = photos.map((photo, i) => {
@@ -97,6 +98,7 @@ const AddProduct = (props) => {
         try {
             await api.addProduct(postData);
             toastr.success("Product created!");
+            history.push("/seller-dashboard/products");
         } catch (err) {
             alert(
                 (err.response && err.response.data.message) ||
@@ -139,7 +141,9 @@ const AddProduct = (props) => {
 
     return (
         <div className="add-product">
-            <h1 className="seller-dashboard__title">{!_id ? "Add product" : "Edit product"}</h1>
+            <h1 className="seller-dashboard__title">
+                {!_id ? "Add product" : "Edit product"}
+            </h1>
             <form
                 name="add-product"
                 onSubmit={(e) => {
