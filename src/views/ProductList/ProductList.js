@@ -9,6 +9,7 @@ import Filter from "./Filter/Filter";
 import { CATEGORIES_CONSTANT } from "../../constant";
 
 import api from "../../api";
+import { useCallback } from "react";
 const ProductList = () => {
     /*
         Breadcrumb
@@ -19,10 +20,6 @@ const ProductList = () => {
     */
     const { routeName } = useParams();
     const [page, setPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(10);
-    const handlePageChange = (value) => {
-        setPage(value);
-    };
 
     const [size, setSize] = useState(null);
     const handleSizeChange = (value) => {
@@ -65,9 +62,8 @@ const ProductList = () => {
         initCategories
     );
 
-    const [listItem, setListItem] = useState([]);
-    useEffect(() => {
-        const getListItem = async () => {
+    const getListItem = useCallback(
+        async (page) => {
             try {
                 const chosenCat = categories.find((cat) => cat.isChosen);
                 const data = await api.getListProduct({
@@ -91,9 +87,21 @@ const ProductList = () => {
             } catch (err) {
                 console.error(err);
             }
-        };
-        getListItem();
-    }, [page, size, availability, categories]);
+        },
+        [size, availability, categories]
+    );
+
+    const [totalPages, setTotalPages] = useState(10);
+    const handlePageChange = (value) => {
+        setPage(value);
+        getListItem(value);
+    };
+
+    const [listItem, setListItem] = useState([]);
+    useEffect(() => {
+        setPage(1);
+        getListItem(1);
+    }, [size, availability, categories, getListItem]);
     return (
         <div className="container-fluid">
             <div className="row justify-content-center">
