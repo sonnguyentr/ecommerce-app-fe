@@ -67,16 +67,13 @@ const CheckOut = ({
         console.log(shoppingCart);
         const products = createOrder();
         try {
-            const data = await api.createOrder({
+            await api.createOrder({
                 customerId: user._id,
                 products,
             });
-            console.log(data);
-            if (data.status === 200) {
-                alert("Order created!");
-                dispatchClearCart();
-                history.push("/orders");
-            }
+            alert("Order created!");
+            dispatchClearCart();
+            history.push("/orders");
         } catch (error) {
             console.log(error.response.data);
             alert(

@@ -1,22 +1,22 @@
 import React from "react";
 import "./Size.scss";
-import { Button } from "../../../components";
+import { SizeButton } from "../../../components";
 
 const Size = ({ size, handleSize, properties = [] }) => {
     return (
         <div className="product-size mb-4">
             <p className="product-size__label mb-2">Size</p>
             {properties.map((property) => (
-                <Button
-                    key={property.size}
-                    onClick={() => handleSize(property.size)}
-                    disabled={!property.quantity}
-                    className={`${
-                        size === property.size ? "button--primary" : ""
-                    } product-size__button mr-2`}
-                >
-                    {property.size}
-                </Button>
+                <span key={property.size} className="mr-2">
+                    <SizeButton
+                        handleSizeClick={handleSize}
+                        isDisabled={!property.quantity}
+                        isChosen={size === property.size}
+                        size={property.size}
+                    >
+                        {property.size}
+                    </SizeButton>
+                </span>
             ))}
         </div>
     );

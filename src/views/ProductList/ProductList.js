@@ -1,13 +1,12 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import "./ProductList.scss";
 import Item from "./Item/Item";
 import Paging from "./Paging/Paging";
 import Categories from "./Category/Category";
-import { useParams } from "react-router-dom";
+import Filter from "./Filter/Filter";
 
 import api from "../../api";
-import { useEffect } from "react";
-import { useState } from "react";
 const ProductList = () => {
     /*
         Breadcrumb
@@ -17,11 +16,37 @@ const ProductList = () => {
         items
     */
     const { routeName } = useParams();
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(10);
+    const handlePageChange = (value) => {
+        setPage(value);
+    };
+
+    const [size, setSize] = useState(null);
+    const handleSizeChange = (value) => {
+        if (size === value) {
+            setSize(null);
+        } else {
+            setSize(value);
+        }
+    };
+    const initAvailability = {
+        inStore: true,
+        outOfStock: false,
+    };
+    const [availability, setAvailability] = useState(initAvailability);
+
+    const handleAvailabilityChange = (value) => {
+        const newObj = { ...availability };
+        newObj[value] = !newObj[value];
+        setAvailability(newObj);
+    };
+
     const [listItem, setListItem] = useState([]);
     useEffect(() => {
         const getListItem = async () => {
-            const data = await api.getListProduct();
-            if (data.status === 200) {
+            try {
+                const data = await api.getListProduct({ page, size, ...availability });
                 const list = data.data.data.map((item) => {
                     item.price = `$${item.price.toFixed(2)}`;
                     item.img = item.photos[0];
@@ -33,10 +58,13 @@ const ProductList = () => {
                     return item;
                 });
                 setListItem(list);
+                setTotalPages(data.data.totalPages);
+            } catch (err) {
+                console.error(err);
             }
         };
         getListItem();
-    }, []);
+    }, [page, size, availability]);
     const categoriesDummy = [
         {
             name: "All dresses",
@@ -99,6 +127,12 @@ const ProductList = () => {
                             });
                         }}
                     />
+                    <Filter
+                        handleAvailabilityChange={handleAvailabilityChange}
+                        handleSizeChange={handleSizeChange}
+                        size={size}
+                        availability={availability}
+                    />
                 </div>
                 <div className="col-xs-12 col-md-auto">
                     <div className="container-fluid">
@@ -106,7 +140,11 @@ const ProductList = () => {
                             {listItem && listItem.length ? (
                                 <>
                                     <div className="text-right">
-                                        <Paging />
+                                        <Paging
+                                            page={page}
+                                            handlePageChange={handlePageChange}
+                                            totalPages={totalPages}
+                                        />
                                     </div>
                                     <div className="row">
                                         {listItem.map((item, index) => {
@@ -116,7 +154,11 @@ const ProductList = () => {
                                         })}
                                     </div>
                                     <div className="text-right">
-                                        <Paging />
+                                        <Paging
+                                            page={page}
+                                            handlePageChange={handlePageChange}
+                                            totalPages={totalPages}
+                                        />
                                     </div>
                                 </>
                             ) : (

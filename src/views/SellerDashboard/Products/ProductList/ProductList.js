@@ -8,8 +8,8 @@ const ProductList = (props) => {
     const [listProducts, setListProducts] = useState([]);
     useEffect(() => {
         const getListItem = async () => {
-            const data = await api.getListProduct();
-            if (data.status === 200) {
+            try {
+                const data = await api.getListProduct();
                 const list = data.data.data.map((item) => {
                     item.price = `$${item.price.toFixed(2)}`;
                     item.img = item.photos[0];
@@ -22,6 +22,8 @@ const ProductList = (props) => {
                     return item;
                 });
                 setListProducts(list);
+            } catch (err) {
+                console.log(err);
             }
         };
         getListItem();
@@ -34,16 +36,14 @@ const ProductList = (props) => {
         if (!result) return;
         try {
             const data = await api.removeProduct(product._id);
-            if (data.status === 200) {
-                console.log(data.data);
-                alert((data.data && data.data.message) || "Delete success!");
-                const list = [...listProducts];
-                const foundIndex = list.findIndex(
-                    (item) => item._id === product._id
-                );
-                list.splice(foundIndex, 1);
-                setListProducts(list);
-            }
+            console.log(data.data);
+            alert((data.data && data.data.message) || "Delete success!");
+            const list = [...listProducts];
+            const foundIndex = list.findIndex(
+                (item) => item._id === product._id
+            );
+            list.splice(foundIndex, 1);
+            setListProducts(list);
         } catch (error) {
             alert(error.response.data.message);
         }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Item.scss";
 import { useHistory } from "react-router-dom";
 
@@ -9,21 +9,36 @@ const Item = ({ title, price, available, img, _id }) => {
     const handleClick = () => {
         history.push(`/product-detail/${_id}`);
     };
+    const [isLoaded, setIsLoaded] = useState(false);
+    const onImgLoaded = () => {
+        setIsLoaded(true);
+    };
     return (
         <div
-            className={`item ${!available ? "disabled" : ""}`}
+            className={`product-list__item ${!available ? "disabled" : ""}`}
             onClick={handleClick}
         >
-            <img src={img} className="img-fluid" alt={title}></img>
-
+            <img
+                onLoad={onImgLoaded}
+                src={img}
+                className={`img-fluid ${!isLoaded ? "item__img--loading" : ""}`}
+                alt={title}
+            ></img>
+            <img
+                src="/img/product-placeholder.png"
+                className={`img-fluid ${isLoaded ? "item__img--loading" : ""}`}
+                alt={title}
+            ></img>
             {available ? (
-                <div className="quick-shop">
-                    <Button className="button--primary button--block">+ Quick shop</Button>
+                <div className="product-list__quick-shop">
+                    <Button className="list__quick-shop__button button--primary button--block">
+                        + Quick shop
+                    </Button>
                 </div>
             ) : (
-                <div className="sold-out">Sold out</div>
+                <div className="product-list__sold-out">Sold out</div>
             )}
-            <p className="title text--dark-grey mb-1">{title}</p>
+            <p className="product-list__title text--dark-grey mb-1">{title}</p>
             <small className="text--greyish-brown">{price}</small>
         </div>
     );

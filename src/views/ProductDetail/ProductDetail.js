@@ -23,8 +23,8 @@ const ProductDetail = ({ dispatchAddToCart }) => {
     const [product, setProduct] = useState({});
     useEffect(() => {
         const getProductDetail = async () => {
-            const data = await api.getProductDetail(productId);
-            if (data.status === 200) {
+            try {
+                const data = await api.getProductDetail(productId);
                 const product = {
                     ...data.data.data,
                 };
@@ -32,8 +32,12 @@ const ProductDetail = ({ dispatchAddToCart }) => {
                 product.picture =
                     product.photos[0] || "/img/product-placeholder.png";
                 setProduct(product);
-                const availableProperty = product.properties.find((i) => i.quantity);
+                const availableProperty = product.properties.find(
+                    (i) => i.quantity
+                );
                 setSize(availableProperty.size);
+            } catch (err) {
+                console.log(err);
             }
         };
         getProductDetail();

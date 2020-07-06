@@ -1,6 +1,7 @@
 import axios from "axios";
 import { config } from "../constant";
 import store from "../store/store";
+import { buildParamQuery } from "../helper";
 
 const state = store.getState();
 const token = state.user && state.user.token;
@@ -22,8 +23,15 @@ export default {
     login: ({ email, password }) => {
         return instance.post("/auth/login", { email, password });
     },
-    getListProduct: () => {
-        return instance.get("/products");
+    getListProduct: ({ page = 1, limit = 20, size, inStore, outOfStock }) => {
+        const query = buildParamQuery({
+            page,
+            limit,
+            size,
+            inStore,
+            outOfStock,
+        });
+        return instance.get("/products" + (query ? `?${query}` : ""));
     },
     getProductDetail: (_id) => {
         return instance.get("/products/" + _id);

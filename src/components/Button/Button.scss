@@ -44,6 +44,12 @@
             outline: none;
         }
     }
+    &.button--transparent {
+        background-color: transparent;
+        &:hover {
+            background-color: #efefef;
+        }
+    }
     &:disabled {
         background-color: #b1b1b1;
         border: solid 1px #b1b1b1;

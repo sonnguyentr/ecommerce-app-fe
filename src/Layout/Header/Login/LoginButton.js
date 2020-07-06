@@ -59,11 +59,8 @@ const LoginButton = ({ dispatchUserUpdate }) => {
         event.preventDefault();
         try {
             const data = await API.login({ email, password });
-            if (data.status === 200) {
-                setIsLoginSuccess(true);
-                dispatchUserUpdate({ ...data.data });
-            } else {
-            }
+            setIsLoginSuccess(true);
+            dispatchUserUpdate({ ...data.data });
         } catch (error) {
             setIsLoginSuccess(false);
         }

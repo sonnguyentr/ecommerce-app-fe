@@ -1,4 +1,4 @@
-.item {
+.product-list__item {
     width: 180px;
     height: 345px;
     padding: 10px;
@@ -8,13 +8,13 @@
     &.disabled {
         cursor: default;
     }
-    .title {
+    .product-list__title {
         font-size: 14px;
         max-height: 40px;
         overflow: hidden;
         text-overflow: ellipsis;
     }
-    .sold-out {
+    .product-list__sold-out {
         font-size: 12px;
         font-weight: bold;
         text-align: center;
@@ -27,13 +27,13 @@
         padding: 3px;
     }
 
-    &:hover > .quick-shop {
+    &:hover > .product-list__quick-shop {
         display: block;
     }
     img {
         width: 100%;
     }
-    .quick-shop {
+    .product-list__quick-shop {
         display: none;
         width: 180px;
         height: 268px;
@@ -42,10 +42,13 @@
         position: absolute;
         top: 10px;
         text-align: center;
-        .button {
+        .list__quick-shop__button {
             position: absolute;
             bottom: 0;
             border-radius: 0;
         }
+    }
+    .item__img--loading {
+        display: none;
     }
 }

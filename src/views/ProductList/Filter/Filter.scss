@@ -1,0 +1,31 @@
+.product-list__filter {
+    .filter___title {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 18px;
+    }
+    .filter___item-container {
+        border-bottom: 1px solid #d4d3d3;
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+    .filter___item {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+        color: #4d4d4d;
+        padding-bottom: 8px;
+        padding-top: 8px;
+        cursor: pointer;
+        &.filter___item--chosen {
+            color: #202124;
+            font-weight: 500;
+            border-bottom: 1px dashed #d4d3d3;
+        }
+    }
+    .fitler__item-detail {
+        padding-top: 15px;
+        padding-bottom: 20px;
+    }
+}
