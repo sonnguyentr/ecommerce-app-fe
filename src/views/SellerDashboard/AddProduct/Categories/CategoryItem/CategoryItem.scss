@@ -1,0 +1,15 @@
+.categories__container {
+    .category-item {
+        display: inline-block;
+        background-color: #f6f6f6;
+        border-radius: 4px;
+        padding: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        margin: 5px 15px 5px 0;
+        i {
+            color: #acacac;
+            margin-left: 10px;
+        }
+    }
+}

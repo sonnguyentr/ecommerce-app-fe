@@ -15,7 +15,7 @@ const Category = ({ list, onClick }) => {
                         >
                             {item.name}
                         </p>
-                        {item.main && <hr />}
+                        {index === 0 && <hr />}
                     </div>
                 );
             })}

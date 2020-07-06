@@ -6,6 +6,8 @@ import { Paging } from "../../components";
 import Categories from "./Category/Category";
 import Filter from "./Filter/Filter";
 
+import { CATEGORIES_CONSTANT } from "../../constant";
+
 import api from "../../api";
 const ProductList = () => {
     /*
@@ -69,34 +71,13 @@ const ProductList = () => {
         };
         getListItem();
     }, [page, size, availability]);
-    const categoriesDummy = [
-        {
-            name: "All dresses",
-            main: true,
-            isChosen: true,
-        },
-        {
-            name: "Rompers / Jumpsuits",
-        },
-        {
-            name: "Casual dresses",
-        },
-        {
-            name: "Going out dresses",
-        },
-        {
-            name: "Party / Ocassion dresses",
-        },
-        {
-            name: "Mini dresses",
-        },
-        {
-            name: "Maxi / Midi dresses",
-        },
-        {
-            name: "Sets",
-        },
-    ];
+
+    const initCategories = [...CATEGORIES_CONSTANT];
+    initCategories.unshift({
+        name: "All dresses",
+        value: "",
+        isChosen: true,
+    });
     const categoriesReducer = (state, action) => {
         if (action.type === "CHOSE_CAT") {
             return state.map((item) => {
@@ -109,7 +90,7 @@ const ProductList = () => {
     };
     const [categories, dispatchCategories] = useReducer(
         categoriesReducer,
-        categoriesDummy
+        initCategories
     );
     return (
         <div className="container-fluid">
@@ -117,8 +98,11 @@ const ProductList = () => {
                 <div className="col-12">
                     <h6 className="text-center">
                         {routeName +
-                            " / " +
-                            categories.filter((cat) => cat.isChosen)[0].name}
+                            (categories.filter((cat) => cat.isChosen)[0]
+                                ? " / " +
+                                  categories.filter((cat) => cat.isChosen)[0]
+                                      .name
+                                : "")}
                     </h6>
                 </div>
                 <div className="col-xs-12 col-md-2">
