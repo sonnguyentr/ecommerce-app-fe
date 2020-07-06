@@ -1,14 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./RegisterButton.scss";
+import { connect } from "react-redux";
 
 import { Modal, InputWithLabel, Button } from "../../../components";
+import { MODAL_CONSTANT } from "../../../constant";
 import API from "../../../api";
 import toastr from "toastr";
 
-const RegisterButton = ({ dispatchUserUpdate }) => {
-    const [show, showModal] = useState(false);
-
+const mapStateToProps = ({ modal }) => {
+    return { registerModal: modal.register };
+};
+const mapDispatchToProps = (dispatch) => {
+    return {
+        dispatchOpenLoginModal: () => dispatch({ type: MODAL_CONSTANT.LOGIN }),
+        dispatchOpenRegisterModal: () =>
+            dispatch({ type: MODAL_CONSTANT.REGISTER }),
+    };
+};
+const RegisterButton = ({
+    dispatchUserUpdate,
+    registerModal,
+    dispatchOpenRegisterModal,
+    dispatchOpenLoginModal,
+}) => {
     const isEmpty = (value) => {
         if (typeof value === "undefined" || value === "") {
             return true;
@@ -85,19 +100,12 @@ const RegisterButton = ({ dispatchUserUpdate }) => {
     return (
         <div className="register-button">
             <span
-                onClick={() => {
-                    showModal(!show);
-                }}
+                onClick={dispatchOpenRegisterModal}
                 className="text--greyish-brown"
             >
                 Register
             </span>
-            <Modal
-                show={show}
-                handleClose={() => {
-                    showModal(false);
-                }}
-            >
+            <Modal show={registerModal}>
                 <h4 className="modal__title">Register</h4>
                 <form
                     name="register"
@@ -167,15 +175,15 @@ const RegisterButton = ({ dispatchUserUpdate }) => {
                 <hr />
                 <div className="mt-3 mb-2">
                     Do you have an account?{" "}
-                    <Link
-                        className="text--bold text--underline text--pumpkin-orange"
-                        to="/login"
+                    <span
+                        onClick={dispatchOpenLoginModal}
+                        className="text--bold text--underline text--pumpkin-orange cursor-pointer"
                     >
                         Login
-                    </Link>
+                    </span>
                 </div>
             </Modal>
         </div>
     );
 };
-export default RegisterButton;
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterButton);
