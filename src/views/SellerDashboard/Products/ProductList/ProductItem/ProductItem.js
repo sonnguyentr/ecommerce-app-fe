@@ -15,7 +15,7 @@ const ProductItem = (props) => {
                     />
                     <div>
                         <div className="product-item__title">{props.title}</div>
-                        <div className="product-item__category">categories</div>
+                        <div className="product-item__category">{props.categories.toString()}</div>
                     </div>
                 </div>
             </td>

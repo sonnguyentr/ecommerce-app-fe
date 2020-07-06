@@ -44,34 +44,6 @@ const ProductList = () => {
         setAvailability(newObj);
     };
 
-    const [listItem, setListItem] = useState([]);
-    useEffect(() => {
-        const getListItem = async () => {
-            try {
-                const data = await api.getListProduct({
-                    page,
-                    size,
-                    ...availability,
-                });
-                const list = data.data.data.map((item) => {
-                    item.price = `$${item.price.toFixed(2)}`;
-                    item.img = item.photos[0];
-                    let quantity = item.properties.reduce(
-                        (accu, current) => (accu += current.quantity || 0),
-                        0
-                    );
-                    item.available = !!quantity;
-                    return item;
-                });
-                setListItem(list);
-                setTotalPages(data.data.totalPages);
-            } catch (err) {
-                console.error(err);
-            }
-        };
-        getListItem();
-    }, [page, size, availability]);
-
     const initCategories = [...CATEGORIES_CONSTANT];
     initCategories.unshift({
         name: "All dresses",
@@ -92,6 +64,36 @@ const ProductList = () => {
         categoriesReducer,
         initCategories
     );
+
+    const [listItem, setListItem] = useState([]);
+    useEffect(() => {
+        const getListItem = async () => {
+            try {
+                const chosenCat = categories.find((cat) => cat.isChosen);
+                const data = await api.getListProduct({
+                    page,
+                    size,
+                    categories: chosenCat.value,
+                    ...availability,
+                });
+                const list = data.data.data.map((item) => {
+                    item.price = `$${item.price.toFixed(2)}`;
+                    item.img = item.photos[0];
+                    let quantity = item.properties.reduce(
+                        (accu, current) => (accu += current.quantity || 0),
+                        0
+                    );
+                    item.available = !!quantity;
+                    return item;
+                });
+                setListItem(list);
+                setTotalPages(data.data.totalPages);
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        getListItem();
+    }, [page, size, availability, categories]);
     return (
         <div className="container-fluid">
             <div className="row justify-content-center">

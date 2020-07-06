@@ -23,13 +23,21 @@ export default {
     login: ({ email, password }) => {
         return instance.post("/auth/login", { email, password });
     },
-    getListProduct: ({ page = 1, limit = 20, size, inStore, outOfStock }) => {
+    getListProduct: ({
+        page = 1,
+        limit = 20,
+        size,
+        inStore,
+        outOfStock,
+        categories,
+    }) => {
         const query = buildParamQuery({
             page,
             limit,
             size,
             inStore,
             outOfStock,
+            categories,
         });
         return instance.get("/products" + (query ? `?${query}` : ""));
     },
