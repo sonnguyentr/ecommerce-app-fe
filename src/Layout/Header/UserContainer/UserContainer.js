@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import LoginButton from "../Login/LoginButton";
 import RegisterButton from "../Register/RegisterButton";
 import UserAvatar from "../UserAvatar/UserAvatar";
+import toastr from "toastr";
 
 import {
     user as userConstant,
@@ -21,7 +22,7 @@ const mapDispatchToProps = (dispatch) => {
         dispatchUserLogOut: () => {
             dispatch({ type: userConstant.LOGOUT_USER });
             dispatch({ type: cartConstant.CLEAR_CART });
-            alert("Logged out!");
+            toastr.info("Logged out!")
         },
     };
 };

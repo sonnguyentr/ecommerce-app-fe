@@ -4,6 +4,7 @@ import "./RegisterButton.scss";
 
 import { Modal, InputWithLabel, Button } from "../../../components";
 import API from "../../../api";
+import toastr from "toastr";
 
 const RegisterButton = ({ dispatchUserUpdate }) => {
     const [show, showModal] = useState(false);
@@ -72,7 +73,7 @@ const RegisterButton = ({ dispatchUserUpdate }) => {
         try {
             const data = await API.register({ name, email, password });
             dispatchUserUpdate({ ...data.data });
-            alert("Register success!");
+            toastr.success("Register success!");
         } catch (error) {
             console.log(error.response.data);
             alert(

@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import Total from "./Total/Total";
 import Bag from "./Bag/Bag";
 import api from "../../api";
+import toastr from "toastr";
 
 const mapStateToProps = ({ shoppingCart, user }) => {
     const totalBill = shoppingCart.reduce(
@@ -63,15 +64,14 @@ const CheckOut = ({
     const handleCheckOut = async () => {
         if (!user) return alert("Please login before checking out.");
         if (!shoppingCart || !shoppingCart.length)
-            return alert("Cart is empty.");
-        console.log(shoppingCart);
+            return toastr.error("Cart is empty.");
         const products = createOrder();
         try {
             await api.createOrder({
                 customerId: user._id,
                 products,
             });
-            alert("Order created!");
+            toastr.success("Order created!");
             dispatchClearCart();
             history.push("/orders");
         } catch (error) {

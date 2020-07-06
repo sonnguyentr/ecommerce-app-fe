@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import OrderItem from "./OrderItem/OrderItem";
 import { Paging } from "../../components";
 import API from "../../api";
-
+import toastr from "toastr";
 const mapStateToProps = ({ user }) => {
     return { user };
 };
@@ -63,7 +63,9 @@ const Order = ({ user }) => {
         if (!confirm) return;
         try {
             const data = await API.cancelOrder({ order_id });
-            alert((data.data && data.data.message) || "Cancel success!");
+            toastr.success(
+                (data.data && data.data.message) || "Cancel success!"
+            );
             setReload(reload + 1);
         } catch (error) {
             console.log(error.response);

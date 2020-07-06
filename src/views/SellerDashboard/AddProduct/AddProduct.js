@@ -8,6 +8,7 @@ import Price from "./Price/Price";
 import Size from "./Size/Size";
 import Description from "./Description/Description";
 import Buttons from "./Buttons/Buttons";
+import toastr from "toastr";
 
 import api from "../../../api";
 const AddProduct = (props) => {
@@ -95,7 +96,7 @@ const AddProduct = (props) => {
         };
         try {
             await api.addProduct(postData);
-            alert("Product created!");
+            toastr.success("Product created!");
         } catch (err) {
             alert(
                 (err.response && err.response.data.message) ||
@@ -115,7 +116,7 @@ const AddProduct = (props) => {
         try {
             const data = await api.editProduct(_id, postData);
 
-            alert("Product updated!");
+            toastr.success("Product updated!");
             updateProductData(data.data.product);
         } catch (err) {
             alert(
