@@ -98,7 +98,7 @@ const RegisterButton = ({ dispatchUserUpdate }) => {
                     showModal(false);
                 }}
             >
-                <h1>Register</h1>
+                <h4 className="modal__title">Register</h4>
                 <form
                     name="register"
                     onSubmit={(e) => {

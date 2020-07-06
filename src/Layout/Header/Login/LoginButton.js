@@ -81,7 +81,7 @@ const LoginButton = ({ dispatchUserUpdate }) => {
                     showModal(false);
                 }}
             >
-                <h1>Log In</h1>
+                <h4 className="modal__title">Log In</h4>
                 <small className="text--strawberry">
                     {!isLoginSuccess
                         ? "Your e-mail/password is invalid!"
@@ -106,7 +106,6 @@ const LoginButton = ({ dispatchUserUpdate }) => {
                             }
                             placeholder="Enter your email..."
                             errorMessage={emailError}
-                            isFocused
                         >
                             E-mail
                         </InputWithLabel>
@@ -125,7 +124,7 @@ const LoginButton = ({ dispatchUserUpdate }) => {
                         >
                             Password
                         </InputWithLabel>
-                        <div className="container-fluid mt-3 mb-3">
+                        <div className="container-fluid mt-2 mb-4">
                             <div className="row">
                                 <div className="col-md-6 px-0">
                                     <input
@@ -153,7 +152,7 @@ const LoginButton = ({ dispatchUserUpdate }) => {
                     </Button>
                 </form>
                 <hr />
-                <div className="mt-3 mb-2">
+                <div className="mt-4 mb-2">
                     Don’t have an account?{" "}
                     <Link
                         className="text--bold text--underline text--pumpkin-orange"

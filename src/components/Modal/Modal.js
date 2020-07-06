@@ -11,7 +11,7 @@ const Modal = ({ handleClose, show, children }) => {
                 className="modal__content"
             >
                 <button
-                    className="close"
+                    className="modal__close-button"
                     type="button"
                     onClick={handleClose}
                 >
