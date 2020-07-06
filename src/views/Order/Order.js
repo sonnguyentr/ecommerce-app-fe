@@ -3,6 +3,7 @@ import "./Order.scss";
 import { connect } from "react-redux";
 
 import OrderItem from "./OrderItem/OrderItem";
+import { Paging } from "../../components";
 import API from "../../api";
 
 const mapStateToProps = ({ user }) => {
@@ -12,11 +13,16 @@ const mapStateToProps = ({ user }) => {
 const Order = ({ user }) => {
     // Get list Order
     const [reload, setReload] = useState(1);
+    const [page, setPage] = useState(1);
+    const handlePageChange = (value) => {
+        setPage(value);
+    };
+    const [totalPages, setTotalPages] = useState(1);
     const [listOrders, setListOrder] = useState([]);
     useEffect(() => {
         const getListOrder = async () => {
             try {
-                const data = await API.getListOrder();
+                const data = await API.getListOrder({ page, limit: 10 });
                 const list = data.data.data.map((item) => {
                     item.title = item.products.reduce(
                         (accu, current) => (accu += current.title + ", "),
@@ -33,12 +39,13 @@ const Order = ({ user }) => {
                     return item;
                 });
                 setListOrder([...list]);
+                setTotalPages(data.data.totalPages);
             } catch (err) {
                 console.log(err);
             }
         };
         getListOrder();
-    }, [reload]);
+    }, [page, reload]);
 
     const handleShowDetail = (order_id) => {
         const newArr = listOrders.map((order) => {
@@ -100,6 +107,13 @@ const Order = ({ user }) => {
                             })}
                         </tbody>
                     </table>
+                    <div className="text-right mt-3">
+                        <Paging
+                            page={page}
+                            totalPages={totalPages}
+                            handlePageChange={handlePageChange}
+                        />
+                    </div>
                 </div>
             </div>
         </div>
