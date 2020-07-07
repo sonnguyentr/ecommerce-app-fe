@@ -10,7 +10,7 @@ const BagItem = (props) => {
     return (
         <tr className="bag-item border-top">
             <td>
-                <ProductInfo title={props.title} picture={props.picture} />
+                <ProductInfo id={props.id} title={props.title} picture={props.picture} />
             </td>
             <td className="text-center">
                 <ProductColor value={props.color.value} />
