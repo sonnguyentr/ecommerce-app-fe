@@ -9,21 +9,16 @@ const Products = (props) => {
 
     return (
         <div>
-            <div className="container-fluid">
-                <div className="row">
-                    <div className="text-right col-12">
-                        <Button
-                            onClick={() => {
-                                history.push(
-                                    "/seller-dashboard/products/add-product"
-                                );
-                            }}
-                            className="button--primary"
-                        >
-                            Add Product
-                        </Button>
-                    </div>
-                </div>
+            <h1 className="seller-dashboard__title">Products</h1>
+            <div className="text-right">
+                <Button
+                    onClick={() => {
+                        history.push("/seller-dashboard/products/add-product");
+                    }}
+                    className="button--primary mr-0"
+                >
+                    Add Product
+                </Button>
             </div>
             <ProductList />
         </div>

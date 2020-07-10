@@ -3,9 +3,10 @@
         font-size: 12px;
         font-weight: bold;
         color: #202124;
-        width: 100px;
+        width: 110px;
         text-align: right;
         padding-right: 20px;
+        text-transform: uppercase;
     }
     .add-product__input-container {
         width: 800px;
@@ -15,6 +16,7 @@
         border: solid 1px #ededed;
         background-color: #ffffff;
         padding: 5px 12px;
+        margin-bottom: 10px;
     }
     .add-product__text-area {
         height: 112px;
@@ -26,7 +28,7 @@
     .add-product__row {
         display: flex;
         flex-wrap: wrap;
-        max-width: 900px;
+        max-width: 950px;
         margin: auto;
         align-items: center;
         margin-bottom: 20px;

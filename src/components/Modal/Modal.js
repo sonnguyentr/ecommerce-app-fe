@@ -1,9 +1,17 @@
 import React from "react";
-import './Modal.scss'
+import "./Modal.scss";
+import { connect } from "react-redux";
+import { MODAL_CONSTANT } from "../../constant";
 
-const Modal = ({ handleClose, show, children }) => {
+const mapDispatchToProps = (dispatch) => {
+    return {
+        dispatchModalClose: () => dispatch({ type: MODAL_CONSTANT.CLOSE }),
+    };
+};
+
+const Modal = ({ show, children, dispatchModalClose }) => {
     return show ? (
-        <div onClick={handleClose} className="modal__container">
+        <div onClick={dispatchModalClose} className="modal__container">
             <div
                 onClick={(e) => {
                     e.stopPropagation();
@@ -11,9 +19,9 @@ const Modal = ({ handleClose, show, children }) => {
                 className="modal__content"
             >
                 <button
-                    className="close"
+                    className="modal__close-button"
                     type="button"
-                    onClick={handleClose}
+                    onClick={dispatchModalClose}
                 >
                     X
                 </button>
@@ -22,4 +30,4 @@ const Modal = ({ handleClose, show, children }) => {
         </div>
     ) : null;
 };
-export default Modal;
+export default connect(null, mapDispatchToProps)(Modal);

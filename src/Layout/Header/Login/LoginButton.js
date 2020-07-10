@@ -1,12 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import "./LoginButton.scss";
+import { connect } from "react-redux";
 
 import { Modal, InputWithLabel, Button } from "../../../components";
 import API from "../../../api";
+import { MODAL_CONSTANT } from "../../../constant";
+const mapStateToProps = ({ modal }) => {
+    return { loginModal: modal.login };
+};
+const mapDispatchToProps = (dispatch) => {
+    return {
+        dispatchOpenLoginModal: () => dispatch({ type: MODAL_CONSTANT.LOGIN }),
+        dispatchOpenRegisterModal: () =>
+            dispatch({ type: MODAL_CONSTANT.REGISTER }),
+    };
+};
 
-const LoginButton = ({ dispatchUserUpdate }) => {
-    const [show, showModal] = useState(false);
+const LoginButton = ({
+    dispatchUserUpdate,
+    loginModal,
+    dispatchOpenLoginModal,
+    dispatchOpenRegisterModal,
+}) => {
     const [isLoginSuccess, setIsLoginSuccess] = useState(true);
 
     const isEmpty = (value) => {
@@ -69,19 +84,12 @@ const LoginButton = ({ dispatchUserUpdate }) => {
         <>
             <Button
                 className="login login__button button--outline button--primary"
-                onClick={() => {
-                    showModal(!show);
-                }}
+                onClick={dispatchOpenLoginModal}
             >
                 Log In
             </Button>
-            <Modal
-                show={show}
-                handleClose={() => {
-                    showModal(false);
-                }}
-            >
-                <h1>Log In</h1>
+            <Modal show={loginModal}>
+                <h4 className="modal__title">Log In</h4>
                 <small className="text--strawberry">
                     {!isLoginSuccess
                         ? "Your e-mail/password is invalid!"
@@ -106,7 +114,6 @@ const LoginButton = ({ dispatchUserUpdate }) => {
                             }
                             placeholder="Enter your email..."
                             errorMessage={emailError}
-                            isFocused
                         >
                             E-mail
                         </InputWithLabel>
@@ -125,7 +132,7 @@ const LoginButton = ({ dispatchUserUpdate }) => {
                         >
                             Password
                         </InputWithLabel>
-                        <div className="container-fluid mt-3 mb-3">
+                        <div className="container-fluid mt-2 mb-4">
                             <div className="row">
                                 <div className="col-md-6 px-0">
                                     <input
@@ -153,18 +160,18 @@ const LoginButton = ({ dispatchUserUpdate }) => {
                     </Button>
                 </form>
                 <hr />
-                <div className="mt-3 mb-2">
+                <div className="mt-4 mb-2">
                     Don’t have an account?{" "}
-                    <Link
-                        className="text--bold text--underline text--pumpkin-orange"
-                        to="/register"
+                    <span
+                        onClick={dispatchOpenRegisterModal}
+                        className="text--bold text--underline text--pumpkin-orange cursor-pointer"
                     >
                         Register
-                    </Link>
+                    </span>
                 </div>
             </Modal>
         </>
     );
 };
 
-export default LoginButton;
+export default connect(mapStateToProps, mapDispatchToProps)(LoginButton);

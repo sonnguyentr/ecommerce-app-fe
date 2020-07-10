@@ -26,16 +26,16 @@ const CartButton = ({ count, shoppingCart }) => {
                 <span>{count}</span>
             </div>
             {!!count && (
-                <div
-                    onClick={() => {
-                        history.push("/check-out");
-                    }}
-                    className="cart-button__list-item"
-                >
+                <div className="cart-button__list-item">
                     {shoppingCart.map((item) => (
                         <CartProduct key={item.id} {...item} />
                     ))}
-                    <Button className="button--block mt-0 cart-button__view-cart">
+                    <Button
+                        onClick={() => {
+                            history.push("/check-out");
+                        }}
+                        className="button--block mt-0 cart-button__view-cart"
+                    >
                         View cart
                     </Button>
                 </div>

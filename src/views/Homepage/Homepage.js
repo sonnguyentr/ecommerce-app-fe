@@ -26,7 +26,12 @@ const HomePage = () => {
     const history = useHistory();
     return (
         <div className="homepage__container">
-            <div className="homepage__cover">
+            <div
+                onClick={() => {
+                    history.push("/products");
+                }}
+                className="homepage__cover"
+            >
                 <img
                     src="/img/cover.jpg"
                     height="666px"
@@ -48,6 +53,9 @@ const HomePage = () => {
                     {homepageCategories.map(({ name, img }) => {
                         return (
                             <div
+                                onClick={() => {
+                                    history.push("/products");
+                                }}
                                 key={name}
                                 className="homepage__pic-container text--center"
                             >
@@ -57,7 +65,9 @@ const HomePage = () => {
                                     alt="home-pic"
                                 ></img>
                                 <div className="homepage__overlay">
-                                    <h2 className="text--white">{name}</h2>
+                                    <h2 className="text--white cursor-pointer">
+                                        {name}
+                                    </h2>
                                     <hr className="homepage__hr" />
                                     <Button
                                         onClick={() => {

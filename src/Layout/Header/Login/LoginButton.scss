@@ -2,12 +2,12 @@
     &.login__button {
         border-radius: 100px;
         padding: 10px 30px;
-    
+
         .login__button:hover {
             background-color: #ff7e2424;
             cursor: pointer;
         }
-    
+
         .login__button:focus {
             outline: none;
         }

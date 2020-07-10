@@ -10,5 +10,9 @@
         font-weight: 500;
         align-self: center;
         text-align: center;
+        &:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
     }
 }

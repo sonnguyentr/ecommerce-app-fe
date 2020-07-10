@@ -2,11 +2,14 @@ import React, { useReducer, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./ProductList.scss";
 import Item from "./Item/Item";
-import Paging from "./Paging/Paging";
+import { Paging } from "../../components";
 import Categories from "./Category/Category";
 import Filter from "./Filter/Filter";
 
+import { CATEGORIES_CONSTANT } from "../../constant";
+
 import api from "../../api";
+import { useCallback } from "react";
 const ProductList = () => {
     /*
         Breadcrumb
@@ -17,10 +20,6 @@ const ProductList = () => {
     */
     const { routeName } = useParams();
     const [page, setPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(10);
-    const handlePageChange = (value) => {
-        setPage(value);
-    };
 
     const [size, setSize] = useState(null);
     const handleSizeChange = (value) => {
@@ -42,11 +41,37 @@ const ProductList = () => {
         setAvailability(newObj);
     };
 
-    const [listItem, setListItem] = useState([]);
-    useEffect(() => {
-        const getListItem = async () => {
+    const initCategories = [...CATEGORIES_CONSTANT];
+    initCategories.unshift({
+        name: "All dresses",
+        value: "",
+        isChosen: true,
+    });
+    const categoriesReducer = (state, action) => {
+        if (action.type === "CHOSE_CAT") {
+            return state.map((item) => {
+                item.isChosen = action.payload.name === item.name;
+                return item;
+            });
+        } else {
+            throw new Error();
+        }
+    };
+    const [categories, dispatchCategories] = useReducer(
+        categoriesReducer,
+        initCategories
+    );
+
+    const getListItem = useCallback(
+        async (page) => {
             try {
-                const data = await api.getListProduct({ page, size, ...availability });
+                const chosenCat = categories.find((cat) => cat.isChosen);
+                const data = await api.getListProduct({
+                    page,
+                    size,
+                    categories: chosenCat.value,
+                    ...availability,
+                });
                 const list = data.data.data.map((item) => {
                     item.price = `$${item.price.toFixed(2)}`;
                     item.img = item.photos[0];
@@ -62,59 +87,32 @@ const ProductList = () => {
             } catch (err) {
                 console.error(err);
             }
-        };
-        getListItem();
-    }, [page, size, availability]);
-    const categoriesDummy = [
-        {
-            name: "All dresses",
-            main: true,
-            isChosen: true,
         },
-        {
-            name: "Rompers / Jumpsuits",
-        },
-        {
-            name: "Casual dresses",
-        },
-        {
-            name: "Going out dresses",
-        },
-        {
-            name: "Party / Ocassion dresses",
-        },
-        {
-            name: "Mini dresses",
-        },
-        {
-            name: "Maxi / Midi dresses",
-        },
-        {
-            name: "Sets",
-        },
-    ];
-    const categoriesReducer = (state, action) => {
-        if (action.type === "CHOSE_CAT") {
-            return state.map((item) => {
-                item.isChosen = action.payload.name === item.name;
-                return item;
-            });
-        } else {
-            throw new Error();
-        }
-    };
-    const [categories, dispatchCategories] = useReducer(
-        categoriesReducer,
-        categoriesDummy
+        [size, availability, categories]
     );
+
+    const [totalPages, setTotalPages] = useState(10);
+    const handlePageChange = (value) => {
+        setPage(value);
+        getListItem(value);
+    };
+
+    const [listItem, setListItem] = useState([]);
+    useEffect(() => {
+        setPage(1);
+        getListItem(1);
+    }, [size, availability, categories, getListItem]);
     return (
         <div className="container-fluid">
             <div className="row justify-content-center">
                 <div className="col-12">
                     <h6 className="text-center">
                         {routeName +
-                            " / " +
-                            categories.filter((cat) => cat.isChosen)[0].name}
+                            (categories.filter((cat) => cat.isChosen)[0]
+                                ? " / " +
+                                  categories.filter((cat) => cat.isChosen)[0]
+                                      .name
+                                : "")}
                     </h6>
                 </div>
                 <div className="col-xs-12 col-md-2">

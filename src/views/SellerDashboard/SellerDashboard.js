@@ -9,7 +9,7 @@ import sellerRoutes from "../../router/seller";
 const SellerDasboard = ({ props }) => {
     const { path } = useRouteMatch();
     return (
-        <div className="seller-dashboard dcontainer-fluid p-4">
+        <div className="seller-dashboard">
             <div className="row">
                 <div className="col-auto text-center">
                     <Logo />

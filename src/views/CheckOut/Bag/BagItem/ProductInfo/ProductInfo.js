@@ -1,7 +1,9 @@
 import React from "react";
 import "./ProductInfo.scss";
+import { useHistory } from "react-router-dom";
 
-const ProductInfo = ({ title, picture }) => {
+const ProductInfo = ({ title, picture, id }) => {
+    const history = useHistory();
     return (
         <div className="container-fluid py-2 product-info">
             <div className="row">
@@ -13,7 +15,9 @@ const ProductInfo = ({ title, picture }) => {
                     />
                 </div>
                 <div className="col pr-0 product-info__title">
-                    <span>{title}</span>
+                    <span onClick={() => history.push("/product-detail/" + id)}>
+                        {title}
+                    </span>
                 </div>
             </div>
         </div>

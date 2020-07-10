@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import "./AddProduct.scss";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
+
+import { CATEGORIES_CONSTANT } from "../../../constant";
 
 import Photos from "./Photos/Photos";
 import Name from "./Name/Name";
@@ -8,10 +10,13 @@ import Price from "./Price/Price";
 import Size from "./Size/Size";
 import Description from "./Description/Description";
 import Buttons from "./Buttons/Buttons";
+import Categories from "./Categories/Categories";
+import toastr from "toastr";
 
 import api from "../../../api";
 const AddProduct = (props) => {
     const { _id } = useParams();
+    const history = useHistory();
     const updateProductData = useCallback((product) => {
         let photos = [{}, {}, {}, {}];
         photos = photos.map((photo, i) => {
@@ -19,11 +24,19 @@ const AddProduct = (props) => {
                 src: product.photos[i],
             };
         });
+        const categoriesArr = [];
+        product.categories.forEach((catValue) => {
+            const foundCat = CATEGORIES_CONSTANT.find(
+                (c) => c.value === catValue
+            );
+            if (foundCat) categoriesArr.push(foundCat);
+        });
         setPhotoArray([...photos]);
         setTitle(product.title);
         setPrice(product.price);
         setDescription(product.description);
         setSizeArray(product.properties);
+        setChosenCategories(categoriesArr);
     }, []);
     useEffect(() => {
         if (!_id) return;
@@ -66,6 +79,20 @@ const AddProduct = (props) => {
     const handlePriceChange = (e) => {
         setPrice(e.target.value);
     };
+    // Categories
+    const [chosenCategories, setChosenCategories] = useState([]);
+    const handleCategorySelect = (selectedCat) => {
+        const newCats = [...chosenCategories];
+        const index = chosenCategories.findIndex(
+            (cat) => cat.value === selectedCat.value
+        );
+        if (index === -1) {
+            newCats.push(selectedCat);
+        } else {
+            newCats.splice(index, 1);
+        }
+        setChosenCategories(newCats);
+    };
     // Size
     const initSizeArray = [
         { size: "S", quantity: 0 },
@@ -92,10 +119,12 @@ const AddProduct = (props) => {
             description,
             photos: photoArray,
             properties: sizeArray,
+            categories: chosenCategories,
         };
         try {
             await api.addProduct(postData);
-            alert("Product created!");
+            toastr.success("Product created!");
+            history.push("/seller-dashboard/products");
         } catch (err) {
             alert(
                 (err.response && err.response.data.message) ||
@@ -111,11 +140,12 @@ const AddProduct = (props) => {
             description,
             photos: photoArray,
             properties: sizeArray,
+            categories: chosenCategories,
         };
         try {
             const data = await api.editProduct(_id, postData);
 
-            alert("Product updated!");
+            toastr.success("Product updated!");
             updateProductData(data.data.product);
         } catch (err) {
             alert(
@@ -138,6 +168,9 @@ const AddProduct = (props) => {
 
     return (
         <div className="add-product">
+            <h1 className="seller-dashboard__title">
+                {!_id ? "Add product" : "Edit product"}
+            </h1>
             <form
                 name="add-product"
                 onSubmit={(e) => {
@@ -150,6 +183,11 @@ const AddProduct = (props) => {
                     <Price
                         price={price}
                         handlePriceChange={handlePriceChange}
+                    />
+                    <Categories
+                        categories={CATEGORIES_CONSTANT}
+                        chosenCategories={chosenCategories}
+                        handleCategorySelect={handleCategorySelect}
                     />
                     {sizeArray.map((item) => (
                         <Size

@@ -5,11 +5,16 @@ import OrderTable from "./OrderTable/OrderTable";
 
 import API from "../../../api";
 const Order = (props) => {
+    const [page, setPage] = useState(1);
+    const handlePageChange = (value) => {
+        setPage(value);
+    };
+    const [totalPages, setTotalPages] = useState(1);
     const [listOrders, setListOrders] = useState([]);
     useEffect(() => {
         const getListOrder = async () => {
             try {
-                const data = await API.getListOrder();
+                const data = await API.getListOrder({ page, limit: 10 });
                 const list = data.data.data.map((item) => {
                     item.quantity = item.products.reduce(
                         (accu, current) => (accu += current.quantity || 0),
@@ -18,12 +23,13 @@ const Order = (props) => {
                     return item;
                 });
                 setListOrders([...list]);
+                setTotalPages(data.data.totalPages);
             } catch (err) {
                 console.log(err);
             }
         };
         getListOrder();
-    }, []);
+    }, [page]);
 
     const updateOrderStatus = (order_id, payload) => {
         const newArr = [...listOrders];
@@ -47,10 +53,13 @@ const Order = (props) => {
     };
     return (
         <div>
-            <h1>Orders</h1>
+            <h1 className="seller-dashboard__title">Orders</h1>
             <OrderTable
                 listOrders={listOrders}
                 handleUpdateOrderStatus={handleUpdateOrderStatus}
+                page={page}
+                handlePageChange={handlePageChange}
+                totalPages={totalPages}
             />
         </div>
     );
